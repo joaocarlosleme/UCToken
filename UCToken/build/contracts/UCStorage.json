@@ -1,0 +1,439 @@
+{
+  "contractName": "UCStorage",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "balanceOf",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        },
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "allowance",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.1+commit.c8a2cb62\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"address\"},{\"name\":\"\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/E/jcl/webmaster/github/uctoken/uctoken/contracts/UCStorage.sol\":\"UCStorage\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/E/jcl/webmaster/github/uctoken/uctoken/contracts/UCStorage.sol\":{\"keccak256\":\"0x0ad26ff9fa880da69cb08f3530fbe780ed1dc072039d671963b9992846696e7d\",\"urls\":[\"bzzr://ef24a9111bf1a43aed4e9150ad241537422486caca98b3dde0be48ccc36f6429\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506101da806100206000396000f3fe608060405260043610610051576000357c01000000000000000000000000000000000000000000000000000000009004806318160ddd1461005657806370a0823114610081578063dd62ed3e146100e6575b600080fd5b34801561006257600080fd5b5061006b61016b565b6040518082815260200191505060405180910390f35b34801561008d57600080fd5b506100d0600480360360208110156100a457600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610171565b6040518082815260200191505060405180910390f35b3480156100f257600080fd5b506101556004803603604081101561010957600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610189565b6040518082815260200191505060405180910390f35b60005481565b60016020528060005260406000206000915090505481565b600260205281600052604060002060205280600052604060002060009150915050548156fea165627a7a72305820690917bd428ffec52d2f9271aca90109c452ed5d4ab5bd8c0ba3670ae4648afe0029",
+  "deployedBytecode": "0x608060405260043610610051576000357c01000000000000000000000000000000000000000000000000000000009004806318160ddd1461005657806370a0823114610081578063dd62ed3e146100e6575b600080fd5b34801561006257600080fd5b5061006b61016b565b6040518082815260200191505060405180910390f35b34801561008d57600080fd5b506100d0600480360360208110156100a457600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610171565b6040518082815260200191505060405180910390f35b3480156100f257600080fd5b506101556004803603604081101561010957600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610189565b6040518082815260200191505060405180910390f35b60005481565b60016020528060005260406000206000915090505481565b600260205281600052604060002060205280600052604060002060009150915050548156fea165627a7a72305820690917bd428ffec52d2f9271aca90109c452ed5d4ab5bd8c0ba3670ae4648afe0029",
+  "sourceMap": "36:192:3:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;36:192:3;;;;;;;",
+  "deployedSourceMap": "36:192:3:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;66:26;;8:9:-1;5:2;;;30:1;27;20:12;5:2;66:26:3;;;:::i;:::-;;;;;;;;;;;;;;;;;;;100:44;;8:9:-1;5:2;;;30:1;27;20:12;5:2;100:44:3;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;100:44:3;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;150:64;;8:9:-1;5:2;;;30:1;27;20:12;5:2;150:64:3;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;150:64:3;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;66:26;;;;:::o;100:44::-;;;;;;;;;;;;;;;;;:::o;150:64::-;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity >=0.4.21 <0.6.0;\r\n\r\ncontract UCStorage {\r\n   \r\n   uint256 public totalSupply;\r\n\r\n   mapping(address => uint256) public balanceOf;\r\n   mapping(address => mapping(address => uint256)) public allowance;\r\n\r\n    \r\n\r\n}",
+  "sourcePath": "E:\\jcl\\webmaster\\github\\uctoken\\uctoken\\contracts\\UCStorage.sol",
+  "ast": {
+    "absolutePath": "/E/jcl/webmaster/github/uctoken/uctoken/contracts/UCStorage.sol",
+    "exportedSymbols": {
+      "UCStorage": [
+        161
+      ]
+    },
+    "id": 162,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 148,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".21",
+          "<",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:3"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 161,
+        "linearizedBaseContracts": [
+          161
+        ],
+        "name": "UCStorage",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 150,
+            "name": "totalSupply",
+            "nodeType": "VariableDeclaration",
+            "scope": 161,
+            "src": "66:26:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 149,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "66:7:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 154,
+            "name": "balanceOf",
+            "nodeType": "VariableDeclaration",
+            "scope": 161,
+            "src": "100:44:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
+              "typeString": "mapping(address => uint256)"
+            },
+            "typeName": {
+              "id": 153,
+              "keyType": {
+                "id": 151,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "108:7:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "100:27:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
+                "typeString": "mapping(address => uint256)"
+              },
+              "valueType": {
+                "id": 152,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "119:7:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 160,
+            "name": "allowance",
+            "nodeType": "VariableDeclaration",
+            "scope": 161,
+            "src": "150:64:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_address_$_t_uint256_$_$",
+              "typeString": "mapping(address => mapping(address => uint256))"
+            },
+            "typeName": {
+              "id": 159,
+              "keyType": {
+                "id": 155,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "158:7:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "150:47:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_address_$_t_uint256_$_$",
+                "typeString": "mapping(address => mapping(address => uint256))"
+              },
+              "valueType": {
+                "id": 158,
+                "keyType": {
+                  "id": 156,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "177:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "nodeType": "Mapping",
+                "src": "169:27:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
+                  "typeString": "mapping(address => uint256)"
+                },
+                "valueType": {
+                  "id": 157,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "188:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 162,
+        "src": "36:192:3"
+      }
+    ],
+    "src": "0:228:3"
+  },
+  "legacyAST": {
+    "absolutePath": "/E/jcl/webmaster/github/uctoken/uctoken/contracts/UCStorage.sol",
+    "exportedSymbols": {
+      "UCStorage": [
+        161
+      ]
+    },
+    "id": 162,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 148,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".21",
+          "<",
+          "0.6",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:3"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 161,
+        "linearizedBaseContracts": [
+          161
+        ],
+        "name": "UCStorage",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 150,
+            "name": "totalSupply",
+            "nodeType": "VariableDeclaration",
+            "scope": 161,
+            "src": "66:26:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 149,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "66:7:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 154,
+            "name": "balanceOf",
+            "nodeType": "VariableDeclaration",
+            "scope": 161,
+            "src": "100:44:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
+              "typeString": "mapping(address => uint256)"
+            },
+            "typeName": {
+              "id": 153,
+              "keyType": {
+                "id": 151,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "108:7:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "100:27:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
+                "typeString": "mapping(address => uint256)"
+              },
+              "valueType": {
+                "id": 152,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "119:7:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 160,
+            "name": "allowance",
+            "nodeType": "VariableDeclaration",
+            "scope": 161,
+            "src": "150:64:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_address_$_t_uint256_$_$",
+              "typeString": "mapping(address => mapping(address => uint256))"
+            },
+            "typeName": {
+              "id": 159,
+              "keyType": {
+                "id": 155,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "158:7:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "150:47:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_mapping$_t_address_$_t_uint256_$_$",
+                "typeString": "mapping(address => mapping(address => uint256))"
+              },
+              "valueType": {
+                "id": 158,
+                "keyType": {
+                  "id": 156,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "177:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "nodeType": "Mapping",
+                "src": "169:27:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
+                  "typeString": "mapping(address => uint256)"
+                },
+                "valueType": {
+                  "id": 157,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "188:7:3",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 162,
+        "src": "36:192:3"
+      }
+    ],
+    "src": "0:228:3"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.1+commit.c8a2cb62.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.19",
+  "updatedAt": "2019-11-22T01:36:08.511Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

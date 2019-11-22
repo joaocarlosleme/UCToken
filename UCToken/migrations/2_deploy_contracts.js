@@ -1,4 +1,8 @@
 var UCToken = artifacts.require("./UCToken.sol");
+var UCCrawlingBand = artifacts.require("./UCCrawlingBand.sol");
+var UCTrade = artifacts.require("./UCTrade.sol");
+var SampleCollateralToken = artifacts.require("./SampleCollateralToken.sol");
+
 //var DappTokenSale = artifacts.require("./DappTokenSale.sol");
 
 // module.exports = function(deployer) {
@@ -12,11 +16,21 @@ var UCToken = artifacts.require("./UCToken.sol");
 //   });
 // };
 
+// module.exports = function(deployer) {
+//   deployer.deploy(UCToken, 1000000);
+//   // deployer.deploy(UCToken, 1000000).then(function() {
+//   //   // Token price is 1 Ether (18 decimals)?
+//   //   var tokenPrice = 1000000000000000000;
+//   //   return deployer.deploy(DappTokenSale, DappToken.address, tokenPrice);
+//   // });
+// };
+
 module.exports = function(deployer) {
-  deployer.deploy(UCToken, 1000000);
-  // deployer.deploy(UCToken, 1000000).then(function() {
-  //   // Token price is 1 Ether (18 decimals)?
-  //   var tokenPrice = 1000000000000000000;
-  //   return deployer.deploy(DappTokenSale, DappToken.address, tokenPrice);
-  // });
+  deployer.deploy(UCToken, 0).then(function() {
+    return deployer.deploy(UCCrawlingBand);
+  }).then(function() {
+  	return deployer.deploy(SampleCollateralToken);
+  }).then(function() {
+  	return deployer.deploy(UCTrade, UCToken.address, UCCrawlingBand.address);
+  });
 };

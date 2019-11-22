@@ -1,0 +1,20 @@
+{
+    "name": "uc-token",
+    "version": "0.0.1",
+    "description": "UC Token Ecosystem on Ethereum",
+    "main": "truffle-config.js",
+    "directories": {
+      "test": "test"
+    },
+    "scripts": {
+      "dev": "lite-server"
+    },
+    "author": "Joao Leme",
+    "license": "ISC",
+    "devDependencies": {
+      "lite-server": "^2.3.0"
+    },
+    "dependencies": {
+      "openzeppelin-solidity": "2.4.0"
+    }
+  }

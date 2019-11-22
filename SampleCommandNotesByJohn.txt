@@ -1,11 +1,11 @@
 
 
-DappToken.deployed().then(function(instance) { tokenInstance = instance; tokenInstance.getBalance.call(web3.eth.accounts[0]); })
+UCToken.deployed().then(function(instance) { tokenInstance = instance; tokenInstance.getBalance.call(web3.eth.accounts[0]); })
 
 
 
 
-DappToken.deployed().then(function(instance) { token = instance; })
+UCToken.deployed().then(function(instance) { token = instance; })
 
 token.transfer(web3.eth.accounts[1], 50000, { from: web3.eth.accounts[0] });
 
