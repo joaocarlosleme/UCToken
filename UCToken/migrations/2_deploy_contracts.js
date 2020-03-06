@@ -2,6 +2,7 @@ var UCToken = artifacts.require("./UCToken.sol");
 var UCCrawlingBand = artifacts.require("./UCCrawlingBand.sol");
 var UCTrade = artifacts.require("./UCTrade.sol");
 var SampleCollateralToken = artifacts.require("./SampleCollateralToken.sol");
+//var UCCollateralTokenInterface = artifacts.require("./UCCollateralTokenInterface.sol");
 
 //var DappTokenSale = artifacts.require("./DappTokenSale.sol");
 
@@ -29,6 +30,7 @@ module.exports = function(deployer) {
   deployer.deploy(UCToken, 0).then(function() {
     return deployer.deploy(UCCrawlingBand);
   }).then(function() {
+    //deployer.deploy(UCCollateralTokenInterface);
   	return deployer.deploy(SampleCollateralToken);
   }).then(function() {
   	return deployer.deploy(UCTrade, UCToken.address, UCCrawlingBand.address);

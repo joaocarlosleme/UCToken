@@ -1,7 +1,9 @@
 var UCToken = artifacts.require("./UCToken.sol");
+var UCTrade = artifacts.require("./UCTrade.sol");
 
 contract('UCToken', function(accounts) {
     var tokenInstance;
+    var ucTradeInstance;
 
     // it('sets the total supply upon deployment', function() {
     //     return UCToken.deployed().then(function(instance) {
@@ -36,6 +38,9 @@ contract('UCToken', function(accounts) {
           return tokenInstance.standard();
         }).then(function(standard) {
           assert.equal(standard, 'UC Token v1.0', 'has the correct standard');
+          return tokenInstance.decimals();
+        }).then(function(decimals) {
+          assert.equal(decimals.toNumber(), 18, 'has the correct decimals');
         });
       })
     
@@ -47,7 +52,17 @@ contract('UCToken', function(accounts) {
           assert.equal(totalSupply.toNumber(), 0, 'sets the total supply to 000');
           return tokenInstance.balanceOf(accounts[0]);
         }).then(function(adminBalance) {
-          assert.equal(adminBalance.toNumber(), 0, 'it does not allocates the initial supply to the admin account'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          assert.equal(adminBalance.toNumber(), 0, 'Correct balance (it does not allocates the initial supply to the admin account)'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+        });
+      });
+
+      it('add minter', function() {
+        return UCTrade.deployed().then(function(instance) {
+          ucTradeInstance = instance;
+          tokenInstance.addMinter(ucTradeInstance.address);
+          return tokenInstance.isMinter(ucTradeInstance.address);
+        }).then(function(result) {
+          assert.equal(result, true, 'minter added');
         });
       });
     

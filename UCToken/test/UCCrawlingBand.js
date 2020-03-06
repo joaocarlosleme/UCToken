@@ -2,8 +2,8 @@ var UCCrawlingBand = artifacts.require("./UCCrawlingBand.sol");
 
 contract('UCCrawlingBand', function(accounts) {
     var tokenInstance;
-    var ceilingPrice = 10000000; 
-    var floorPrice = 9000000; 
+    var ceilingPrice = 100000; 
+    var floorPrice = 90000; 
 
     it('initializes the contract with the correct values', function() {
         return UCCrawlingBand.deployed().then(function(instance) {

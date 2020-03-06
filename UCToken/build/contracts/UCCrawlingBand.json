@@ -58,25 +58,25 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.1+commit.c8a2cb62\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"latestFloorPrice\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getCurrentFloorPrice\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getCurrentCeilingPrice\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"latestCeilingPrice\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Business logic for the UC price crawling band target in US Dollars.\\r\",\"methods\":{\"getCurrentCeilingPrice()\":{\"details\":\"Returns the current target UC ceiling price in US Dollar.\\r Note that...\\r TODO: implement pause modifier\\r\",\"return\":\"UC Ceiling Price in US Dollar\\r\"},\"getCurrentFloorPrice()\":{\"details\":\"Returns the current target UC floor price in US Dollar / 10000000.\\r Note that...\\r TODO: implement pause modifier\\r\",\"return\":\"UC Floor Price in US Dollar in US Dollar / 10000000\\r\"}},\"title\":\"UCCrawlingBand\\r\"},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/E/jcl/webmaster/github/uctoken/uctoken/contracts/UCCrawlingBand.sol\":\"UCCrawlingBand\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/E/jcl/webmaster/github/uctoken/uctoken/contracts/UCCrawlingBand.sol\":{\"keccak256\":\"0xf3045cf16b116a4292c1051a8d634e2b0c984c896fd312791558aadb574bc96f\",\"urls\":[\"bzzr://c1ebfa456ebeb8ebc5d3b2ee911267e42560b973ab3f0db6ab3806f0eda6419c\"]}},\"version\":1}",
-  "bytecode": "0x6080604052629896806000556289544060015534801561001e57600080fd5b506101578061002e6000396000f3fe60806040526004361061005c576000357c0100000000000000000000000000000000000000000000000000000000900480631e4330d6146100615780632271e82a1461008c5780636a05b6fb146100b7578063d23deb18146100e2575b600080fd5b34801561006d57600080fd5b5061007661010d565b6040518082815260200191505060405180910390f35b34801561009857600080fd5b506100a1610113565b6040518082815260200191505060405180910390f35b3480156100c357600080fd5b506100cc61011c565b6040518082815260200191505060405180910390f35b3480156100ee57600080fd5b506100f7610125565b6040518082815260200191505060405180910390f35b60015481565b60008054905090565b60008054905090565b6000548156fea165627a7a72305820dc1c82eaa51ce6ad581ca024daae792f3e21d0ca1e9cb812153d8f2f3214ef830029",
-  "deployedBytecode": "0x60806040526004361061005c576000357c0100000000000000000000000000000000000000000000000000000000900480631e4330d6146100615780632271e82a1461008c5780636a05b6fb146100b7578063d23deb18146100e2575b600080fd5b34801561006d57600080fd5b5061007661010d565b6040518082815260200191505060405180910390f35b34801561009857600080fd5b506100a1610113565b6040518082815260200191505060405180910390f35b3480156100c357600080fd5b506100cc61011c565b6040518082815260200191505060405180910390f35b3480156100ee57600080fd5b506100f7610125565b6040518082815260200191505060405180910390f35b60015481565b60008054905090565b60008054905090565b6000548156fea165627a7a72305820dc1c82eaa51ce6ad581ca024daae792f3e21d0ca1e9cb812153d8f2f3214ef830029",
-  "sourceMap": "151:1556:2:-;;;220:8;184:44;;338:7;304:41;;151:1556;8:9:-1;5:2;;;30:1;27;20:12;5:2;151:1556:2;;;;;;;",
-  "deployedSourceMap": "151:1556:2:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;304:41;;8:9:-1;5:2;;;30:1;27;20:12;5:2;304:41:2;;;:::i;:::-;;;;;;;;;;;;;;;;;;;1276:426;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1276:426:2;;;:::i;:::-;;;;;;;;;;;;;;;;;;;616:428;;8:9:-1;5:2;;;30:1;27;20:12;5:2;616:428:2;;;:::i;:::-;;;;;;;;;;;;;;;;;;;184:44;;8:9:-1;5:2;;;30:1;27;20:12;5:2;184:44:2;;;:::i;:::-;;;;;;;;;;;;;;;;;;;304:41;;;;:::o;1276:426::-;1329:7;1676:18;;1669:25;;1276:426;:::o;616:428::-;671:7;1018:18;;1011:25;;616:428;:::o;184:44::-;;;;:::o",
-  "source": "pragma solidity >=0.4.21 <0.6.0;\r\n\r\n\r\n/**\r\n * @title UCCrawlingBand\r\n * @dev Business logic for the UC price crawling band target in US Dollars.\r\n */\r\ncontract UCCrawlingBand {\r\n\r\n    uint256 public latestCeilingPrice = 10000000; // lastest updated CeilingPrice in US Dollar / 10000000 (7 decimals)\r\n    uint256 public latestFloorPrice = 9000000; // lastest updated FloorPrice in US Dollar / 10000000 (7 decimals)\r\n\r\n    /**\r\n     * @dev Returns the current target UC ceiling price in US Dollar.\r\n     * Note that...\r\n     * TODO: implement pause modifier\r\n     * @return UC Ceiling Price in US Dollar\r\n     */\r\n    function getCurrentCeilingPrice() public view returns (uint256) {\r\n        // uint256 elapsedTime = block.timestamp.sub(openingTime());\r\n        // uint256 timeRange = closingTime().sub(openingTime());\r\n        // uint256 rateRange = _initialRate.sub(_finalRate);\r\n        // return _initialRate.sub(elapsedTime.mul(rateRange).div(timeRange));\r\n        \r\n        // for testing purpose\r\n        return latestCeilingPrice;\r\n    }\r\n    /**\r\n     * @dev Returns the current target UC floor price in US Dollar / 10000000.\r\n     * Note that...\r\n     * TODO: implement pause modifier\r\n     * @return UC Floor Price in US Dollar in US Dollar / 10000000\r\n     */\r\n    function getCurrentFloorPrice() public view returns (uint256) {\r\n        // uint256 elapsedTime = block.timestamp.sub(openingTime());\r\n        // uint256 timeRange = closingTime().sub(openingTime());\r\n        // uint256 rateRange = _initialRate.sub(_finalRate);\r\n        // return _initialRate.sub(elapsedTime.mul(rateRange).div(timeRange));\r\n        \r\n        // for testing purpose\r\n        return latestCeilingPrice;\r\n    }\r\n\r\n}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.1+commit.c8a2cb62\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"latestFloorPrice\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getCurrentFloorPrice\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getCurrentCeilingPrice\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"latestCeilingPrice\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Business logic for the UC price crawling band target in US Dollars.\\r\",\"methods\":{\"getCurrentCeilingPrice()\":{\"details\":\"Returns the current target UC ceiling price in US Dollar.\\r Note that...\\r TODO: implement pause modifier\\r\",\"return\":\"UC Ceiling Price in US Dollar\\r\"},\"getCurrentFloorPrice()\":{\"details\":\"Returns the current target UC floor price in US Dollar / 10000000.\\r Note that...\\r TODO: implement pause modifier\\r\",\"return\":\"UC Floor Price in US Dollar in US Dollar / 10000000\\r\"}},\"title\":\"UCCrawlingBand\\r\"},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/E/jcl/webmaster/github/uctoken/uctoken/contracts/UCCrawlingBand.sol\":\"UCCrawlingBand\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/E/jcl/webmaster/github/uctoken/uctoken/contracts/UCCrawlingBand.sol\":{\"keccak256\":\"0x6cf246419a432f9c80324f99163eebdb36c6774f97a50b9301e754a8be588964\",\"urls\":[\"bzzr://9f9272768336d62773a4114b5c483fa0dfa7bc1002ffaeca34058d4667d293ac\"]}},\"version\":1}",
+  "bytecode": "0x6080604052620186a060005562015f9060015534801561001e57600080fd5b506101588061002e6000396000f3fe60806040526004361061005c576000357c0100000000000000000000000000000000000000000000000000000000900480631e4330d6146100615780632271e82a1461008c5780636a05b6fb146100b7578063d23deb18146100e2575b600080fd5b34801561006d57600080fd5b5061007661010d565b6040518082815260200191505060405180910390f35b34801561009857600080fd5b506100a1610113565b6040518082815260200191505060405180910390f35b3480156100c357600080fd5b506100cc61011d565b6040518082815260200191505060405180910390f35b3480156100ee57600080fd5b506100f7610126565b6040518082815260200191505060405180910390f35b60015481565b6000600154905090565b60008054905090565b6000548156fea165627a7a7230582086754a8d1da152d478aa9e0a64fd486c14f1d87502a20d14edf81ba4eb8f00000029",
+  "deployedBytecode": "0x60806040526004361061005c576000357c0100000000000000000000000000000000000000000000000000000000900480631e4330d6146100615780632271e82a1461008c5780636a05b6fb146100b7578063d23deb18146100e2575b600080fd5b34801561006d57600080fd5b5061007661010d565b6040518082815260200191505060405180910390f35b34801561009857600080fd5b506100a1610113565b6040518082815260200191505060405180910390f35b3480156100c357600080fd5b506100cc61011d565b6040518082815260200191505060405180910390f35b3480156100ee57600080fd5b506100f7610126565b6040518082815260200191505060405180910390f35b60015481565b6000600154905090565b60008054905090565b6000548156fea165627a7a7230582086754a8d1da152d478aa9e0a64fd486c14f1d87502a20d14edf81ba4eb8f00000029",
+  "sourceMap": "151:1546:3:-;;;220:6;184:42;;334:5;300:39;;151:1546;8:9:-1;5:2;;;30:1;27;20:12;5:2;151:1546:3;;;;;;;",
+  "deployedSourceMap": "151:1546:3:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;300:39;;8:9:-1;5:2;;;30:1;27;20:12;5:2;300:39:3;;;:::i;:::-;;;;;;;;;;;;;;;;;;;1268:424;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1268:424:3;;;:::i;:::-;;;;;;;;;;;;;;;;;;;608:428;;8:9:-1;5:2;;;30:1;27;20:12;5:2;608:428:3;;;:::i;:::-;;;;;;;;;;;;;;;;;;;184:42;;8:9:-1;5:2;;;30:1;27;20:12;5:2;184:42:3;;;:::i;:::-;;;;;;;;;;;;;;;;;;;300:39;;;;:::o;1268:424::-;1321:7;1668:16;;1661:23;;1268:424;:::o;608:428::-;663:7;1010:18;;1003:25;;608:428;:::o;184:42::-;;;;:::o",
+  "source": "pragma solidity >=0.4.21 <0.6.0;\r\n\r\n\r\n/**\r\n * @title UCCrawlingBand\r\n * @dev Business logic for the UC price crawling band target in US Dollars.\r\n */\r\ncontract UCCrawlingBand {\r\n\r\n    uint256 public latestCeilingPrice = 100000; // lastest updated CeilingPrice in US Dollar / 100000 (5 decimals)\r\n    uint256 public latestFloorPrice = 90000; // lastest updated FloorPrice in US Dollar / 100000 (5 decimals)\r\n\r\n    /**\r\n     * @dev Returns the current target UC ceiling price in US Dollar.\r\n     * Note that...\r\n     * TODO: implement pause modifier\r\n     * @return UC Ceiling Price in US Dollar\r\n     */\r\n    function getCurrentCeilingPrice() public view returns (uint256) {\r\n        // uint256 elapsedTime = block.timestamp.sub(openingTime());\r\n        // uint256 timeRange = closingTime().sub(openingTime());\r\n        // uint256 rateRange = _initialRate.sub(_finalRate);\r\n        // return _initialRate.sub(elapsedTime.mul(rateRange).div(timeRange));\r\n        \r\n        // for testing purpose\r\n        return latestCeilingPrice;\r\n    }\r\n    /**\r\n     * @dev Returns the current target UC floor price in US Dollar / 10000000.\r\n     * Note that...\r\n     * TODO: implement pause modifier\r\n     * @return UC Floor Price in US Dollar in US Dollar / 10000000\r\n     */\r\n    function getCurrentFloorPrice() public view returns (uint256) {\r\n        // uint256 elapsedTime = block.timestamp.sub(openingTime());\r\n        // uint256 timeRange = closingTime().sub(openingTime());\r\n        // uint256 rateRange = _initialRate.sub(_finalRate);\r\n        // return _initialRate.sub(elapsedTime.mul(rateRange).div(timeRange));\r\n        \r\n        // for testing purpose\r\n        return latestFloorPrice;\r\n    }\r\n\r\n}",
   "sourcePath": "E:\\jcl\\webmaster\\github\\uctoken\\uctoken\\contracts\\UCCrawlingBand.sol",
   "ast": {
     "absolutePath": "/E/jcl/webmaster/github/uctoken/uctoken/contracts/UCCrawlingBand.sol",
     "exportedSymbols": {
       "UCCrawlingBand": [
-        146
+        162
       ]
     },
-    "id": 147,
+    "id": 163,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 123,
+        "id": 139,
         "literals": [
           "solidity",
           ">=",
@@ -87,7 +87,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:32:2"
+        "src": "0:32:3"
       },
       {
         "baseContracts": [],
@@ -95,20 +95,20 @@
         "contractKind": "contract",
         "documentation": "@title UCCrawlingBand\r\n@dev Business logic for the UC price crawling band target in US Dollars.\r",
         "fullyImplemented": true,
-        "id": 146,
+        "id": 162,
         "linearizedBaseContracts": [
-          146
+          162
         ],
         "name": "UCCrawlingBand",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 126,
+            "id": 142,
             "name": "latestCeilingPrice",
             "nodeType": "VariableDeclaration",
-            "scope": 146,
-            "src": "184:44:2",
+            "scope": 162,
+            "src": "184:42:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -116,10 +116,10 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 124,
+              "id": 140,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
-              "src": "184:7:2",
+              "src": "184:7:3",
               "typeDescriptions": {
                 "typeIdentifier": "t_uint256",
                 "typeString": "uint256"
@@ -127,31 +127,31 @@
             },
             "value": {
               "argumentTypes": null,
-              "hexValue": "3130303030303030",
-              "id": 125,
+              "hexValue": "313030303030",
+              "id": 141,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "220:8:2",
+              "src": "220:6:3",
               "subdenomination": null,
               "typeDescriptions": {
-                "typeIdentifier": "t_rational_10000000_by_1",
-                "typeString": "int_const 10000000"
+                "typeIdentifier": "t_rational_100000_by_1",
+                "typeString": "int_const 100000"
               },
-              "value": "10000000"
+              "value": "100000"
             },
             "visibility": "public"
           },
           {
             "constant": false,
-            "id": 129,
+            "id": 145,
             "name": "latestFloorPrice",
             "nodeType": "VariableDeclaration",
-            "scope": 146,
-            "src": "304:41:2",
+            "scope": 162,
+            "src": "300:39:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -159,10 +159,10 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 127,
+              "id": 143,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
-              "src": "304:7:2",
+              "src": "300:7:3",
               "typeDescriptions": {
                 "typeIdentifier": "t_uint256",
                 "typeString": "uint256"
@@ -170,75 +170,75 @@
             },
             "value": {
               "argumentTypes": null,
-              "hexValue": "39303030303030",
-              "id": 128,
+              "hexValue": "3930303030",
+              "id": 144,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "338:7:2",
+              "src": "334:5:3",
               "subdenomination": null,
               "typeDescriptions": {
-                "typeIdentifier": "t_rational_9000000_by_1",
-                "typeString": "int_const 9000000"
+                "typeIdentifier": "t_rational_90000_by_1",
+                "typeString": "int_const 90000"
               },
-              "value": "9000000"
+              "value": "90000"
             },
             "visibility": "public"
           },
           {
             "body": {
-              "id": 136,
+              "id": 152,
               "nodeType": "Block",
-              "src": "680:364:2",
+              "src": "672:364:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 134,
+                    "id": 150,
                     "name": "latestCeilingPrice",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 126,
-                    "src": "1018:18:2",
+                    "referencedDeclaration": 142,
+                    "src": "1010:18:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 133,
-                  "id": 135,
+                  "functionReturnParameters": 149,
+                  "id": 151,
                   "nodeType": "Return",
-                  "src": "1011:25:2"
+                  "src": "1003:25:3"
                 }
               ]
             },
             "documentation": "@dev Returns the current target UC ceiling price in US Dollar.\r\nNote that...\r\nTODO: implement pause modifier\r\n@return UC Ceiling Price in US Dollar\r",
-            "id": 137,
+            "id": 153,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "getCurrentCeilingPrice",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 130,
+              "id": 146,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "647:2:2"
+              "src": "639:2:3"
             },
             "returnParameters": {
-              "id": 133,
+              "id": 149,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 132,
+                  "id": 148,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 137,
-                  "src": "671:7:2",
+                  "scope": 153,
+                  "src": "663:7:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -246,10 +246,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 131,
+                    "id": 147,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "671:7:2",
+                    "src": "663:7:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -259,65 +259,65 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "670:9:2"
+              "src": "662:9:3"
             },
-            "scope": 146,
-            "src": "616:428:2",
+            "scope": 162,
+            "src": "608:428:3",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 144,
+              "id": 160,
               "nodeType": "Block",
-              "src": "1338:364:2",
+              "src": "1330:362:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 142,
-                    "name": "latestCeilingPrice",
+                    "id": 158,
+                    "name": "latestFloorPrice",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 126,
-                    "src": "1676:18:2",
+                    "referencedDeclaration": 145,
+                    "src": "1668:16:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 141,
-                  "id": 143,
+                  "functionReturnParameters": 157,
+                  "id": 159,
                   "nodeType": "Return",
-                  "src": "1669:25:2"
+                  "src": "1661:23:3"
                 }
               ]
             },
             "documentation": "@dev Returns the current target UC floor price in US Dollar / 10000000.\r\nNote that...\r\nTODO: implement pause modifier\r\n@return UC Floor Price in US Dollar in US Dollar / 10000000\r",
-            "id": 145,
+            "id": 161,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "getCurrentFloorPrice",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 138,
+              "id": 154,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1305:2:2"
+              "src": "1297:2:3"
             },
             "returnParameters": {
-              "id": 141,
+              "id": 157,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 140,
+                  "id": 156,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 145,
-                  "src": "1329:7:2",
+                  "scope": 161,
+                  "src": "1321:7:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -325,10 +325,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 139,
+                    "id": 155,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1329:7:2",
+                    "src": "1321:7:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -338,33 +338,33 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1328:9:2"
+              "src": "1320:9:3"
             },
-            "scope": 146,
-            "src": "1276:426:2",
+            "scope": 162,
+            "src": "1268:424:3",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 147,
-        "src": "151:1556:2"
+        "scope": 163,
+        "src": "151:1546:3"
       }
     ],
-    "src": "0:1707:2"
+    "src": "0:1697:3"
   },
   "legacyAST": {
     "absolutePath": "/E/jcl/webmaster/github/uctoken/uctoken/contracts/UCCrawlingBand.sol",
     "exportedSymbols": {
       "UCCrawlingBand": [
-        146
+        162
       ]
     },
-    "id": 147,
+    "id": 163,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 123,
+        "id": 139,
         "literals": [
           "solidity",
           ">=",
@@ -375,7 +375,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:32:2"
+        "src": "0:32:3"
       },
       {
         "baseContracts": [],
@@ -383,20 +383,20 @@
         "contractKind": "contract",
         "documentation": "@title UCCrawlingBand\r\n@dev Business logic for the UC price crawling band target in US Dollars.\r",
         "fullyImplemented": true,
-        "id": 146,
+        "id": 162,
         "linearizedBaseContracts": [
-          146
+          162
         ],
         "name": "UCCrawlingBand",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 126,
+            "id": 142,
             "name": "latestCeilingPrice",
             "nodeType": "VariableDeclaration",
-            "scope": 146,
-            "src": "184:44:2",
+            "scope": 162,
+            "src": "184:42:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -404,10 +404,10 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 124,
+              "id": 140,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
-              "src": "184:7:2",
+              "src": "184:7:3",
               "typeDescriptions": {
                 "typeIdentifier": "t_uint256",
                 "typeString": "uint256"
@@ -415,31 +415,31 @@
             },
             "value": {
               "argumentTypes": null,
-              "hexValue": "3130303030303030",
-              "id": 125,
+              "hexValue": "313030303030",
+              "id": 141,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "220:8:2",
+              "src": "220:6:3",
               "subdenomination": null,
               "typeDescriptions": {
-                "typeIdentifier": "t_rational_10000000_by_1",
-                "typeString": "int_const 10000000"
+                "typeIdentifier": "t_rational_100000_by_1",
+                "typeString": "int_const 100000"
               },
-              "value": "10000000"
+              "value": "100000"
             },
             "visibility": "public"
           },
           {
             "constant": false,
-            "id": 129,
+            "id": 145,
             "name": "latestFloorPrice",
             "nodeType": "VariableDeclaration",
-            "scope": 146,
-            "src": "304:41:2",
+            "scope": 162,
+            "src": "300:39:3",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -447,10 +447,10 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 127,
+              "id": 143,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
-              "src": "304:7:2",
+              "src": "300:7:3",
               "typeDescriptions": {
                 "typeIdentifier": "t_uint256",
                 "typeString": "uint256"
@@ -458,75 +458,75 @@
             },
             "value": {
               "argumentTypes": null,
-              "hexValue": "39303030303030",
-              "id": 128,
+              "hexValue": "3930303030",
+              "id": 144,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "338:7:2",
+              "src": "334:5:3",
               "subdenomination": null,
               "typeDescriptions": {
-                "typeIdentifier": "t_rational_9000000_by_1",
-                "typeString": "int_const 9000000"
+                "typeIdentifier": "t_rational_90000_by_1",
+                "typeString": "int_const 90000"
               },
-              "value": "9000000"
+              "value": "90000"
             },
             "visibility": "public"
           },
           {
             "body": {
-              "id": 136,
+              "id": 152,
               "nodeType": "Block",
-              "src": "680:364:2",
+              "src": "672:364:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 134,
+                    "id": 150,
                     "name": "latestCeilingPrice",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 126,
-                    "src": "1018:18:2",
+                    "referencedDeclaration": 142,
+                    "src": "1010:18:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 133,
-                  "id": 135,
+                  "functionReturnParameters": 149,
+                  "id": 151,
                   "nodeType": "Return",
-                  "src": "1011:25:2"
+                  "src": "1003:25:3"
                 }
               ]
             },
             "documentation": "@dev Returns the current target UC ceiling price in US Dollar.\r\nNote that...\r\nTODO: implement pause modifier\r\n@return UC Ceiling Price in US Dollar\r",
-            "id": 137,
+            "id": 153,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "getCurrentCeilingPrice",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 130,
+              "id": 146,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "647:2:2"
+              "src": "639:2:3"
             },
             "returnParameters": {
-              "id": 133,
+              "id": 149,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 132,
+                  "id": 148,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 137,
-                  "src": "671:7:2",
+                  "scope": 153,
+                  "src": "663:7:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -534,10 +534,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 131,
+                    "id": 147,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "671:7:2",
+                    "src": "663:7:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -547,65 +547,65 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "670:9:2"
+              "src": "662:9:3"
             },
-            "scope": 146,
-            "src": "616:428:2",
+            "scope": 162,
+            "src": "608:428:3",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 144,
+              "id": 160,
               "nodeType": "Block",
-              "src": "1338:364:2",
+              "src": "1330:362:3",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 142,
-                    "name": "latestCeilingPrice",
+                    "id": 158,
+                    "name": "latestFloorPrice",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 126,
-                    "src": "1676:18:2",
+                    "referencedDeclaration": 145,
+                    "src": "1668:16:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 141,
-                  "id": 143,
+                  "functionReturnParameters": 157,
+                  "id": 159,
                   "nodeType": "Return",
-                  "src": "1669:25:2"
+                  "src": "1661:23:3"
                 }
               ]
             },
             "documentation": "@dev Returns the current target UC floor price in US Dollar / 10000000.\r\nNote that...\r\nTODO: implement pause modifier\r\n@return UC Floor Price in US Dollar in US Dollar / 10000000\r",
-            "id": 145,
+            "id": 161,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "getCurrentFloorPrice",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 138,
+              "id": 154,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "1305:2:2"
+              "src": "1297:2:3"
             },
             "returnParameters": {
-              "id": 141,
+              "id": 157,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 140,
+                  "id": 156,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 145,
-                  "src": "1329:7:2",
+                  "scope": 161,
+                  "src": "1321:7:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -613,10 +613,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 139,
+                    "id": 155,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1329:7:2",
+                    "src": "1321:7:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -626,20 +626,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1328:9:2"
+              "src": "1320:9:3"
             },
-            "scope": 146,
-            "src": "1276:426:2",
+            "scope": 162,
+            "src": "1268:424:3",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 147,
-        "src": "151:1556:2"
+        "scope": 163,
+        "src": "151:1546:3"
       }
     ],
-    "src": "0:1707:2"
+    "src": "0:1697:3"
   },
   "compiler": {
     "name": "solc",
@@ -649,12 +649,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x3b0Bed115159080874636D7Ecf49B79173464D3c",
-      "transactionHash": "0xe187ffd9562e51b1e46e58f77fe684f83cd4c907045cb0862bca1ada59bb7e81"
+      "address": "0xE1721C08d3147Bc168a1CE15dC4609390318df75",
+      "transactionHash": "0x8e1d07e9dd23aa2e27e5c3c44f031dc4c4c7a19eff9ad6a5fe16f034012136b1"
     }
   },
   "schemaVersion": "3.0.19",
-  "updatedAt": "2019-11-22T01:36:12.548Z",
+  "updatedAt": "2019-11-27T01:28:02.843Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "Business logic for the UC price crawling band target in US Dollars.\r",

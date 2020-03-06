@@ -6,9 +6,10 @@ import "@openzeppelin/contracts/math/SafeMath.sol";
 contract UCToken is MinterRole {
     using SafeMath for uint256;
 
-    string  public name = "UC";
-    string  public symbol = "UC";
-    string  public standard = "UC Token v1.0";
+    string constant public name = "UC";
+    string constant public symbol = "UC";
+    string constant public standard = "UC Token v1.0";
+    uint8 constant public decimals = 18;
     uint256 public totalSupply;
 
     event Transfer(
@@ -83,7 +84,7 @@ contract UCToken is MinterRole {
     }
 
     /**
-     * @dev Exchange UCs for collateral, burMake new tokens in exchangefor collateral and assign to sender
+     * @dev Exchange UCs for collateral, burn new tokens in exchangefor collateral and assign to sender
      * This function has a non-reentrancy guard, so it shouldn't be called by
      * another `nonReentrant` function.
      * @param _amount amount of UC okens to burn
@@ -98,6 +99,7 @@ contract UCToken is MinterRole {
         totalSupply = totalSupply.sub(_amount);
         emit Transfer(_account, address(0), _amount);
 
+        return true;
 
     }
 }
