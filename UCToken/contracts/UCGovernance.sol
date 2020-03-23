@@ -3,8 +3,9 @@ pragma solidity >=0.4.21 <0.6.2;
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "./libraries/UnorderedKeySet.sol";
 import "./UCGToken.sol";
+import "./UCChangeable.sol";
 
-contract UCGovernance {
+contract UCGovernance is UCChangeable {
     using SafeMath for uint256;
     using UnorderedKeySetLib for UnorderedKeySetLib.Set;
 
@@ -16,22 +17,22 @@ contract UCGovernance {
     UCGToken ucgToken;
 
     /// Objects (Structs)
-    struct ChangeRequest {
-        // address contractAddress;
-        // string functionName;
-        // string parameters;
-        // string notes;
-        // bytes32 proposal; // hash of the proposal // the key on the mapping and Set
-        string status;
-        address createBy;
-        uint256 UIPNumber;
-        string notes; // in case of no UIP number
-        uint256 votes; // total votes
-        mapping (address => uint256) userVotes; // votes per user
-    }
+    // struct ChangeRequest {
+    //     // address contractAddress;
+    //     // string functionName;
+    //     // string parameters;
+    //     // string notes;
+    //     bytes32 proposal; // hash of the proposal (contractAddress, method name, parameter values)
+    //     string status;
+    //     address createBy;
+    //     uint256 UIPNumber;
+    //     string notes; // in case of no UIP number
+    //     uint256 votes; // total votes
+    //     mapping (address => uint256) userVotes; // votes per user
+    // }
 
     /// Public Mappings
-    mapping(bytes32 => ChangeRequest) public changeRequests; // where bytes32 is the hash of the proposal
+    mapping(bytes32 => ChangeRequest) public changeRequests; // where bytes32 is a unique ID for the changeRequest (hash of the proposal + now)
     mapping(address=>uint256) public lockedUCGBalance;
     mapping(address=>UnorderedKeySetLib.Set) public userParticipations;  // list of user participation on change requests
 
@@ -69,11 +70,13 @@ contract UCGovernance {
         emit Unlocked(msg.sender, _amount);
     }
 
-    function newChangeRequest(bytes32 _proposal, uint256 _UIPNumber, string memory _notes) public {
-        changeRequestsSet.insert(_proposal); // Note that this will fail automatically if the key already exists.
+    function newChangeRequest(bytes32 _proposal, uint256 _UIPNumber, string _notes) public {
+        bytes32 crID = keccak256(_proposal, now);
+        changeRequestsSet.insert(crID); // Note that this will fail automatically if the key already exists.
 
-        changeRequests[_proposal] = ChangeRequest({
-            status: "PendingApproval",
+        changeRequests[crID] = ChangeRequest({
+            proposal: _proposal,
+            status: CRStatus.PendingApproval,
             createBy: msg.sender,
             UIPNumber: _UIPNumber,
             notes: _notes
@@ -116,6 +119,20 @@ contract UCGovernance {
     function cancelVoteOnChangeRequest(bytes32 _key) public {
         reduceVoteOnChangeRequest(_key, lockedUCGBalance[msg.sender]);
         emit VoteCancelled(_key, msg.sender);
+    }
+    function changeRequestExits(bytes32 _key) public view returns(bool) {
+        return changeRequestsSet.exists(_key);
+    }
+    function isApproved(bytes32 _changeRequestKey) public returns(bool) {
+        require(changeRequestsSet.exists(_key), "Change Request not found.");
+        ChangeRequest cr = changeRequests[_changeRequestKey];
+        if(cr.status == 1) {
+            return true;
+        }
+        // check if it's pending aproval
+        require(cr.status != 0, string(abi.encodePacked("Change Request can't be approved because currrent Status: ", cr.status)); // canceled, aplied, expired, closed
+
+
     }
 
     /// Private Methods

@@ -1,4 +1,4 @@
-pragma solidity >=0.5.1 <0.6.0;
+pragma solidity >=0.5.1 <0.6.2;
 
 /*
 Hitchens UnorderedKeySet v0.93 (modified - see comments)

@@ -54,7 +54,7 @@ contract UCMarketplace is ReentrancyGuard {
     }
 
     /// Public Mappings
-    mapping (address => Collateral) public collaterals; // mapping of collateralTokens by token address
+    mapping(address => Collateral) public collaterals; // mapping of collateralTokens by token address
     mapping(bytes32 => SaleOrder) public saleOrders;
     mapping(bytes32 => PurchaseOrder) public purchaseOrders;
     //mapping (address => uint256) public usdBalances; // amount of USD available for buyers to place orders on orderBook
