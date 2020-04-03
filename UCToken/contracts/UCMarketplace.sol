@@ -13,19 +13,18 @@ import "./libraries/UnorderedKeySet.sol"; // or import {UnorderedKeySetLib} from
  * @title UCMarketplace
  * @dev Contract destination for aquiring and selling UCs.
  */
-contract UCMarketplace is ReentrancyGuard {
+contract UCMarketplace is UCChangeable, ReentrancyGuard {
     using SafeMath for uint256;
     using UnorderedKeySetLib for UnorderedKeySetLib.Set;
     using UnorderedAddressSetLib for UnorderedAddressSetLib.Set;
 
     /// Public Properties
-    address public ucTokenAddress;
-    address public ucCrawlingBandAddress;
-    address public admin; // replace later to list
+    //address public ucTokenAddress;
+    //address public ucCrawlingBandAddress;
 
     /// Contract Navigation Properties
-    UCToken ucToken;
-    UCCrawlingBand ucCrawlingBand; // The reference to UCCrawlingBand implementation.
+    UCToken public ucToken;
+    UCCrawlingBand public ucCrawlingBand; // The reference to UCCrawlingBand implementation.
     //UCStorage public ucStorage;
 
     /// Objects (Structs)
@@ -65,30 +64,25 @@ contract UCMarketplace is ReentrancyGuard {
     UnorderedKeySetLib.Set purchaseOrdersSet;
 
     /// Modifiers
-
-    // later change to list of approved addresses (see wards on MCD) and later to UCG aproval system (look into MCD Governance)
-    modifier onlyAdmin() {
-        require(msg.sender == address(admin), "admin only function");
-        _;
-    }
-
     modifier collateralActive(address collateral) {
         require(!Collateral[collateral].paused, "Collateral temporary paused.");
         _;
     }
 
-    constructor(address _ucTokenAddress, address _ucCrawlingBandAddress) public {
-        admin = msg.sender;
-        ucTokenAddress = _ucTokenAddress;
-        ucCrawlingBandAddress = _ucCrawlingBandAddress;
-        ucToken = UCToken(ucTokenAddress);
-        //ucStorage = _ucStorage;
-        ucCrawlingBand = UCCrawlingBand(ucCrawlingBandAddress);
+    constructor(address path) public {
+
+        ucPath = UCPath(path);
+        //ucPath.initializePath(address(this), "UCMarketplace");
+
+        //ucTokenAddress = _ucTokenAddress;
+        //ucCrawlingBandAddress = _ucCrawlingBandAddress;
+        ucToken = UCToken(ucPath.getPath("UCToken"));
+        ucCrawlingBand = UCCrawlingBand(ucPath.getPath("UCCrawlingBand"));
     }
 
-    /// Public Methods - Administration only
+    /// Public Methods - Authorized only
 
-    function acceptNewCollateral(address _tokenAddr, uint256 _price, bool _paused) public onlyAdmin {
+    function acceptNewCollateral(address _tokenAddr, uint256 _price, bool _paused) public auth {
         // TODO: check if is ERC compatible token
 
         // check if token hasn't been included yet
@@ -104,7 +98,7 @@ contract UCMarketplace is ReentrancyGuard {
         });
         emit NewCollateral(_tokenAddr, _price, _paused);
     }
-    function updateCollateral(address _tokenAddr, uint256 _price, bool _paused) public onlyAdmin {
+    function updateCollateral(address _tokenAddr, uint256 _price, bool _paused) public auth {
         require(collateralsSet.exists(_tokenAddr), "Collateral doesn't exist");
         Collateral storage c = Collateral[_tokenAddr];
         c.price = _price;

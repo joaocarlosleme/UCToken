@@ -1,9 +1,9 @@
 pragma solidity >=0.4.21 <0.6.0;
 
-import "@openzeppelin/contracts/access/roles/MinterRole.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
+import "./UCChangeable.sol";
 
-contract UCToken is MinterRole {
+contract UCToken is UCChangeable {
     using SafeMath for uint256;
 
     string constant public name = "UC";
@@ -74,7 +74,7 @@ contract UCToken is MinterRole {
      *
      * - `to` cannot be the zero address.
      */
-    function mint(address account, uint256 amount) public onlyMinter returns (bool) {
+    function mint(address account, uint256 amount) public auth returns (bool) {
         require(account != address(0), "ERC20: mint to the zero address");
 
         totalSupply = totalSupply.add(amount);
@@ -90,7 +90,7 @@ contract UCToken is MinterRole {
      * @param _amount amount of UC okens to burn
      * @return The number of UCs buyer received
      */
-    function burn(address _account, uint256 _amount) public onlyMinter returns (bool)  {
+    function burn(address _account, uint256 _amount) public auth returns (bool)  {
         require(_amount > 0, "UC amount required");
         uint256 balance = balanceOf[_account];
         require(balance >= _amount, "Balance lower than amount to burn");
