@@ -11,7 +11,11 @@ contract UCAuth is UCChangeable {
 
     /// Private lists
     UnorderedAddressSetLib.Set admins; // list of admins
-    UnorderedAddressSetLib.Set ucContracts; // list of active contracts (both current and replaced)
+    //UnorderedAddressSetLib.Set ucContracts; // list of active contracts (both current and replaced)
+
+    constructor(address pathAddress) UCChangeable(pathAddress, "UCAuth") public {
+
+    }
 
     /// Public Methods
 

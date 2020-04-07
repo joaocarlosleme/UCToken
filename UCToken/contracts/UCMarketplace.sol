@@ -2,7 +2,7 @@ pragma solidity >=0.4.21 <0.6.0;
 
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
-import "@openzeppelin/contracts/token/ERC20Detailed.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20Detailed.sol";
 import "./UCToken.sol";
 import "./UCStorage.sol";
 import "./UCCrawlingBand.sol";
@@ -19,8 +19,6 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
     using UnorderedAddressSetLib for UnorderedAddressSetLib.Set;
 
     /// Public Properties
-    //address public ucTokenAddress;
-    //address public ucCrawlingBandAddress;
 
     /// Contract Navigation Properties
     UCToken public ucToken;
@@ -65,17 +63,12 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
 
     /// Modifiers
     modifier collateralActive(address collateral) {
-        require(!Collateral[collateral].paused, "Collateral temporary paused.");
+        require(collateralsSet.exists(collateral), "Collateral doesn't exist");
+        require(!collaterals[collateral].paused, "Collateral temporary paused.");
         _;
     }
 
-    constructor(address path) public {
-
-        ucPath = UCPath(path);
-        //ucPath.initializePath(address(this), "UCMarketplace");
-
-        //ucTokenAddress = _ucTokenAddress;
-        //ucCrawlingBandAddress = _ucCrawlingBandAddress;
+    constructor(address pathAddress) UCChangeable(pathAddress, "UCMarketplace") public {
         ucToken = UCToken(ucPath.getPath("UCToken"));
         ucCrawlingBand = UCCrawlingBand(ucPath.getPath("UCCrawlingBand"));
     }
@@ -92,7 +85,7 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
         collaterals[_tokenAddr] = Collateral({
             tokenAddr: _tokenAddr,
             price: _price,
-            //balance: 0,
+            orderbookBalance: 0,
             paused: _paused,
             token: ERC20Detailed(_tokenAddr)
         });
@@ -100,7 +93,7 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
     }
     function updateCollateral(address _tokenAddr, uint256 _price, bool _paused) public auth {
         require(collateralsSet.exists(_tokenAddr), "Collateral doesn't exist");
-        Collateral storage c = Collateral[_tokenAddr];
+        Collateral storage c = collaterals[_tokenAddr];
         c.price = _price;
         c.paused = _paused;
         emit CollateralUpdated(_tokenAddr, _price, _paused);
@@ -115,30 +108,30 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
     }
     function getCollateralBalance(address _tokenAddr, bool includeOrderbook) public view returns (uint256) {
         require(collateralsSet.exists(_tokenAddr), "Collateral doesn't exist");
-        uint256 totalAmount = collaterals[_tokenAddr].token.balanceOf(this);
+        uint256 totalAmount = collaterals[_tokenAddr].token.balanceOf(address(this));
         if(includeOrderbook) {
             return totalAmount;
         } else {
             return totalAmount.sub(collaterals[_tokenAddr].orderbookBalance);
         }
     }
-    function getCollateralRate(address _tokenAddr) public view returns(uint256 rate) {
+    function getCollateralRate(address _tokenAddr) public returns(uint256 rate) {
         require(collateralsSet.exists(_tokenAddr), "Collateral doesn't exist");
         return collaterals[_tokenAddr].price.div(ucCrawlingBand.getCurrentCeilingPrice());
     }
 
     function addSaleOrder(uint _amount, uint _price, address _collateral, uint _expiration) public collateralActive(_collateral) {
         require(_amount > 0, "UC amount required");
-        require(collateralsSet.exists(_collateral), "Collateral doesn't exist");
+        //require(collateralsSet.exists(_collateral), "Collateral doesn't exist");
         // check if sender has enough balance
-        require(ucToken.transferFrom(msg.sender, this, _amount), "Couldn't transfer UC token.");
+        require(ucToken.transferFrom(msg.sender, address(this), _amount), "Couldn't transfer UC token.");
 
-        bytes32 key = keccak256(msg.sender, _amount, _price, _collateral, _expiration, block.number);
+        bytes32 key = keccak256(abi.encodePacked(msg.sender, _amount, _price, _collateral, _expiration, block.number));
         saleOrdersSet.insert(key); // Note that this will fail automatically if the key already exists.
         SaleOrder storage o = saleOrders[key];
         o.amount = _amount;
         o.price = _price;
-        o.collareral = _collateral;
+        o.collateral = _collateral;
         o.expiration = _expiration;
         emit OrderBookChange(msg.sender, key, "addSaleOrder", _price, _collateral, _expiration);
     }
@@ -155,12 +148,12 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
     function cancelSaleOrder(bytes32 _key) public {
         require(saleOrdersSet.exists(_key), "SaleOrder doesn't exist");
         SaleOrder storage o = saleOrders[_key];
-        require(o.addr = msg.sender, "order doesn't belong to sender");
+        require(o.addr == msg.sender, "order doesn't belong to sender");
         require(ucToken.transferFrom(address(this), msg.sender, o.amount), "Couldn't transfer UC token.");
 
         saleOrdersSet.remove(_key); // Note that this will fail automatically if the key doesn't exist
         delete saleOrders[_key];
-        emit OrderBookChange(msg.sender, _key, "SaleOrderCancelled", o.price, o.expiration);
+        emit OrderBookChange(msg.sender, _key, "SaleOrderCancelled", o.price, o.addr, o.expiration);
     }
     function getSaleOrdersCount() public view returns(uint count) {
         return saleOrdersSet.count();
@@ -170,40 +163,41 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
     }
 
     function matchSaleOrder(bytes32 _key, address _buyer, address _collateral, uint256 _amount)
-        public collateralActive(_collateral) returns (bool success) {
+        public collateralActive(_collateral) returns (bool) {
         require(saleOrdersSet.exists(_key), "SaleOrder doesn't exist");
-        require(collateralsSet.exists(_tokenAddr), "Collateral doesn't exist");
+        require(collateralsSet.exists(_collateral), "Collateral doesn't exist");
 
         SaleOrder storage o = saleOrders[_key];
         // check sale order expiration
         if(o.expiration <= now) {
-            this.cancelSaleOrder(_key);
+            cancelSaleOrder(_key);
             revert("Sale order expired.");
         }
-        Collateral storage c = Collateral[_tokenAddr];
+        Collateral storage c = collaterals[_collateral];
         // check price match
         uint256 offerTotalValue = c.price.mul(_amount);
         uint256 saleTotalValue = o.price.mul(o.amount);
         require(offerTotalValue >= saleTotalValue, "asking price above offer");
         // check buyer funds
-        uint256 pendingBalance = _amount.sub(c.balances[msg.sender]);
-        if(pendingBalance > 0) {
-            //require(c.token.transferFrom(msg.sender, address(this), pendingBalance), "Coundn't transfer pending collateral amount.");
-            this.addCollateral(_collateral, pendingBalance);
+        uint256 buyerBalance = c.balances[msg.sender]; // amount of collateral buyer already transfered
+        if(_amount > buyerBalance) {
+            addCollateral(_collateral, _amount.sub(buyerBalance));
         }
         // remove collateral from buyer
-        this.debitCollateral(c, msg.sender, _amount);
+        debitCollateral(c, msg.sender, _amount);
         // add collateral to seller
-        Collateral storage sc = Collateral[o.collateral];
-        scAmount = saleTotalValue.div(sc.price);
-        this.transferCollateral(sellerCollateral.token, scAmount);
+        Collateral storage sc = collaterals[o.collateral];
+        uint256 scAmount = saleTotalValue.div(sc.price);
+        transferCollateral(sc.token, o.addr, scAmount);
         // transfer UCs
         ucToken.transfer(_buyer, o.amount);
 
-        this.deleteSaleOrder(_key);
+        deleteSaleOrder(_key);
 
         // maybe break orderBookChange into 3 events (new, removed, match)
         emit OrderBookChange(_buyer, _key, "matchSaleOrder", offerTotalValue, _collateral, o.expiration);
+
+        return true;
     }
 
 
@@ -214,8 +208,8 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
      * @param _collateral collateral Token Address
      * @param _amount amount of collateral Token to exchange
      */
-    function addCollateral(address _collateral, uint256 _amount) public {
-        require(collateralsSet.exists(_collateral), "Collateral doesn't exist");
+    function addCollateral(address _collateral, uint256 _amount) public collateralActive(_collateral) {
+        //require(collateralsSet.exists(_collateral), "Collateral doesn't exist");
         Collateral storage cToken = collaterals[_collateral];
         // transfer to collateral reserves
         require(cToken.token.transferFrom(msg.sender, address(this), _amount), "Transfer of collateral failed.");
@@ -225,7 +219,7 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
         // usdBalances[msg.sender] = usdBalances[msg.sender].add(usdAmount);
 
         // credit collateral balance to user
-        this.creditCollateral(cToken, msg.sender, _amount);
+        creditCollateral(cToken, msg.sender, _amount);
 
         emit Deposit(_collateral, msg.sender, _amount);
     }
@@ -241,9 +235,9 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
         require(collateralsSet.exists(_collateral), "Collateral doesn't exist");
         Collateral storage cToken = collaterals[_collateral];
         // remove credit collateral balance from user & check enough balance
-        this.debitCollateral(cToken, msg.sender, _amount);
+        debitCollateral(cToken, msg.sender, _amount);
         // transfer from collateral reserves
-        this.transferCollateral(cToken.token, msg.sender, _amount);
+        transferCollateral(cToken.token, msg.sender, _amount);
         return true;
     }
 
@@ -309,7 +303,7 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
         // transfer from reserves
         //if (!cToken.token.transfer(msg.sender, cAmount)) revert("Couldn't transfer collateral tokens");
         require(cToken.token.transfer(msg.sender, cAmount), "Couldn't transfer collateral tokens");
-        cToken.balance = cToken.balance.sub(cAmount);
+        cToken.orderbookBalance = cToken.orderbookBalance.sub(cAmount);
 
         // burn UC
         require(ucToken.burn(msg.sender, _amount), "Couldn't burn UC token.");
@@ -344,7 +338,7 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
         require(ucAmount >= _minUCAmount, "Calculated UC amount below minimum.");
 
         // transfer to reserves
-        cToken.balance = cToken.balance.add(_amount);
+        cToken.orderbookBalance = cToken.orderbookBalance.add(_amount);
         require(cToken.token.transferFrom(msg.sender, address(this), _amount), "Transfer of collateral failed.");
         //if (!cToken.token.transferFrom(msg.sender, address(this), _amount)) revert("Transfer of collateral failed.");
 
@@ -360,13 +354,13 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
      * @dev Get Total reserves balance (amount * price) for every collateral
      * @return The total reserves value in USD (6 decimals)
      */
-    function getReservesBalance() public view returns(uint256 totalBalance) {
+    function getReservesBalance() public view returns(uint256) {
         uint256 totalBalance = 0;
         uint256 collateralCount = getCollateralsCount();
         for (uint256 i = 0; i < collateralCount; i++) {
             address collateralAddress = getCollateralAddressAtIndex(i);
-            Collateral collateral = collaterals(collateralAddress);
-            uint256 collateralBalance = GetCollateralBalance(collateralAddress, false);
+            Collateral memory collateral = collaterals[collateralAddress];
+            uint256 collateralBalance = getCollateralBalance(collateralAddress, false);
             totalBalance = totalBalance.add(collateralBalance.mul(collateral.price));
         }
         return totalBalance;
@@ -413,7 +407,7 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
      * It does not change collateral ownership
      *
      */
-    function creditCollateral(Collateral collateral, address _to, uint256 _amount) private {
+    function creditCollateral(Collateral storage collateral, address _to, uint256 _amount) private {
         // credit collateral balance to user
         collateral.balances[_to] = collateral.balances[_to].add(_amount);
         // add orderBook balance
@@ -424,7 +418,7 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
      * It does not change collateral ownership
      *
      */
-    function debitCollateral(Collateral collateral, address _to, uint256 _amount) private {
+    function debitCollateral(Collateral storage collateral, address _to, uint256 _amount) private {
         // debit amount from user collateral balance
         collateral.balances[_to] = collateral.balances[_to].sub(_amount, "Not enough balance");
         // add orderBook balance

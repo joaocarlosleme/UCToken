@@ -57,14 +57,15 @@ contract UCGovernance is UCChangeable {
     /// Public Mappings
     mapping(bytes32 => ChangeRequest) public changeRequests; // where bytes32 is a unique ID for the changeRequest (hash of the proposal + now)
     mapping(address=>uint256) public lockedUCGBalance;
-    mapping(address=>UnorderedKeySetLib.Set) public userParticipations;  // list of user participation on change requests
     mapping(bytes32 => bytes32) public winnerRequestIdPerTarget; // maps target to winner ChangeRequest key
+
+    /// Internal Mappings
+    mapping(address => UnorderedKeySetLib.Set) internal userParticipations;  // list of user participation on change requests
 
     /// Private lists
     UnorderedKeySetLib.Set changeRequestsSet; // list of change requests
 
-    constructor(address _ucPath) public {
-        ucPath = UCPath(_ucPath);
+    constructor(address pathAddress) UCChangeable(pathAddress, "UCGovernance") public {
         ucgToken = UCGToken(ucPath.getPath("UCGToken"));
         maxParticipation = 7; // initial value
     }
@@ -87,25 +88,28 @@ contract UCGovernance is UCChangeable {
         // to go over the loop and delete votes
         // check how many requests user is participating already
         UnorderedKeySetLib.Set storage p = userParticipations[msg.sender];
-        for( uint i = 0; i < p.count; i++) {
+        for( uint i = 0; i < p.count(); i++) {
             reduceVoteOnChangeRequest(p.keyAtIndex(i), _amount);
         }
 
         emit Unlocked(msg.sender, _amount);
     }
 
-    function newChangeRequest(bytes32 _target, bytes32 _proposal, uint256 _UIPNumber, string _notes) public {
-        bytes32 crID = keccak256(_target, _proposal, now);
+    function newChangeRequest(bytes32 _target, bytes32 _proposal, uint256 _safeDelay, uint256 _UIPNumber, string memory _notes) public {
+        bytes32 crID = keccak256(abi.encodePacked(_target, _proposal, now));
         changeRequestsSet.insert(crID); // Note that this will fail automatically if the key already exists.
 
         changeRequests[crID] = ChangeRequest({
             target: _target,
             proposal: _proposal,
+            safeDelay: _safeDelay,
             status: CRStatus.PendingApproval,
             createBy: msg.sender,
             createdOn: now,
             UIPNumber: _UIPNumber,
-            notes: _notes
+            notes: _notes,
+            votes: 0,
+            votesAgainstWinner: 0
         });
 
         emit NewChangeRequest(_target, _proposal, msg.sender, _UIPNumber, _notes);
@@ -126,11 +130,11 @@ contract UCGovernance is UCChangeable {
         // check if is updating vote
         if(!p.exists(_key)) {
             // if doesn't exist need to check if there is room to add
-            require(p.count <= maxParticipation, "Max participation reached");
+            require(p.count() <= maxParticipation, "Max participation reached");
             p.insert(_key);
         }
         // add votes to request
-        ChangeRequest storage cr = ChangeRequests[_key];
+        ChangeRequest storage cr = changeRequests[_key];
         // check if there is already a vote from this user
         uint256 currentVotes = cr.userVotes[msg.sender];
         uint256 currentVotesAgainstWinner = cr.userVotesAgainstWinner[msg.sender];
@@ -145,7 +149,7 @@ contract UCGovernance is UCChangeable {
         cr.votesAgainstWinner = cr.votesAgainstWinner.add(_amount);
 
         //// add votes against winner
-
+        uint256 wv = 0;
         // make sure current request is not winner request
         if(_key != winnerRequestIdPerTarget[cr.target]) {
             // ChangeRequest storage wr = ChangeRequests[winnerRequestIdPerTarget[c.target]]; // locate winner
@@ -157,7 +161,7 @@ contract UCGovernance is UCChangeable {
             //     }
             // }
 
-            uint256 wv = getUserVotesOnWinnerRequest(c.target);
+            wv = getUserVotesOnWinnerRequest(cr.target);
             if(wv != 0) {
                 // if(wv > _amount) { // use this code in case wants to limit winner up to twice that of vote
                 //     cr.userVotesAgainstWinner[msg.sender] = cr.userVotesAgainstWinner[msg.sender].add(_amount);
@@ -171,7 +175,7 @@ contract UCGovernance is UCChangeable {
             }
         }
 
-        emit NewVote(_key, cr.target, _amount, msg.sender);
+        emit NewVote(_key, cr.target, _amount, _amount.add(wv), msg.sender);
     }
     function cancelVoteOnChangeRequest(bytes32 _key) public {
         reduceVoteOnChangeRequest(_key, lockedUCGBalance[msg.sender]);
@@ -191,7 +195,7 @@ contract UCGovernance is UCChangeable {
         // check if change request exist
         require(changeRequestsSet.exists(_key), "ChangeRequest doesn't exist");
 
-        ChangeRequest storage cr = ChangeRequests[_key];
+        ChangeRequest storage cr = changeRequests[_key];
         bytes32 wrKey = winnerRequestIdPerTarget[cr.target];
         if(_key == wrKey) {
             return true;
@@ -200,7 +204,7 @@ contract UCGovernance is UCChangeable {
         if(cr.status != CRStatus.PendingApproval) { // check if it's pending aproval
             return false; // only PendingApproval CRs can become winners
         }
-        ChangeRequest storage wr = ChangeRequests[wrKey]; // locate winner
+        ChangeRequest storage wr = changeRequests[wrKey]; // locate winner
         if(wr.createdOn > cr.createdOn) { // check if changeRequest came after winnerRequest, otherwise it is expired
             cr.status = CRStatus.Expired;
             return false;
@@ -222,9 +226,21 @@ contract UCGovernance is UCChangeable {
     function updateToAppliedStatus(bytes32 _key) public auth {
         // check if change request exist
         require(changeRequestsSet.exists(_key), "ChangeRequest doesn't exist");
-        ChangeRequest storage cr = ChangeRequests[_key];
+        ChangeRequest storage cr = changeRequests[_key];
         cr.status = CRStatus.Applied;
 
+    }
+    // method called by UCPath and to be overriden by implemantation contract
+    function updatePath(string memory pathName, address pathAddress) public auth {
+        bool updated;
+        if(keccak256(bytes(pathName)) == keccak256("UCGToken")) {
+            ucgToken = UCGToken(pathAddress);
+            updated = true;
+        }
+
+        if(updated) {
+            emit PathUpdated(pathName, pathAddress);
+        }
     }
 
     // function isApproved(bytes32 _changeRequestKey) public returns(bool) {
@@ -245,7 +261,7 @@ contract UCGovernance is UCChangeable {
         UnorderedKeySetLib.Set storage p = userParticipations[msg.sender];
         require(p.exists(_key), "User does not participate on ChangeRequest");
         // check votes on request
-        ChangeRequest storage c = ChangeRequests[_key];
+        ChangeRequest storage c = changeRequests[_key];
         uint256 currentVotes = c.userVotes[msg.sender];
         uint256 currentVotesAgainstWinner = c.userVotesAgainstWinner[msg.sender];
         //uint256 computedVotesOnWinner = currentVotesAgainstWinner.sub(currentVotes);
@@ -283,9 +299,9 @@ contract UCGovernance is UCChangeable {
      * @param _target bytes32 key that represents the target of the change request (hash of contract address + method name)
      * @return number of votes on winner request. returns 0 if no vote is found (0 is default uint256 value)
      */
-    function getUserVotesOnWinnerRequest(bytes32 _target) private returns (uint256) {
+    function getUserVotesOnWinnerRequest(bytes32 _target) private view returns (uint256) {
         uint256 wv;
-        ChangeRequest storage wr = ChangeRequests[winnerRequestIdPerTarget[_target]]; // locate winner
+        ChangeRequest storage wr = changeRequests[winnerRequestIdPerTarget[_target]]; // locate winner
         if(wr.target == _target) { // check if wr exist (initialized)
             wv = wr.userVotes[msg.sender]; // check if user has voted on winner request
         }
@@ -323,6 +339,6 @@ contract UCGovernance is UCChangeable {
     );
     event VoteCancelled(bytes32 changeRequest, address user);
     event NewVote(bytes32 changeRequest, bytes32 target, uint256 amount, uint256 amountAgaintWinner, address user);
-    event NewWinner(bytes32 changeRequest uint256 safeDelay);
+    event NewWinner(bytes32 changeRequest, uint256 safeDelay);
 
 }

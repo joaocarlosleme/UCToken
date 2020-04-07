@@ -17,7 +17,9 @@ contract UCReplaceable is UCChangeable {
         _;
     }
 
-    // called by UCPAth when a replaceable contract is replaced
+    // called by other contract when a replaceable contract is replaced or has been and
+    // ...now its functions marked must be shutdown
+    // ... must use try catch to check if contract is really replaceable if calling from another contract
     function replace(address newAddress) public auth {
         require(!replaced, "Has already been replaced");
         newContractAddress = newAddress;

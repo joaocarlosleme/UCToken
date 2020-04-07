@@ -4,8 +4,8 @@ import "./libraries/UnorderedKeySet.sol";
 import "./UCGovernance.sol";
 import "./UCChangeable.sol";
 
-contract UCSPath is UCChangeable {
-   using UnorderedKeySetLib for UnorderedAddressSetLib.Set;
+contract UCPath is UCChangeable {
+   using UnorderedAddressSetLib for UnorderedAddressSetLib.Set;
 
    /// Public Properties
    address public ucGovernanceAddress;
@@ -34,30 +34,30 @@ contract UCSPath is UCChangeable {
    //    Status status;
    // }
 
-   constructor() public {
-      ucPath = UCPath(address(this));
+   constructor() UCChangeable(address(0), "UCPath") public {
+
    }
 
    /// Public Methods
    function getPath(string memory _contractName) public view returns (address) {
       address path = currentPath[_contractName];
-      require(path != address(0));
+      require(path != address(0), "Path not initialized");
       return path;
    }
    function setPath(bytes32 changeRequestID, string memory pathName, address newAddress) public {
       require(ucGovernance.isWinner(changeRequestID), "ChangeRequest not winner");
       // get request target, proposal, safe Delay and status
-      (bytes32 target, bytes32 proposal, uint safeDelay, uint status,,,,,,,,) = ucGovernance.changeRequests(changeRequestID);
+      (bytes32 target, bytes32 proposal, uint safeDelay, UCGovernance.CRStatus status,,,,,,) = ucGovernance.changeRequests(changeRequestID);
       // check if it hasn't been applyed yet
-      require(status != 1, "ChangeRequest is not on Approved status");
+      require(uint(status) != 1, "ChangeRequest is not on Approved status");
       // check if request match target
-      require(target == keccak256(this.address, "changePath"), "ChangeRequest does not match Target");
+      require(target == keccak256(abi.encodePacked(address(this), "changePath")), "ChangeRequest does not match Target");
       // check if request match proposal
-      require(proposal == keccak256(pathName, newAddress), "ChangeRequest does not match proposal");
+      require(proposal == keccak256(abi.encodePacked(pathName, newAddress)), "ChangeRequest does not match proposal");
       // check if safeDelay has passed
       require(now > safeDelay, "Can't apply request within safe delay");
       // check if path exist and is different that proposed path
-      address currPath = currentPath[_contractName];
+      address currPath = currentPath[pathName];
       if(currPath != address(0)) {
          require(currPath != newAddress, "Proposed address is the same as current address");
       }
@@ -69,7 +69,7 @@ contract UCSPath is UCChangeable {
       if(currPath != address(0)) {
          emit PathChanged(pathName, newAddress);
       } else {
-         emit PathInicialized(_contractName, _path);
+         emit PathInicialized(pathName, newAddress);
       }
 
    }
@@ -103,7 +103,7 @@ contract UCSPath is UCChangeable {
 
    /// Private Functions
    function insertContractToList(address _contract) private {
-      if(!ucContracts.exists(_contract) {
+      if(!ucContracts.exists(_contract)) {
          ucContracts.insert(_contract);
       }
    }

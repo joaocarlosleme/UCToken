@@ -2,7 +2,7 @@ pragma solidity >=0.4.21 <0.6.5;
 
 import "./UCPath.sol";
 
-contract UCChangeableBase {
+contract UCChangeable {
 
     /// Public Properties
     address public owner;
@@ -16,19 +16,35 @@ contract UCChangeableBase {
         _;
     }
 
-    constructor() public {
+    constructor(address pathAddress, string memory pathName) internal {
         owner = msg.sender;
         emit NewOwner(msg.sender);
+
+        if(keccak256(bytes(pathName)) == keccak256("UCPath")) {
+            ucPath = UCPath(address(this));
+        } else {
+            ucPath = UCPath(pathAddress);
+        }
+        if(ucPath.getPath(pathName) == address(0)) {
+            ucPath.initializePath(address(this), pathName);
+        }
     }
 
-    /// Public Functions
+    /// Public Methods
     function setOwner(address _owner) public auth {
         owner = _owner;
         emit NewOwner(_owner);
     }
     function setPath(address _path) public auth {
-        ucPath = _path;
+        ucPath = UCPath(_path);
         emit NewPath(_path);
+    }
+
+    /// Public Auth Mehods
+
+    // method called by UCPath and to be overriden by implemantation contract
+    function updatePath(string memory pathName, address pathAddress) public auth {
+        emit PathUpdated(pathName, pathAddress);
     }
 
     /// Internal Functions
@@ -48,6 +64,8 @@ contract UCChangeableBase {
             // TODO Check list of users
         }
     }
+
+
 
     /// Private Functions
 
@@ -70,11 +88,6 @@ contract UCChangeableBase {
 
     /// Events
     event NewOwner(address owner);
-    event NewPath(address path);
-}
-contract UCChangeable is UCChangeableBase {
-    constructor(address path) public {
-        ucPath = UCPath(path);
-        ucPath.initializePath(address(this), "UCChangeable");
-    }
+    event NewPath(address pathAddress);
+    event PathUpdated(string pathName, address pathAddress);
 }

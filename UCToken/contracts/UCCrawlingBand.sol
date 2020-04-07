@@ -1,41 +1,43 @@
 pragma solidity >=0.4.21 <0.6.0;
 
-import "./UCMarketplace.sol";
+import "@openzeppelin/contracts/math/SafeMath.sol";
 import "./UCToken.sol";
+import "./UCChangeable.sol";
+import "./UCMarketplace.sol";
 
 /**
  * @title UCCrawlingBand
  * @dev Business logic for the UC price crawling band target in US Dollars.
  */
-contract UCCrawlingBand {
+contract UCCrawlingBand is UCChangeable {
+    using SafeMath for uint256;
 
     /// Public Properties
     uint256 public latestCeilingPrice; // last used CeilingPrice in US Dollar / 100000 (6 decimals)
     uint256 public latestFloorPrice; // last used FloorPrice in US Dollar / 100000 (6 decimals)
     uint256 public latestTime; // time of latest call
     uint256 public band; // in % (10 means 10%)
-    uint256 public crawlingRate; // price increase per hour
+    uint256 public crawlingRate; // price increase per hour (11 = 0,000011 = 0,1/(365*24))
     uint256 public detachRate; // number between 1 and 100: % of crawling Rate (100 means equal crawling rate)
-    address public ucMarketplaceAddress;
-    address public ucTokenAddress;
 
     /// Contract Navigation Properties
-    UCMarketplace ucMarketplace;
     UCToken ucToken;
+    UCMarketplace ucMarketplace;
 
 
-    constructor(uint256 _band, uint256 _crawlingRate, address _ucMarketplaceAddress, address _ucTokenAddress) public {
+    constructor(uint256 _band, uint256 _crawlingRate, address pathAddress) UCChangeable(pathAddress, "UCCrawlingBand") public {
         band = _band;
         crawlingRate = _crawlingRate;
-        ucMarketplaceAddress = _ucMarketplaceAddress;
-        ucTokenAddress = _ucTokenAddress;
-        ucMarketplace = UCMarketplace(ucMarketplaceAdddress);
-        ucTokenAddress = UCToken(ucTokenAddress);
+        ucToken = UCToken(ucPath.getPath("UCToken"));
         detachRate = 100;
     }
 
     /// Public Methods
-    function getEstimatedCeilingPrice() public view returns (uint256) {
+    function init() public {
+        require(address(ucMarketplace) == address(0), "Already initialized");
+        ucMarketplace = UCMarketplace(ucPath.getPath("UCMarketplace"));
+    }
+    function getEstimatedCeilingPrice() public returns (uint256) {
         latestTime = now;
         if(latestCeilingPrice == 0) {
             return 1000000;
@@ -56,7 +58,7 @@ contract UCCrawlingBand {
         }
         return proposedPrice;
     }
-    function getEstimatedFloorPrice() public view returns (uint256) {
+    function getEstimatedFloorPrice() public returns (uint256) {
         latestTime = now;
         if(latestFloorPrice == 0) {
             return 900000;
@@ -71,8 +73,8 @@ contract UCCrawlingBand {
         require(proposedPrice > latestFloorPrice, "Calculated proposed price must be higher than latestFloorPrice.");
 
         // check if there can be an increase on floorPrice based on reserves
-        uint256 totalReserves = ucMarketPlace.GetReservesBalance();
-        int256 totalSupply = ucToken.totalSupply;
+        uint256 totalReserves = ucMarketplace.getReservesBalance();
+        uint256 totalSupply = ucToken.totalSupply();
         if(totalReserves < proposedPrice.mul(totalSupply)) {
             proposedPrice = totalReserves.div(totalSupply);
         }
@@ -86,7 +88,7 @@ contract UCCrawlingBand {
      * TODO: implement pause modifier
      * @return UC Ceiling Price in US Dollar
      */
-    function getCurrentCeilingPrice() internal returns (uint256) {
+    function getCurrentCeilingPrice() public returns (uint256) {
         // latestTime = now;
         // if(latestCeilingPrice == 0) {
         //     latestCeilingPrice = 1000000;
@@ -122,7 +124,7 @@ contract UCCrawlingBand {
      * TODO: implement pause modifier
      * @return UC Floor Price in US Dollar in US Dollar / 10000000
      */
-    function getCurrentFloorPrice() internal returns (uint256) {
+    function getCurrentFloorPrice() public returns (uint256) {
         uint256 calculatedFloorPrice = getEstimatedFloorPrice();
         if(calculatedFloorPrice == latestFloorPrice) {
             return latestFloorPrice;
