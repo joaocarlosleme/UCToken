@@ -14,9 +14,7 @@ contract UCGToken is UCChangeable, ERC20 {
     uint8 constant public decimals = 18;
 
     constructor(address pathAddress) UCChangeable(pathAddress, "UCGToken") public {
-        uint256 initialSupply = UCToken(ucPath.getPath("UCToken")).balanceOf(msg.sender);
-        //balanceOf[msg.sender] = initialSupply;
-        //_totalSupply = initialSupply;
+        uint256 initialSupply = 500000000*10**18;
         _mint(msg.sender, initialSupply);
     }
     /** @dev Creates `amount` tokens and assigns them to `account`, increasing

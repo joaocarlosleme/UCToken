@@ -1,4 +1,4 @@
-pragma solidity >=0.4.21 <0.6.2;
+pragma solidity 0.5.7;
 
 import "./libraries/UnorderedKeySet.sol";
 import "./UCGovernance.sol";
@@ -8,7 +8,6 @@ contract UCPath is UCChangeable {
    using UnorderedAddressSetLib for UnorderedAddressSetLib.Set;
 
    /// Public Properties
-   address public ucGovernanceAddress;
    address public ucCrawlingBandAddress;
    //uint256[2] public changeUCCrawlingBandAddressReq; // requirement
 
@@ -19,7 +18,7 @@ contract UCPath is UCChangeable {
    UnorderedAddressSetLib.Set ucContracts; // list of active contracts (both current and replaced)
 
    /// Public Mappings
-   mapping(string => address) private currentPath; // mapping of current paths por contract name
+   mapping(string => address) private currentPath; // mapping of current paths p/contract name. May return address(0). Use getPath instead.
 
    // /// Enums
    //  enum Status {
@@ -34,15 +33,23 @@ contract UCPath is UCChangeable {
    //    Status status;
    // }
 
-   constructor() UCChangeable(address(0), "UCPath") public {
-
+   constructor() public UCChangeable(address(0), "UCPath") {
+      initializePath(address(this), "UCPath");
    }
 
    /// Public Methods
    function getPath(string memory _contractName) public view returns (address) {
       address path = currentPath[_contractName];
-      require(path != address(0), "Path not initialized");
+      require(path != address(0), string(abi.encodePacked("Path not initialized: ", _contractName)));
       return path;
+   }
+   function hasPath(string memory _contractName) public view returns (bool) {
+      address path = currentPath[_contractName];
+      if(path != address(0)) {
+         return true;
+      } else {
+         return false;
+      }
    }
    function setPath(bytes32 changeRequestID, string memory pathName, address newAddress) public {
       require(ucGovernance.isWinner(changeRequestID), "ChangeRequest not winner");
@@ -76,7 +83,7 @@ contract UCPath is UCChangeable {
 
    /// Public Auth Methods
    function initializePath(address _path, string memory _contractName) public auth {
-      require(currentPath[_contractName] == address(0));
+      require(currentPath[_contractName] == address(0), "Can't initialize a Path that has been set already");
       currentPath[_contractName] = _path;
       insertContractToList(_path);
       emit PathInicialized(_contractName, _path);

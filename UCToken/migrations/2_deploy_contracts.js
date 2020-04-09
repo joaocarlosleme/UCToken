@@ -1,4 +1,3 @@
-var UCChangeable = artifacts.require("./UCChangeable.sol");
 var UCPath = artifacts.require("./UCPath.sol");
 var UCToken = artifacts.require("./UCToken.sol");
 var UCGToken = artifacts.require("./UCGToken.sol");
@@ -32,16 +31,21 @@ var SampleCollateralToken = artifacts.require("./SampleCollateralToken.sol");
 // };
 
 module.exports = function(deployer) {
-  deployer.deploy(UCPath).then(function() {
+  deployer.deploy(UCPath).then(function(instance) {
     return deployer.deploy(UCToken, UCPath.address, 0);
   }).then(function() {
-    //deployer.deploy(UCCollateralTokenInterface);
+    UCPath.deployed().then(function(instance) { instance.initializePath(UCToken.address, "UCToken") });
   	return deployer.deploy(UCGToken, UCPath.address);
   }).then(function() {
+    UCPath.deployed().then(function(instance) { instance.initializePath(UCGToken.address, "UCGToken") });
   	return deployer.deploy(UCCrawlingBand, 10, 11, UCPath.address);
   }).then(function() {
+    UCPath.deployed().then(function(instance) { instance.initializePath(UCCrawlingBand.address, "UCCrawlingBand") });
   	return deployer.deploy(UCMarketplace, UCPath.address);
   }).then(function() {
+    UCPath.deployed().then(function(instance) { instance.initializePath(UCMarketplace.address, "UCMarketplace") });
   	return deployer.deploy(UCGovernance, UCPath.address);
+  }).then(function() {
+    UCPath.deployed().then(function(instance) { instance.initializePath(UCGovernance.address, "UCGovernance") });
   });
 };

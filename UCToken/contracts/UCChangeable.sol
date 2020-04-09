@@ -1,4 +1,4 @@
-pragma solidity >=0.4.21 <0.6.5;
+pragma solidity 0.5.7;
 
 import "./UCPath.sol";
 
@@ -12,7 +12,11 @@ contract UCChangeable {
 
     /// Modifiers
     modifier auth {
-        require(isAuthorized(msg.sender), "Not Authorized");
+        //// for debugging
+        // require(
+        //     isAuthorized(msg.sender),
+        //     string(abi.encodePacked("MSG SENDER: ", toString(msg.sender), " OWNER: ", toString(owner), " ADDRESS THIS: ", toString(address(this))))); // "Not authorized"
+        require(isAuthorized(msg.sender),"Not authorized");
         _;
     }
 
@@ -24,10 +28,13 @@ contract UCChangeable {
             ucPath = UCPath(address(this));
         } else {
             ucPath = UCPath(pathAddress);
+            // if(!ucPath.hasPath(pathName)) {
+            //     ucPath.initializePath(address(this), pathName); // doesn't work because doesn't pass AUTH (msg.sender is new contract not yet registered)
+            // }
         }
-        if(ucPath.getPath(pathName) == address(0)) {
-            ucPath.initializePath(address(this), pathName);
-        }
+        // if(!ucPath.hasPath(pathName)) {
+        //     ucPath.initializePath(address(this), pathName); // doesn't work for UCPath contract (probably because the methods are not available yet)
+        // }
     }
 
     /// Public Methods
@@ -51,7 +58,7 @@ contract UCChangeable {
     function isAuthorized(address src) internal view returns (bool) {
         if (src == address(this)) {
             return true;
-        } else if (src == owner) {
+        } else if (src == owner) { // can't use tx.origin == ower https://solidity.readthedocs.io/en/develop/security-considerations.html#tx-origin
             return true;
         } else if(isContract(src)) {
             // check list of ucContracts
@@ -85,6 +92,19 @@ contract UCChangeable {
         }
         return (codehash != 0x0 && codehash != accountHash);
     }
+    // function toString(address _addr) internal pure returns (string memory) {
+    //     bytes32 value = bytes32(uint256(_addr));
+    //     bytes memory alphabet = "0123456789abcdef";
+
+    //     bytes memory str = new bytes(42);
+    //     str[0] = '0';
+    //     str[1] = 'x';
+    //     for (uint i = 0; i < 20; i++) {
+    //         str[2+i*2] = alphabet[uint(uint8(value[i + 12] >> 4))];
+    //         str[3+i*2] = alphabet[uint(uint8(value[i + 12] & 0x0f))];
+    //     }
+    //     return string(str);
+    // }
 
     /// Events
     event NewOwner(address owner);

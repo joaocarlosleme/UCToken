@@ -58,25 +58,25 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.1+commit.c8a2cb62\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"address\"},{\"name\":\"\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCStorage.sol\":\"UCStorage\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCStorage.sol\":{\"keccak256\":\"0x0ad26ff9fa880da69cb08f3530fbe780ed1dc072039d671963b9992846696e7d\",\"urls\":[\"bzzr://ef24a9111bf1a43aed4e9150ad241537422486caca98b3dde0be48ccc36f6429\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b506101da806100206000396000f3fe608060405260043610610051576000357c01000000000000000000000000000000000000000000000000000000009004806318160ddd1461005657806370a0823114610081578063dd62ed3e146100e6575b600080fd5b34801561006257600080fd5b5061006b61016b565b6040518082815260200191505060405180910390f35b34801561008d57600080fd5b506100d0600480360360208110156100a457600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610171565b6040518082815260200191505060405180910390f35b3480156100f257600080fd5b506101556004803603604081101561010957600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610189565b6040518082815260200191505060405180910390f35b60005481565b60016020528060005260406000206000915090505481565b600260205281600052604060002060205280600052604060002060009150915050548156fea165627a7a7230582071be167fdab636af27c288be9f2f0efa91984396c1659b44c3bcd71f856b062e0029",
-  "deployedBytecode": "0x608060405260043610610051576000357c01000000000000000000000000000000000000000000000000000000009004806318160ddd1461005657806370a0823114610081578063dd62ed3e146100e6575b600080fd5b34801561006257600080fd5b5061006b61016b565b6040518082815260200191505060405180910390f35b34801561008d57600080fd5b506100d0600480360360208110156100a457600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610171565b6040518082815260200191505060405180910390f35b3480156100f257600080fd5b506101556004803603604081101561010957600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610189565b6040518082815260200191505060405180910390f35b60005481565b60016020528060005260406000206000915090505481565b600260205281600052604060002060205280600052604060002060009150915050548156fea165627a7a7230582071be167fdab636af27c288be9f2f0efa91984396c1659b44c3bcd71f856b062e0029",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.7+commit.6da8b019\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"address\"},{\"name\":\"\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCStorage.sol\":\"UCStorage\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCStorage.sol\":{\"keccak256\":\"0x0ad26ff9fa880da69cb08f3530fbe780ed1dc072039d671963b9992846696e7d\",\"urls\":[\"bzzr://ef24a9111bf1a43aed4e9150ad241537422486caca98b3dde0be48ccc36f6429\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506101a3806100206000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c806318160ddd1461004657806370a0823114610064578063dd62ed3e146100bc575b600080fd5b61004e610134565b6040518082815260200191505060405180910390f35b6100a66004803603602081101561007a57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061013a565b6040518082815260200191505060405180910390f35b61011e600480360360408110156100d257600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610152565b6040518082815260200191505060405180910390f35b60005481565b60016020528060005260406000206000915090505481565b600260205281600052604060002060205280600052604060002060009150915050548156fea165627a7a7230582077b6b3eabca1c4ac273e339156a75e56734791abde46d903f06143de703879ef0029",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c806318160ddd1461004657806370a0823114610064578063dd62ed3e146100bc575b600080fd5b61004e610134565b6040518082815260200191505060405180910390f35b6100a66004803603602081101561007a57600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919050505061013a565b6040518082815260200191505060405180910390f35b61011e600480360360408110156100d257600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff169060200190929190803573ffffffffffffffffffffffffffffffffffffffff169060200190929190505050610152565b6040518082815260200191505060405180910390f35b60005481565b60016020528060005260406000206000915090505481565b600260205281600052604060002060205280600052604060002060009150915050548156fea165627a7a7230582077b6b3eabca1c4ac273e339156a75e56734791abde46d903f06143de703879ef0029",
   "sourceMap": "36:192:12:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;36:192:12;;;;;;;",
-  "deployedSourceMap": "36:192:12:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;66:26;;8:9:-1;5:2;;;30:1;27;20:12;5:2;66:26:12;;;:::i;:::-;;;;;;;;;;;;;;;;;;;100:44;;8:9:-1;5:2;;;30:1;27;20:12;5:2;100:44:12;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;100:44:12;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;150:64;;8:9:-1;5:2;;;30:1;27;20:12;5:2;150:64:12;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;150:64:12;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;66:26;;;;:::o;100:44::-;;;;;;;;;;;;;;;;;:::o;150:64::-;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "deployedSourceMap": "36:192:12:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;36:192:12;;;;;;;;;;;;;;;;;;;;;;;;;;;;;66:26;;;:::i;:::-;;;;;;;;;;;;;;;;;;;100:44;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;100:44:12;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;150:64;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;150:64:12;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;66:26;;;;:::o;100:44::-;;;;;;;;;;;;;;;;;:::o;150:64::-;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
   "source": "pragma solidity >=0.4.21 <0.6.0;\r\n\r\ncontract UCStorage {\r\n   \r\n   uint256 public totalSupply;\r\n\r\n   mapping(address => uint256) public balanceOf;\r\n   mapping(address => mapping(address => uint256)) public allowance;\r\n\r\n    \r\n\r\n}",
   "sourcePath": "E:\\JCL\\Webmaster\\GitHub\\UCToken\\UCToken\\contracts\\UCStorage.sol",
   "ast": {
     "absolutePath": "/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCStorage.sol",
     "exportedSymbols": {
       "UCStorage": [
-        3287
+        3301
       ]
     },
-    "id": 3288,
+    "id": 3302,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3274,
+        "id": 3288,
         "literals": [
           "solidity",
           ">=",
@@ -95,19 +95,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3287,
+        "id": 3301,
         "linearizedBaseContracts": [
-          3287
+          3301
         ],
         "name": "UCStorage",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 3276,
+            "id": 3290,
             "name": "totalSupply",
             "nodeType": "VariableDeclaration",
-            "scope": 3287,
+            "scope": 3301,
             "src": "66:26:12",
             "stateVariable": true,
             "storageLocation": "default",
@@ -116,7 +116,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 3275,
+              "id": 3289,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "66:7:12",
@@ -130,10 +130,10 @@
           },
           {
             "constant": false,
-            "id": 3280,
+            "id": 3294,
             "name": "balanceOf",
             "nodeType": "VariableDeclaration",
-            "scope": 3287,
+            "scope": 3301,
             "src": "100:44:12",
             "stateVariable": true,
             "storageLocation": "default",
@@ -142,9 +142,9 @@
               "typeString": "mapping(address => uint256)"
             },
             "typeName": {
-              "id": 3279,
+              "id": 3293,
               "keyType": {
-                "id": 3277,
+                "id": 3291,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "108:7:12",
@@ -160,7 +160,7 @@
                 "typeString": "mapping(address => uint256)"
               },
               "valueType": {
-                "id": 3278,
+                "id": 3292,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "119:7:12",
@@ -175,10 +175,10 @@
           },
           {
             "constant": false,
-            "id": 3286,
+            "id": 3300,
             "name": "allowance",
             "nodeType": "VariableDeclaration",
-            "scope": 3287,
+            "scope": 3301,
             "src": "150:64:12",
             "stateVariable": true,
             "storageLocation": "default",
@@ -187,9 +187,9 @@
               "typeString": "mapping(address => mapping(address => uint256))"
             },
             "typeName": {
-              "id": 3285,
+              "id": 3299,
               "keyType": {
-                "id": 3281,
+                "id": 3295,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "158:7:12",
@@ -205,9 +205,9 @@
                 "typeString": "mapping(address => mapping(address => uint256))"
               },
               "valueType": {
-                "id": 3284,
+                "id": 3298,
                 "keyType": {
-                  "id": 3282,
+                  "id": 3296,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "177:7:12",
@@ -223,7 +223,7 @@
                   "typeString": "mapping(address => uint256)"
                 },
                 "valueType": {
-                  "id": 3283,
+                  "id": 3297,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "188:7:12",
@@ -238,7 +238,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 3288,
+        "scope": 3302,
         "src": "36:192:12"
       }
     ],
@@ -248,14 +248,14 @@
     "absolutePath": "/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCStorage.sol",
     "exportedSymbols": {
       "UCStorage": [
-        3287
+        3301
       ]
     },
-    "id": 3288,
+    "id": 3302,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3274,
+        "id": 3288,
         "literals": [
           "solidity",
           ">=",
@@ -274,19 +274,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3287,
+        "id": 3301,
         "linearizedBaseContracts": [
-          3287
+          3301
         ],
         "name": "UCStorage",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 3276,
+            "id": 3290,
             "name": "totalSupply",
             "nodeType": "VariableDeclaration",
-            "scope": 3287,
+            "scope": 3301,
             "src": "66:26:12",
             "stateVariable": true,
             "storageLocation": "default",
@@ -295,7 +295,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 3275,
+              "id": 3289,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "66:7:12",
@@ -309,10 +309,10 @@
           },
           {
             "constant": false,
-            "id": 3280,
+            "id": 3294,
             "name": "balanceOf",
             "nodeType": "VariableDeclaration",
-            "scope": 3287,
+            "scope": 3301,
             "src": "100:44:12",
             "stateVariable": true,
             "storageLocation": "default",
@@ -321,9 +321,9 @@
               "typeString": "mapping(address => uint256)"
             },
             "typeName": {
-              "id": 3279,
+              "id": 3293,
               "keyType": {
-                "id": 3277,
+                "id": 3291,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "108:7:12",
@@ -339,7 +339,7 @@
                 "typeString": "mapping(address => uint256)"
               },
               "valueType": {
-                "id": 3278,
+                "id": 3292,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "119:7:12",
@@ -354,10 +354,10 @@
           },
           {
             "constant": false,
-            "id": 3286,
+            "id": 3300,
             "name": "allowance",
             "nodeType": "VariableDeclaration",
-            "scope": 3287,
+            "scope": 3301,
             "src": "150:64:12",
             "stateVariable": true,
             "storageLocation": "default",
@@ -366,9 +366,9 @@
               "typeString": "mapping(address => mapping(address => uint256))"
             },
             "typeName": {
-              "id": 3285,
+              "id": 3299,
               "keyType": {
-                "id": 3281,
+                "id": 3295,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "158:7:12",
@@ -384,9 +384,9 @@
                 "typeString": "mapping(address => mapping(address => uint256))"
               },
               "valueType": {
-                "id": 3284,
+                "id": 3298,
                 "keyType": {
-                  "id": 3282,
+                  "id": 3296,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "177:7:12",
@@ -402,7 +402,7 @@
                   "typeString": "mapping(address => uint256)"
                 },
                 "valueType": {
-                  "id": 3283,
+                  "id": 3297,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "188:7:12",
@@ -417,7 +417,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 3288,
+        "scope": 3302,
         "src": "36:192:12"
       }
     ],
@@ -425,11 +425,11 @@
   },
   "compiler": {
     "name": "solc",
-    "version": "0.5.1+commit.c8a2cb62.Emscripten.clang"
+    "version": "0.5.7+commit.6da8b019.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.19",
-  "updatedAt": "2020-04-07T16:02:03.085Z",
+  "schemaVersion": "3.0.23",
+  "updatedAt": "2020-04-09T02:59:27.063Z",
   "devdoc": {
     "methods": {}
   },
