@@ -15,7 +15,8 @@ contract UCCrawlingBand is UCChangeable {
     /// Public Properties
     uint256 public latestCeilingPrice; // last used CeilingPrice in US Dollar / 100000 (6 decimals)
     uint256 public latestFloorPrice; // last used FloorPrice in US Dollar / 100000 (6 decimals)
-    uint256 public latestTime; // time of latest call
+    uint256 public latestCeilingTime; // time of latest change in ceiling price
+    uint256 public latestFloorTime; // time of latest change in floor price
     uint256 public band; // in % (10 means 10%)
     uint256 public crawlingRate; // price increase per hour (11 = 0,000011 = 0,1/(365*24))
     uint256 public detachRate; // number between 1 and 100: % of crawling Rate (100 means equal crawling rate)
@@ -37,12 +38,11 @@ contract UCCrawlingBand is UCChangeable {
         require(address(ucMarketplace) == address(0), "Already initialized");
         ucMarketplace = UCMarketplace(ucPath.getPath("UCMarketplace"));
     }
-    function getEstimatedCeilingPrice() public returns (uint256) {
-        latestTime = now;
-        if(latestCeilingPrice == 0) {
+    function getEstimatedCeilingPrice() public view returns (uint256) {
+        if(latestCeilingTime == 0) {
             return 1000000;
         }
-        uint256 elapsedHours = (now.sub(latestTime)).div(3600);
+        uint256 elapsedHours = (now.sub(latestCeilingTime)).div(3600);
         uint256 proposedPrice = latestCeilingPrice.add(crawlingRate.mul(elapsedHours));
         require(proposedPrice > latestCeilingPrice, "Error calculating proposed price: must be higher than latestCeilingPrice.");
         uint256 estimatedFloorPrice = getEstimatedFloorPrice();
@@ -56,11 +56,14 @@ contract UCCrawlingBand is UCChangeable {
         {
             proposedPrice = priceBandLimit;
         }
+        // Check of proposed price is higher than latestPrice (requirement?)
+        if(proposedPrice < latestCeilingPrice) {
+            return latestCeilingPrice;
+        }
         return proposedPrice;
     }
-    function getEstimatedFloorPrice() public returns (uint256) {
-        latestTime = now;
-        if(latestFloorPrice == 0) {
+    function getEstimatedFloorPrice() public view returns (uint256) {
+        if(latestFloorTime == 0) {
             return 900000;
         }
 
@@ -68,7 +71,7 @@ contract UCCrawlingBand is UCChangeable {
         uint256 floorPriceCrawlingRate = (crawlingRate.mul(detachRate)).div(100);
         require(floorPriceCrawlingRate <= crawlingRate, "Error calculating floorPriceCrawlingRate: cant be greater than CrawlingRate.");
 
-        uint256 elapsedHours = (now.sub(latestTime)).div(3600);
+        uint256 elapsedHours = (now.sub(latestFloorTime)).div(3600);
         uint256 proposedPrice = latestFloorPrice.add(floorPriceCrawlingRate.mul(elapsedHours));
         require(proposedPrice > latestFloorPrice, "Calculated proposed price must be higher than latestFloorPrice.");
 
@@ -82,13 +85,15 @@ contract UCCrawlingBand is UCChangeable {
 
         return proposedPrice;
     }
+
+    /// Public Authorization Methods
     /**
      * @dev Returns the current target UC ceiling price in US Dollar.
      * Note that...
      * TODO: implement pause modifier
      * @return UC Ceiling Price in US Dollar
      */
-    function getCurrentCeilingPrice() public returns (uint256) {
+    function getCurrentCeilingPrice() public auth returns (uint256) {
         // latestTime = now;
         // if(latestCeilingPrice == 0) {
         //     latestCeilingPrice = 1000000;
@@ -113,7 +118,8 @@ contract UCCrawlingBand is UCChangeable {
         // return latestCeilingPrice;
 
         uint256 calculatedCeilingPrice = getEstimatedCeilingPrice();
-        if(calculatedCeilingPrice > latestCeilingPrice) {
+        latestCeilingTime = now; // maybe check if now > latestTime?
+        if(calculatedCeilingPrice != latestCeilingPrice) {
             latestCeilingPrice = calculatedCeilingPrice;
         }
         return latestCeilingPrice;
@@ -124,12 +130,12 @@ contract UCCrawlingBand is UCChangeable {
      * TODO: implement pause modifier
      * @return UC Floor Price in US Dollar in US Dollar / 10000000
      */
-    function getCurrentFloorPrice() public returns (uint256) {
+    function getCurrentFloorPrice() public auth returns (uint256) {
         uint256 calculatedFloorPrice = getEstimatedFloorPrice();
-        if(calculatedFloorPrice == latestFloorPrice) {
-            return latestFloorPrice;
+        latestFloorTime = now;
+        if(calculatedFloorPrice != latestFloorPrice) {
+            latestFloorPrice = calculatedFloorPrice;
         }
-        latestFloorPrice = calculatedFloorPrice;
         return latestFloorPrice;
     }
 

@@ -1,9 +1,9 @@
 var UCToken = artifacts.require("./UCToken.sol");
-var UCTrade = artifacts.require("./UCTrade.sol");
+//var UCTrade = artifacts.require("./UCTrade.sol");
 
 contract('UCToken', function(accounts) {
     var tokenInstance;
-    var ucTradeInstance;
+    // /var ucTradeInstance;
 
     // it('sets the total supply upon deployment', function() {
     //     return UCToken.deployed().then(function(instance) {
@@ -43,7 +43,7 @@ contract('UCToken', function(accounts) {
           assert.equal(decimals.toNumber(), 18, 'has the correct decimals');
         });
       })
-    
+
       it('allocates the initial supply upon deployment', function() {
         return UCToken.deployed().then(function(instance) {
           tokenInstance = instance;
@@ -56,16 +56,16 @@ contract('UCToken', function(accounts) {
         });
       });
 
-      it('add minter', function() {
-        return UCTrade.deployed().then(function(instance) {
-          ucTradeInstance = instance;
-          tokenInstance.addMinter(ucTradeInstance.address);
-          return tokenInstance.isMinter(ucTradeInstance.address);
-        }).then(function(result) {
-          assert.equal(result, true, 'minter added');
-        });
-      });
-    
+      // it('add minter', function() {
+      //   return UCTrade.deployed().then(function(instance) {
+      //     ucTradeInstance = instance;
+      //     tokenInstance.addMinter(ucTradeInstance.address);
+      //     return tokenInstance.isMinter(ucTradeInstance.address);
+      //   }).then(function(result) {
+      //     assert.equal(result, true, 'minter added');
+      //   });
+      // });
+
       // it('transfers token ownership', function() {
       //   return UCToken.deployed().then(function(instance) {
       //     tokenInstance = instance;
@@ -88,7 +88,7 @@ contract('UCToken', function(accounts) {
       //     assert.equal(balance.toNumber(), 950000, 'deducts the amount from the sending account');
       //   });
       // });
-    
+
       it('approves tokens for delegated transfer', function() {
         return UCToken.deployed().then(function(instance) {
           tokenInstance = instance;
@@ -99,15 +99,15 @@ contract('UCToken', function(accounts) {
         }).then(function(receipt) {
           assert.equal(receipt.logs.length, 1, 'triggers one event');
           assert.equal(receipt.logs[0].event, 'Approval', 'should be the "Approval" event');
-          assert.equal(receipt.logs[0].args._owner, accounts[0], 'logs the account the tokens are authorized by');
-          assert.equal(receipt.logs[0].args._spender, accounts[1], 'logs the account the tokens are authorized to');
-          assert.equal(receipt.logs[0].args._value, 100, 'logs the transfer amount');
+          assert.equal(receipt.logs[0].args.owner, accounts[0], 'logs the account the tokens are authorized by');
+          assert.equal(receipt.logs[0].args.spender, accounts[1], 'logs the account the tokens are authorized to');
+          assert.equal(receipt.logs[0].args.value, 100, 'logs the transfer amount');
           return tokenInstance.allowance(accounts[0], accounts[1]);
         }).then(function(allowance) {
-          assert.equal(allowance.toNumber(), 100, 'stores the allowance for delegated trasnfer');
+          assert.equal(allowance.toNumber(), 100, 'stores the allowance for delegated transfer');
         });
       });
-    
+
       // it('handles delegated token transfers', function() {
       //   return UCToken.deployed().then(function(instance) {
       //     tokenInstance = instance;

@@ -1,25 +1,24 @@
 var UCCrawlingBand = artifacts.require("./UCCrawlingBand.sol");
 
 contract('UCCrawlingBand', function(accounts) {
-    var tokenInstance;
-    var ceilingPrice = 100000; 
-    var floorPrice = 90000; 
+    var ucCBInstance;
 
     it('initializes the contract with the correct values', function() {
         return UCCrawlingBand.deployed().then(function(instance) {
-          tokenInstance = instance;
-          return tokenInstance.latestCeilingPrice();
-        }).then(function(cPrice) {
-          assert.equal(cPrice, ceilingPrice, 'starting ceiling price correct');
-          return tokenInstance.latestFloorPrice();
-        }).then(function(fPrice) {
-          assert.equal(fPrice, floorPrice, 'starting floor price correct');
-          return tokenInstance.getCurrentCeilingPrice();
-        }).then(function(gcPrice) {
-          assert.equal(gcPrice, ceilingPrice, 'getCeilingPrice working');
-          return tokenInstance.getCurrentFloorPrice();
-        }).then(function(gfPrice) {
-          assert.equal(gfPrice, floorPrice, 'getFloorPrice working');
+          ucCBInstance = instance;
+          return ucCBInstance.latestCeilingPrice();
+        }).then(function(cPrice0) {
+          assert.equal(cPrice0, 0, 'starting latestCeiling price correct');
+          return ucCBInstance.getEstimatedCeilingPrice();
+        }).then(function(cPrice1) {
+          assert(cPrice1 == 1*10**6, 'starting estimated ceiling price correct');
+          return ucCBInstance.latestFloorPrice();
+        }).then(function(fPrice0) {
+          assert.equal(fPrice0, 0, 'starting latestFloor price correct');
+          return ucCBInstance.getEstimatedFloorPrice();
+        }).then(function(fPrice1) {
+          assert(fPrice1 == 9*10**5, 'starting estimated floor price correct');
+          return ucCBInstance.getCurrentFloorPrice();
         });
       })
 

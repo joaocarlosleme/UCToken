@@ -139,14 +139,14 @@
     "absolutePath": "/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCAuth.sol",
     "exportedSymbols": {
       "UCAuth": [
-        92
+        96
       ]
     },
-    "id": 93,
+    "id": 97,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 74,
+        "id": 78,
         "literals": [
           "solidity",
           ">=",
@@ -162,10 +162,10 @@
       {
         "absolutePath": "/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/libraries/UnorderedKeySet.sol",
         "file": "./libraries/UnorderedKeySet.sol",
-        "id": 75,
+        "id": 79,
         "nodeType": "ImportDirective",
-        "scope": 93,
-        "sourceUnit": 3723,
+        "scope": 97,
+        "sourceUnit": 3738,
         "src": "36:41:2",
         "symbolAliases": [],
         "unitAlias": ""
@@ -173,10 +173,10 @@
       {
         "absolutePath": "/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCPath.sol",
         "file": "./UCPath.sol",
-        "id": 76,
+        "id": 80,
         "nodeType": "ImportDirective",
-        "scope": 93,
-        "sourceUnit": 3237,
+        "scope": 97,
+        "sourceUnit": 3252,
         "src": "79:22:2",
         "symbolAliases": [],
         "unitAlias": ""
@@ -184,10 +184,10 @@
       {
         "absolutePath": "/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCChangeable.sol",
         "file": "./UCChangeable.sol",
-        "id": 77,
+        "id": 81,
         "nodeType": "ImportDirective",
-        "scope": 93,
-        "sourceUnit": 290,
+        "scope": 97,
+        "sourceUnit": 294,
         "src": "103:28:2",
         "symbolAliases": [],
         "unitAlias": ""
@@ -198,57 +198,57 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 78,
+              "id": 82,
               "name": "UCChangeable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 289,
+              "referencedDeclaration": 293,
               "src": "154:12:2",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_UCChangeable_$289",
+                "typeIdentifier": "t_contract$_UCChangeable_$293",
                 "typeString": "contract UCChangeable"
               }
             },
-            "id": 79,
+            "id": 83,
             "nodeType": "InheritanceSpecifier",
             "src": "154:12:2"
           }
         ],
         "contractDependencies": [
-          289
+          293
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 92,
+        "id": 96,
         "linearizedBaseContracts": [
-          92,
-          289
+          96,
+          293
         ],
         "name": "UCAuth",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 81,
+            "id": 85,
             "name": "admins",
             "nodeType": "VariableDeclaration",
-            "scope": 92,
+            "scope": 96,
             "src": "271:33:2",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_struct$_Set_$3562_storage",
+              "typeIdentifier": "t_struct$_Set_$3577_storage",
               "typeString": "struct UnorderedAddressSetLib.Set"
             },
             "typeName": {
               "contractScope": null,
-              "id": 80,
+              "id": 84,
               "name": "UnorderedAddressSetLib.Set",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 3562,
+              "referencedDeclaration": 3577,
               "src": "271:26:2",
               "typeDescriptions": {
-                "typeIdentifier": "t_struct$_Set_$3562_storage_ptr",
+                "typeIdentifier": "t_struct$_Set_$3577_storage_ptr",
                 "typeString": "struct UnorderedAddressSetLib.Set"
               }
             },
@@ -257,13 +257,13 @@
           },
           {
             "body": {
-              "id": 90,
+              "id": 94,
               "nodeType": "Block",
               "src": "510:10:2",
               "statements": []
             },
             "documentation": null,
-            "id": 91,
+            "id": 95,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [
@@ -271,11 +271,11 @@
                 "arguments": [
                   {
                     "argumentTypes": null,
-                    "id": 86,
+                    "id": 90,
                     "name": "pathAddress",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 83,
+                    "referencedDeclaration": 87,
                     "src": "480:11:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -285,7 +285,7 @@
                   {
                     "argumentTypes": null,
                     "hexValue": "554341757468",
-                    "id": 87,
+                    "id": 91,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -301,17 +301,17 @@
                     "value": "UCAuth"
                   }
                 ],
-                "id": 88,
+                "id": 92,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 85,
+                  "id": 89,
                   "name": "UCChangeable",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 289,
+                  "referencedDeclaration": 293,
                   "src": "467:12:2",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_UCChangeable_$289_$",
+                    "typeIdentifier": "t_type$_t_contract$_UCChangeable_$293_$",
                     "typeString": "type(contract UCChangeable)"
                   }
                 },
@@ -322,15 +322,15 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 84,
+              "id": 88,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 83,
+                  "id": 87,
                   "name": "pathAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 91,
+                  "scope": 95,
                   "src": "446:19:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -339,7 +339,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 82,
+                    "id": 86,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "446:7:2",
@@ -356,19 +356,19 @@
               "src": "445:21:2"
             },
             "returnParameters": {
-              "id": 89,
+              "id": 93,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "510:0:2"
             },
-            "scope": 92,
+            "scope": 96,
             "src": "434:86:2",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 93,
+        "scope": 97,
         "src": "135:418:2"
       }
     ],
@@ -378,14 +378,14 @@
     "absolutePath": "/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCAuth.sol",
     "exportedSymbols": {
       "UCAuth": [
-        92
+        96
       ]
     },
-    "id": 93,
+    "id": 97,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 74,
+        "id": 78,
         "literals": [
           "solidity",
           ">=",
@@ -401,10 +401,10 @@
       {
         "absolutePath": "/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/libraries/UnorderedKeySet.sol",
         "file": "./libraries/UnorderedKeySet.sol",
-        "id": 75,
+        "id": 79,
         "nodeType": "ImportDirective",
-        "scope": 93,
-        "sourceUnit": 3723,
+        "scope": 97,
+        "sourceUnit": 3738,
         "src": "36:41:2",
         "symbolAliases": [],
         "unitAlias": ""
@@ -412,10 +412,10 @@
       {
         "absolutePath": "/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCPath.sol",
         "file": "./UCPath.sol",
-        "id": 76,
+        "id": 80,
         "nodeType": "ImportDirective",
-        "scope": 93,
-        "sourceUnit": 3237,
+        "scope": 97,
+        "sourceUnit": 3252,
         "src": "79:22:2",
         "symbolAliases": [],
         "unitAlias": ""
@@ -423,10 +423,10 @@
       {
         "absolutePath": "/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCChangeable.sol",
         "file": "./UCChangeable.sol",
-        "id": 77,
+        "id": 81,
         "nodeType": "ImportDirective",
-        "scope": 93,
-        "sourceUnit": 290,
+        "scope": 97,
+        "sourceUnit": 294,
         "src": "103:28:2",
         "symbolAliases": [],
         "unitAlias": ""
@@ -437,57 +437,57 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 78,
+              "id": 82,
               "name": "UCChangeable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 289,
+              "referencedDeclaration": 293,
               "src": "154:12:2",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_UCChangeable_$289",
+                "typeIdentifier": "t_contract$_UCChangeable_$293",
                 "typeString": "contract UCChangeable"
               }
             },
-            "id": 79,
+            "id": 83,
             "nodeType": "InheritanceSpecifier",
             "src": "154:12:2"
           }
         ],
         "contractDependencies": [
-          289
+          293
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 92,
+        "id": 96,
         "linearizedBaseContracts": [
-          92,
-          289
+          96,
+          293
         ],
         "name": "UCAuth",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 81,
+            "id": 85,
             "name": "admins",
             "nodeType": "VariableDeclaration",
-            "scope": 92,
+            "scope": 96,
             "src": "271:33:2",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_struct$_Set_$3562_storage",
+              "typeIdentifier": "t_struct$_Set_$3577_storage",
               "typeString": "struct UnorderedAddressSetLib.Set"
             },
             "typeName": {
               "contractScope": null,
-              "id": 80,
+              "id": 84,
               "name": "UnorderedAddressSetLib.Set",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 3562,
+              "referencedDeclaration": 3577,
               "src": "271:26:2",
               "typeDescriptions": {
-                "typeIdentifier": "t_struct$_Set_$3562_storage_ptr",
+                "typeIdentifier": "t_struct$_Set_$3577_storage_ptr",
                 "typeString": "struct UnorderedAddressSetLib.Set"
               }
             },
@@ -496,13 +496,13 @@
           },
           {
             "body": {
-              "id": 90,
+              "id": 94,
               "nodeType": "Block",
               "src": "510:10:2",
               "statements": []
             },
             "documentation": null,
-            "id": 91,
+            "id": 95,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [
@@ -510,11 +510,11 @@
                 "arguments": [
                   {
                     "argumentTypes": null,
-                    "id": 86,
+                    "id": 90,
                     "name": "pathAddress",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 83,
+                    "referencedDeclaration": 87,
                     "src": "480:11:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -524,7 +524,7 @@
                   {
                     "argumentTypes": null,
                     "hexValue": "554341757468",
-                    "id": 87,
+                    "id": 91,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -540,17 +540,17 @@
                     "value": "UCAuth"
                   }
                 ],
-                "id": 88,
+                "id": 92,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 85,
+                  "id": 89,
                   "name": "UCChangeable",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 289,
+                  "referencedDeclaration": 293,
                   "src": "467:12:2",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_UCChangeable_$289_$",
+                    "typeIdentifier": "t_type$_t_contract$_UCChangeable_$293_$",
                     "typeString": "type(contract UCChangeable)"
                   }
                 },
@@ -561,15 +561,15 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 84,
+              "id": 88,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 83,
+                  "id": 87,
                   "name": "pathAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 91,
+                  "scope": 95,
                   "src": "446:19:2",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -578,7 +578,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 82,
+                    "id": 86,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "446:7:2",
@@ -595,19 +595,19 @@
               "src": "445:21:2"
             },
             "returnParameters": {
-              "id": 89,
+              "id": 93,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "510:0:2"
             },
-            "scope": 92,
+            "scope": 96,
             "src": "434:86:2",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 93,
+        "scope": 97,
         "src": "135:418:2"
       }
     ],
@@ -619,7 +619,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-04-09T02:59:26.903Z",
+  "updatedAt": "2020-04-11T17:13:25.740Z",
   "devdoc": {
     "methods": {}
   },
