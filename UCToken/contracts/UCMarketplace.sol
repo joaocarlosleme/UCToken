@@ -4,7 +4,7 @@ import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20Detailed.sol";
 import "./UCToken.sol";
-import "./UCStorage.sol";
+//import "./UCStorage.sol";
 import "./UCCrawlingBand.sol";
 //import "./UCCollateralTokenInterface.sol"; // replaced by ERC20Detailed
 import "./libraries/UnorderedKeySet.sol"; // or import {UnorderedKeySetLib} from "./libraries/UnorderedKeySet.sol";
@@ -21,7 +21,7 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
     /// Public Properties
 
     /// Contract Navigation Properties
-    UCToken public ucToken;
+    UCToken public ucToken; // maybe should always call UCPath?
     UCCrawlingBand public ucCrawlingBand; // The reference to UCCrawlingBand implementation.
     //UCStorage public ucStorage;
 
@@ -69,7 +69,7 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
     }
 
     constructor(address pathAddress) UCChangeable(pathAddress, "UCMarketplace") public {
-        ucToken = UCToken(ucPath.getPath("UCToken"));
+        ucToken = UCToken(ucPath.getPath("UCToken")); // maybe should always call UCPath?
         ucCrawlingBand = UCCrawlingBand(ucPath.getPath("UCCrawlingBand"));
     }
 
@@ -115,9 +115,23 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
             return totalAmount.sub(collaterals[_tokenAddr].orderbookBalance);
         }
     }
-    function getCollateralRate(address _tokenAddr) public returns(uint256 rate) {
+    // solidity doesnt return franctional numbers, so either return rate of highest (UC or COL)
+    function getCollateralRate(address _tokenAddr) public view returns(uint256 rate, bool rateInUC) {
         require(collateralsSet.exists(_tokenAddr), "Collateral doesn't exist");
-        return collaterals[_tokenAddr].price.div(ucCrawlingBand.getCurrentCeilingPrice());
+        // return collaterals[_tokenAddr].price.div(ucCrawlingBand.getEstimatedCeilingPrice());
+
+        uint256 colPrice = collaterals[_tokenAddr].price;
+        uint256 ucPrice = ucCrawlingBand.getEstimatedCeilingPrice();
+        if(colPrice > ucPrice) {
+            return (colPrice.div(ucPrice), true);
+        } else {
+            return (ucPrice.div(colPrice), false);
+        }
+
+    }
+    function getCollateralPrice(address _tokenAddr) public view returns(uint256 price) {
+        require(collateralsSet.exists(_tokenAddr), "Collateral doesn't exist");
+        return collaterals[_tokenAddr].price;
     }
 
     function addSaleOrder(uint _amount, uint _price, address _collateral, uint _expiration) public collateralActive(_collateral) {

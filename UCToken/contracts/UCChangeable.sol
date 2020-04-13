@@ -83,7 +83,7 @@ contract UCChangeable {
    * @param addr address to check
    * @return whether the target address is a contract
    */
-    function isContract(address addr) internal view returns (bool) {
+    function isContract(address addr) internal view returns (bool) { // make public from internal fo testing
         // https://ethereum.stackexchange.com/a/77888/20639
         bytes32 accountHash = 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;
         bytes32 codehash;

@@ -1,8 +1,11 @@
 var UCToken = artifacts.require("./UCToken.sol");
+var UCPath = artifacts.require("./UCPath.sol");
 //var UCTrade = artifacts.require("./UCTrade.sol");
 
 contract('UCToken', function(accounts) {
     var tokenInstance;
+    var pathInstance;
+    var ucPathAddress;
     // /var ucTradeInstance;
 
     // it('sets the total supply upon deployment', function() {
@@ -41,14 +44,25 @@ contract('UCToken', function(accounts) {
           return tokenInstance.decimals();
         }).then(function(decimals) {
           assert.equal(decimals.toNumber(), 18, 'has the correct decimals');
+          return tokenInstance.owner();
+        }).then(function(_owner) {
+          assert.equal(_owner, accounts[0], 'owner properly set');
+          return UCPath.deployed();
+        }).then(function(_pathInstance) {
+            pathInstance = _pathInstance;
+            return pathInstance.address;
+        }).then(function(address) {
+            ucPathAddress = address;
+            return tokenInstance.ucPath();
+        }).then(function(_ucPathaddress) {
+            assert.equal(_ucPathaddress, ucPathAddress, 'ucPath set correctly');
         });
-      })
+      });
 
       it('allocates the initial supply upon deployment', function() {
-        return UCToken.deployed().then(function(instance) {
-          tokenInstance = instance;
-          return tokenInstance.totalSupply();
-        }).then(function(totalSupply) {
+        // return UCToken.deployed().then(function(instance) { // since tokenInstance has already been set there is no need to instanciate again
+        //   tokenInstance = instance;
+          return tokenInstance.totalSupply().then(function(totalSupply) {
           assert.equal(totalSupply.toNumber(), 0, 'sets the total supply to 000');
           return tokenInstance.balanceOf(accounts[0]);
         }).then(function(adminBalance) {
@@ -149,4 +163,34 @@ contract('UCToken', function(accounts) {
       //     assert.equal(allowance.toNumber(), 0, 'deducts the amount from the allowance');
       //   });
       // });
+
+      it('check UCChangeable properly set', function() {
+        return UCToken.deployed().then(function(instance) {
+          tokenInstance = instance;
+          return tokenInstance.owner();
+        }).then(function(_owner) {
+          assert.equal(_owner, accounts[0], 'owner properly set');
+          return UCPath.deployed();
+        }).then(function(_pathInstance) {
+            pathInstance = _pathInstance;
+            return pathInstance.address;
+        }).then(function(address) {
+            ucPathAddress = address;
+            return tokenInstance.ucPath();
+        }).then(function(_ucPathaddress) {
+            assert.equal(_ucPathaddress, ucPathAddress, 'ucPath set correctly');
+        //     return tokenInstance.isContract(tokenInstance.address); // must make method public to test
+        // }).then(function(isContract) {
+        //     assert(isContract, 'isContract method working');
+            return pathInstance.hasPath("UCToken");
+        }).then(function(hasPath) {
+            assert(hasPath, 'UCToken path initialized');
+            return pathInstance.getPath("UCToken");
+        }).then(function(pathAddress) {
+            assert.equal(pathAddress, tokenInstance.address, 'UCToken path address properly set');
+            return pathInstance.isValid(tokenInstance.address);
+        }).then(function(isValid) {
+            assert(isValid, 'Contract address is valid');
+        });
+      });
 })
