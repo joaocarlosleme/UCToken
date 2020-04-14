@@ -39,7 +39,7 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
     uint amount; // UC amount to sell
     uint price;  // price is willing to sell in USD
     address collateral; // the collareral seller wants in exchange
-    uint256 expiration; // time the order expires
+    uint256 expiration; // time the order expires in seconds
     }
     struct PurchaseOrder {
     address addr; // maker address
@@ -47,7 +47,7 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
     //uint price;  // UC price in USD
     address collateral;
     uint collAmount;
-    uint256 expiration; // time the order expires
+    uint256 expiration; // time the order expires in seconds
     }
 
     /// Public Mappings

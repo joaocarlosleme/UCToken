@@ -33,16 +33,26 @@ contract UCCrawlingBand is UCChangeable {
         detachRate = 100;
     }
 
+    /// TEMP TESTS METHODS
+    function getTimeStamp() public view returns(uint) {
+        return block.timestamp;
+    }
+    function getUCMarketplaceAddress() public view returns(address) {
+        return address(ucMarketplace);
+    }
+
     /// Public Methods
     function init() public {
         require(address(ucMarketplace) == address(0), "Already initialized");
         ucMarketplace = UCMarketplace(ucPath.getPath("UCMarketplace"));
     }
+
     function getEstimatedCeilingPrice() public view returns (uint256) {
         if(latestCeilingTime == 0) {
             return 1000000;
         }
-        uint256 elapsedHours = (now.sub(latestCeilingTime)).div(3600);
+        //uint256 elapsedHours = (now.sub(latestCeilingTime)).div(3600); // FOR TESTING EVERY SEC IS AN HOUR
+        uint256 elapsedHours = now.sub(latestCeilingTime); // FAST TEST ONLY (ADJUST TO GO LIVE)
         uint256 proposedPrice = latestCeilingPrice.add(crawlingRate.mul(elapsedHours));
         require(proposedPrice > latestCeilingPrice, "Error calculating proposed price: must be higher than latestCeilingPrice.");
         uint256 estimatedFloorPrice = getEstimatedFloorPrice();

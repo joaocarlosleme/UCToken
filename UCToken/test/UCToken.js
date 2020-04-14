@@ -63,7 +63,7 @@ contract('UCToken', function(accounts) {
         // return UCToken.deployed().then(function(instance) { // since tokenInstance has already been set there is no need to instanciate again
         //   tokenInstance = instance;
           return tokenInstance.totalSupply().then(function(totalSupply) {
-          assert.equal(totalSupply.toNumber(), 0, 'sets the total supply to 000');
+          assert.equal(totalSupply.toNumber(), 0, 'total supply is ZERO (no token minted)');
           return tokenInstance.balanceOf(accounts[0]);
         }).then(function(adminBalance) {
           assert.equal(adminBalance.toNumber(), 0, 'Correct balance (it does not allocates the initial supply to the admin account)'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
