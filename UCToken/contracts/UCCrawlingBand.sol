@@ -54,7 +54,7 @@ contract UCCrawlingBand is UCChangeable {
         //uint256 elapsedHours = (now.sub(latestCeilingTime)).div(3600); // FOR TESTING EVERY SEC IS AN HOUR
         uint256 elapsedHours = now.sub(latestCeilingTime); // FAST TEST ONLY (ADJUST TO GO LIVE)
         uint256 proposedPrice = latestCeilingPrice.add(crawlingRate.mul(elapsedHours));
-        require(proposedPrice > latestCeilingPrice, "Error calculating proposed price: must be higher than latestCeilingPrice.");
+        require(proposedPrice >= latestCeilingPrice, "Error calculating proposed price: must be higher than latestCeilingPrice.");
         uint256 estimatedFloorPrice = getEstimatedFloorPrice();
         // check if there can be an increase on floorPrice, otherwise do not increase CeilingPrice
         if(latestFloorPrice >= estimatedFloorPrice) {

@@ -115,34 +115,46 @@ contract('UCMarketplace', function(accounts) {
             crawlingBandInstance = instance;
             return crawlingBandInstance.latestCeilingPrice();
         }).then(function(latestCeliningPrice) {
-            console.log(latestCeliningPrice.toNumber());
-            return crawlingBandInstance.getTimeStamp();
-        }).then(function(timeStamp) {
-            console.log(timeStamp.toNumber());
+            console.log("latestCeliningPrice: " + latestCeliningPrice.toNumber());
             return crawlingBandInstance.latestCeilingTime();
         }).then(function(latestCeilinigTIme) {
-            console.log(latestCeilinigTIme.toNumber());
-        //     return crawlingBandInstance.ucMarketplace.address;
-        // }).then(function(marketPlacceAddress) {
-        //     console.log(marketPlacceAddress);
+            console.log("latestCeilinigTime: " + latestCeilinigTIme.toNumber());
+            return crawlingBandInstance.getTimeStamp();
+        }).then(function(timeStamp) {
+            console.log("Current TimeStamp: " + timeStamp.toNumber());
+            return crawlingBandInstance.getEstimatedCeilingPrice();
+        }).then(function(estimatedCeilingPrice) {
+            console.log("estimatedCeilingPrice: " + estimatedCeilingPrice.toNumber());
         //     return crawlingBandInstance.init();
-        // }).then(function() {
+        //}).then(function() {
             return crawlingBandInstance.getUCMarketplaceAddress();
         }).then(function(marketPlacceAddress2) {
-            console.log(marketPlacceAddress2);
+            assert.equal(marketPlacceAddress2, marketplaceInstance.address, "Init has been called and marketplace address set")
+
         });
     });
 
-    // it('add sale order', function() {
-    //     return marketplaceInstance.addSaleOrder("5000000000000000000", 1000001, sampleTokenInstance.address, 3600).then(function(result) {
-    //         assert(result, 'mint successfull');
-    //         return marketplaceInstance.mint(sampleTokenInstance.address, "20000000000000000000", "11000000000000000000");
-    //     }).then(function(_totalSupply) {
-    //         assert.equal(_totalSupply, "10000000000000000000", 'UC Total Supply correct');
-    //         return ucTokenInstance.balanceOf(accounts[0]);
-    //     }).then(function(adminBalance) {
-    //       assert.equal(adminBalance, "10000000000000000000", 'Correct balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
-    //     });
-    // });
+    it('approves UCTokens for delegated transfer', function() {
+        return ucTokenInstance.approve(marketplaceInstance.address, "100000000000000000000", { from: accounts[0] }).then(function(receipt) {
+          assert.equal(receipt.logs.length, 1, 'triggers one event');
+          assert.equal(receipt.logs[0].event, 'Approval', 'should be the "Approval" event');
+          assert.equal(receipt.logs[0].args.owner, accounts[0], 'logs the account the tokens are authorized by');
+          assert.equal(receipt.logs[0].args.spender, marketplaceInstance.address, 'logs the account the tokens are authorized to');
+          assert.equal(receipt.logs[0].args.value, "100000000000000000000", 'logs the transfer amount');
+          return ucTokenInstance.allowance(accounts[0], marketplaceInstance.address);
+        }).then(function(allowance) {
+          assert.equal(allowance, "100000000000000000000", 'stores the allowance for delegated transfer');
+        });
+      });
+
+    it('add sale order', function() {
+        return marketplaceInstance.addSaleOrder("5000000000000000000", 900000, sampleTokenInstance.address, 3600).then(function(receipt) {
+            assert.equal(receipt.logs.length, 1, 'triggers one event');
+            assert.equal(receipt.logs[0].event, 'OrderBookChange', 'should be the "OrderBookChange" event');
+            //assert.equal(receipt.logs[0].args.owner, accounts[0], 'logs the account the tokens are authorized by');
+            //assert.equal(receipt.logs[0].args.spender, marketplaceInstance.address, 'logs the account the tokens are authorized to');
+            //assert.equal(receipt.logs[0].args.value, "100000000000000000000", 'logs the transfer amount');
+        });
+    });
 
 });
