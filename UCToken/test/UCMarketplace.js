@@ -10,6 +10,8 @@ contract('UCMarketplace', function(accounts) {
     var sampleTokenInstance;
     var ucTokenInstance;
     var crawlingBandInstance;
+    var admin = accounts[0];
+    var buyer = accounts[1];
 
     var ucPathAddress;
 
@@ -98,7 +100,7 @@ contract('UCMarketplace', function(accounts) {
         });
     });
 
-    it('check UC Token', function() {
+    it('check Balances', function() {
         return UCToken.deployed().then(function(instance) {
             ucTokenInstance = instance;
             return ucTokenInstance.totalSupply();
@@ -154,6 +156,36 @@ contract('UCMarketplace', function(accounts) {
             //assert.equal(receipt.logs[0].args.owner, accounts[0], 'logs the account the tokens are authorized by');
             //assert.equal(receipt.logs[0].args.spender, marketplaceInstance.address, 'logs the account the tokens are authorized to');
             //assert.equal(receipt.logs[0].args.value, "100000000000000000000", 'logs the transfer amount');
+        });
+    });
+
+    it('add balance for account 2 (2nd buyer) and allowance for marketplace', function() {
+        return sampleTokenInstance.transfer(buyer, "50000000000000000000", { from: admin }).then(function(receipt) {
+            assert.equal(receipt.logs.length, 1, 'triggers one event');
+            assert.equal(receipt.logs[0].event, 'Transfer', 'should be the "Transfer" event');
+            //assert.equal(receipt.logs[0].args.owner, accounts[0], 'logs the account the tokens are authorized by');
+            //assert.equal(receipt.logs[0].args.spender, marketplaceInstance.address, 'logs the account the tokens are authorized to');
+            //assert.equal(receipt.logs[0].args.value, "100000000000000000000", 'logs the transfer amount');
+            return sampleTokenInstance.approve(marketplaceInstance.address, "50000000000000000000", { from: buyer });
+        }).then(function(receipt) {
+            assert.equal(receipt.logs.length, 1, 'triggers one event');
+            assert.equal(receipt.logs[0].event, 'Approval', 'should be the "Approval" event');
+        });
+    });
+
+    it('match sale order', function() {
+        return marketplaceInstance.getSaleOrdersCount().then(function(result) {
+            assert.equal(result, 1, '1 sale order');
+            return marketplaceInstance.addCollateral(sampleTokenInstance.address, "9000000000000000000", { from: buyer });
+        }).then(function(receipt) {
+            assert.equal(receipt.logs.length, 1, 'triggers one event');
+            assert.equal(receipt.logs[0].event, 'Deposit', 'should be the "Deposit" event');
+            return marketplaceInstance.getSaleOrderKeyAtIndex(0);
+        }).then(function(saleOrderKey) {
+            return marketplaceInstance.matchSaleOrder(saleOrderKey, sampleTokenInstance.address, "9000000000000000000", { from: buyer });
+        }).then(function(receipt) {
+            assert.equal(receipt.logs.length, 2, 'triggers two events');
+            assert.equal(receipt.logs[1].event, 'OrderBookChange', 'should be the "OrderBookChange" event');
         });
     });
 

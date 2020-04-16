@@ -37,7 +37,7 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
     struct SaleOrder {
     address addr; // acccount address
     uint amount; // UC amount to sell
-    uint price;  // price is willing to sell in USD
+    uint price;  // UC price is willing to sell in USD for a single UC
     address collateral; // the collareral seller wants in exchange
     uint256 expiration; // time the order expires in seconds
     }
@@ -145,8 +145,9 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
         SaleOrder storage o = saleOrders[key];
         o.amount = _amount;
         o.price = _price;
+        o.addr = msg.sender;
         o.collateral = _collateral;
-        o.expiration = _expiration;
+        o.expiration = now.add(_expiration);
         emit OrderBookChange(msg.sender, key, "addSaleOrder", _price, _collateral, _expiration);
     }
     //// instead of update, must remove and place another one.
@@ -176,7 +177,7 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
         return saleOrdersSet.keyAtIndex(_index);
     }
 
-    function matchSaleOrder(bytes32 _key, address _buyer, address _collateral, uint256 _amount)
+    function matchSaleOrder(bytes32 _key, address _collateral, uint256 _amount)
         public collateralActive(_collateral) returns (bool) {
         require(saleOrdersSet.exists(_key), "SaleOrder doesn't exist");
         require(collateralsSet.exists(_collateral), "Collateral doesn't exist");
@@ -184,7 +185,7 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
         SaleOrder storage o = saleOrders[_key];
         // check sale order expiration
         if(o.expiration <= now) {
-            cancelSaleOrder(_key);
+            // cancelSaleOrder(_key); // doesn't work for 2 reasons (1st sale order doesn't belong to msg.sender, 2nd if revert won't save state)
             revert("Sale order expired.");
         }
         Collateral storage c = collaterals[_collateral];
@@ -204,12 +205,12 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
         uint256 scAmount = saleTotalValue.div(sc.price);
         transferCollateral(sc.token, o.addr, scAmount);
         // transfer UCs
-        ucToken.transfer(_buyer, o.amount);
+        ucToken.transfer(msg.sender, o.amount);
 
         deleteSaleOrder(_key);
 
         // maybe break orderBookChange into 3 events (new, removed, match)
-        emit OrderBookChange(_buyer, _key, "matchSaleOrder", offerTotalValue, _collateral, o.expiration);
+        emit OrderBookChange(msg.sender, _key, "matchSaleOrder", offerTotalValue, _collateral, o.expiration);
 
         return true;
     }
@@ -450,4 +451,5 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
         saleOrdersSet.remove(_key); // Note that this will fail automatically if the key doesn't exist
         delete saleOrders[_key];
     }
+
 }

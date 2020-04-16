@@ -171,7 +171,7 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.7+commit.6da8b019\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"setOwner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_path\",\"type\":\"address\"}],\"name\":\"setPath\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"pathName\",\"type\":\"string\"},{\"name\":\"pathAddress\",\"type\":\"address\"}],\"name\":\"updatePath\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"newContractAddress\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"newAddress\",\"type\":\"address\"}],\"name\":\"replace\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"ucPath\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"replaced\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"newAddress\",\"type\":\"address\"}],\"name\":\"ContractReplaced\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"NewOwner\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"pathAddress\",\"type\":\"address\"}],\"name\":\"NewPath\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"pathName\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"pathAddress\",\"type\":\"address\"}],\"name\":\"PathUpdated\",\"type\":\"event\"}],\"devdoc\":{\"details\":\"To be used on functions that can no longer be called after a contract is replaced.\\r\",\"methods\":{},\"title\":\"UCReplaceable\\r\"},\"userdoc\":{\"methods\":{\"setOwner(address)\":{\"notice\":\"Public Methods\"},\"updatePath(string,address)\":{\"notice\":\"Public Auth Mehods\"}}}},\"settings\":{\"compilationTarget\":{\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCReplaceable.sol\":\"UCReplaceable\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCChangeable.sol\":{\"keccak256\":\"0xd5481e8fbdff8081dfa407e749f02dfd905bdd5f053e2be5603a3e252b6f7fed\",\"urls\":[\"bzzr://9c6ab7e5662bc884e62c7c282766ebd15d2c7049a74a70ed8de21821c55e5815\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCGToken.sol\":{\"keccak256\":\"0xa35f55c00ca6cf98282333efe427a1edba359b385cf243980802b8ea9f42d27c\",\"urls\":[\"bzzr://c7cccb382f0587b7261f0ac8215a212d03634a8dd4685448019e4ab821667c67\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCGovernance.sol\":{\"keccak256\":\"0x299fe206443c8b251d1b69537c2cfb049b9b1945e8b183986b6c695c1ca486b2\",\"urls\":[\"bzzr://ac44f6bfbe3f653ca466ad90eca5e44c5ec9a72e31d05859b3603cb3edf3664b\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCPath.sol\":{\"keccak256\":\"0xa1039f84905b01ac716b60009c0ceab2acd9fc45add2240235acd5e970344a8a\",\"urls\":[\"bzzr://123dace91db185fb9a75f5c557d44341e45b1912f9ce7081f116a2d7fcbf47b7\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCReplaceable.sol\":{\"keccak256\":\"0x61c064540d16b410c94948823f30fc7e475bde7f9c7e846092d60787811c997b\",\"urls\":[\"bzzr://390ff6b99043296b584833a3837cfad5c7ffbd2dd244a1d64d8634b623f626a4\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCToken.sol\":{\"keccak256\":\"0x8e7409a390e6ecc016f516e6d18073e237a9303e930092717c7e32d5f69d3876\",\"urls\":[\"bzzr://3818008c9d68e03cc5396046eadee8671e0f1d167813a9e4bcf977cfb8dcf7f5\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/libraries/UnorderedKeySet.sol\":{\"keccak256\":\"0x9ff362a3b3b33f400f92b20e988941f76a3df03b3fb39927ceb8216eb4888b49\",\"urls\":[\"bzzr://898155ce1d97c23781cf30d4055d2c79df3cc7fa717556932a7d44cc8e892827\"]},\"@openzeppelin/contracts/GSN/Context.sol\":{\"keccak256\":\"0x90a3995645af7562d84b9d69363ffa5ae7217714ab61e951bf7bc450f40e4061\",\"urls\":[\"bzzr://51482c01bddf23793bddee43b60ab9578a62948a4f2082def24ea792a553b055\"]},\"@openzeppelin/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x640b6dee7a4b830bdfd52b5031a07fc2b12209f5b2e29e5d364a7d37f69d8076\",\"urls\":[\"bzzr://292843005e754e752644f767477ec5ad7a1ffc91ddb18c38b8079c62f3993cad\"]},\"@openzeppelin/contracts/token/ERC20/ERC20.sol\":{\"keccak256\":\"0x65a4078c03875c25413a068ce9cfdd7e68a90f8786612d1189c89341e6e3b802\",\"urls\":[\"bzzr://fefcc5ec4e313a66c9fd38375983b5973c528e7e19b6d37c2f1ac6745295e6e2\"]},\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0xe5bb0f57cff3e299f360052ba50f1ea0fff046df2be070b6943e0e3c3fdad8a9\",\"urls\":[\"bzzr://cf2d583b8dce38d0617fdcd65f2fd9f126fe17b7f683b5a515ea9d2762d8b062\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.7+commit.6da8b019\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"setOwner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_path\",\"type\":\"address\"}],\"name\":\"setPath\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"pathName\",\"type\":\"string\"},{\"name\":\"pathAddress\",\"type\":\"address\"}],\"name\":\"updatePath\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"newContractAddress\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"newAddress\",\"type\":\"address\"}],\"name\":\"replace\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"ucPath\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"replaced\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"newAddress\",\"type\":\"address\"}],\"name\":\"ContractReplaced\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"NewOwner\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"pathAddress\",\"type\":\"address\"}],\"name\":\"NewPath\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"pathName\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"pathAddress\",\"type\":\"address\"}],\"name\":\"PathUpdated\",\"type\":\"event\"}],\"devdoc\":{\"details\":\"To be used on functions that can no longer be called after a contract is replaced.\\r\",\"methods\":{},\"title\":\"UCReplaceable\\r\"},\"userdoc\":{\"methods\":{\"setOwner(address)\":{\"notice\":\"Public Methods\"},\"updatePath(string,address)\":{\"notice\":\"Public Auth Mehods\"}}}},\"settings\":{\"compilationTarget\":{\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCReplaceable.sol\":\"UCReplaceable\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCChangeable.sol\":{\"keccak256\":\"0x63bad7dac7b6e55d20d450779b0f1478c894fb77baa4ea13471b692d1b5a25d7\",\"urls\":[\"bzzr://875cb8635372656e54acf56b4cad5b183305ab48df218abb24e5c959f64c8737\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCGToken.sol\":{\"keccak256\":\"0xa35f55c00ca6cf98282333efe427a1edba359b385cf243980802b8ea9f42d27c\",\"urls\":[\"bzzr://c7cccb382f0587b7261f0ac8215a212d03634a8dd4685448019e4ab821667c67\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCGovernance.sol\":{\"keccak256\":\"0x299fe206443c8b251d1b69537c2cfb049b9b1945e8b183986b6c695c1ca486b2\",\"urls\":[\"bzzr://ac44f6bfbe3f653ca466ad90eca5e44c5ec9a72e31d05859b3603cb3edf3664b\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCPath.sol\":{\"keccak256\":\"0xa1039f84905b01ac716b60009c0ceab2acd9fc45add2240235acd5e970344a8a\",\"urls\":[\"bzzr://123dace91db185fb9a75f5c557d44341e45b1912f9ce7081f116a2d7fcbf47b7\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCReplaceable.sol\":{\"keccak256\":\"0x61c064540d16b410c94948823f30fc7e475bde7f9c7e846092d60787811c997b\",\"urls\":[\"bzzr://390ff6b99043296b584833a3837cfad5c7ffbd2dd244a1d64d8634b623f626a4\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCToken.sol\":{\"keccak256\":\"0x8e7409a390e6ecc016f516e6d18073e237a9303e930092717c7e32d5f69d3876\",\"urls\":[\"bzzr://3818008c9d68e03cc5396046eadee8671e0f1d167813a9e4bcf977cfb8dcf7f5\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/libraries/UnorderedKeySet.sol\":{\"keccak256\":\"0x9ff362a3b3b33f400f92b20e988941f76a3df03b3fb39927ceb8216eb4888b49\",\"urls\":[\"bzzr://898155ce1d97c23781cf30d4055d2c79df3cc7fa717556932a7d44cc8e892827\"]},\"@openzeppelin/contracts/GSN/Context.sol\":{\"keccak256\":\"0x90a3995645af7562d84b9d69363ffa5ae7217714ab61e951bf7bc450f40e4061\",\"urls\":[\"bzzr://51482c01bddf23793bddee43b60ab9578a62948a4f2082def24ea792a553b055\"]},\"@openzeppelin/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x640b6dee7a4b830bdfd52b5031a07fc2b12209f5b2e29e5d364a7d37f69d8076\",\"urls\":[\"bzzr://292843005e754e752644f767477ec5ad7a1ffc91ddb18c38b8079c62f3993cad\"]},\"@openzeppelin/contracts/token/ERC20/ERC20.sol\":{\"keccak256\":\"0x65a4078c03875c25413a068ce9cfdd7e68a90f8786612d1189c89341e6e3b802\",\"urls\":[\"bzzr://fefcc5ec4e313a66c9fd38375983b5973c528e7e19b6d37c2f1ac6745295e6e2\"]},\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0xe5bb0f57cff3e299f360052ba50f1ea0fff046df2be070b6943e0e3c3fdad8a9\",\"urls\":[\"bzzr://cf2d583b8dce38d0617fdcd65f2fd9f126fe17b7f683b5a515ea9d2762d8b062\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
@@ -182,14 +182,14 @@
     "absolutePath": "/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCReplaceable.sol",
     "exportedSymbols": {
       "UCReplaceable": [
-        3301
+        3356
       ]
     },
-    "id": 3302,
+    "id": 3357,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3253,
+        "id": 3308,
         "literals": [
           "solidity",
           ">=",
@@ -205,10 +205,10 @@
       {
         "absolutePath": "/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCPath.sol",
         "file": "./UCPath.sol",
-        "id": 3254,
+        "id": 3309,
         "nodeType": "ImportDirective",
-        "scope": 3302,
-        "sourceUnit": 3252,
+        "scope": 3357,
+        "sourceUnit": 3307,
         "src": "36:22:11",
         "symbolAliases": [],
         "unitAlias": ""
@@ -219,7 +219,7 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 3255,
+              "id": 3310,
               "name": "UCChangeable",
               "nodeType": "UserDefinedTypeName",
               "referencedDeclaration": 293,
@@ -229,7 +229,7 @@
                 "typeString": "contract UCChangeable"
               }
             },
-            "id": 3256,
+            "id": 3311,
             "nodeType": "InheritanceSpecifier",
             "src": "215:12:11"
           }
@@ -240,9 +240,9 @@
         "contractKind": "contract",
         "documentation": "@title UCReplaceable\r\n@dev To be used on functions that can no longer be called after a contract is replaced.\r",
         "fullyImplemented": false,
-        "id": 3301,
+        "id": 3356,
         "linearizedBaseContracts": [
-          3301,
+          3356,
           293
         ],
         "name": "UCReplaceable",
@@ -250,10 +250,10 @@
         "nodes": [
           {
             "constant": false,
-            "id": 3258,
+            "id": 3313,
             "name": "replaced",
             "nodeType": "VariableDeclaration",
-            "scope": 3301,
+            "scope": 3356,
             "src": "237:20:11",
             "stateVariable": true,
             "storageLocation": "default",
@@ -262,7 +262,7 @@
               "typeString": "bool"
             },
             "typeName": {
-              "id": 3257,
+              "id": 3312,
               "name": "bool",
               "nodeType": "ElementaryTypeName",
               "src": "237:4:11",
@@ -276,10 +276,10 @@
           },
           {
             "constant": false,
-            "id": 3260,
+            "id": 3315,
             "name": "newContractAddress",
             "nodeType": "VariableDeclaration",
-            "scope": 3301,
+            "scope": 3356,
             "src": "264:33:11",
             "stateVariable": true,
             "storageLocation": "default",
@@ -288,7 +288,7 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 3259,
+              "id": 3314,
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "264:7:11",
@@ -303,7 +303,7 @@
           },
           {
             "body": {
-              "id": 3269,
+              "id": 3324,
               "nodeType": "Block",
               "src": "346:93:11",
               "statements": [
@@ -313,7 +313,7 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 3264,
+                        "id": 3319,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -324,11 +324,11 @@
                         "src": "365:9:11",
                         "subExpression": {
                           "argumentTypes": null,
-                          "id": 3263,
+                          "id": 3318,
                           "name": "replaced",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 3258,
+                          "referencedDeclaration": 3313,
                           "src": "366:8:11",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bool",
@@ -343,7 +343,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "436f6e7472616374207265706c61636564206279206e6577436f6e7472616374416464726573732e",
-                        "id": 3265,
+                        "id": 3320,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -370,21 +370,21 @@
                           "typeString": "literal_string \"Contract replaced by newContractAddress.\""
                         }
                       ],
-                      "id": 3262,
+                      "id": 3317,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        4534,
-                        4535
+                        4589,
+                        4590
                       ],
-                      "referencedDeclaration": 4535,
+                      "referencedDeclaration": 4590,
                       "src": "357:7:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 3266,
+                    "id": 3321,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -398,23 +398,23 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3267,
+                  "id": 3322,
                   "nodeType": "ExpressionStatement",
                   "src": "357:62:11"
                 },
                 {
-                  "id": 3268,
+                  "id": 3323,
                   "nodeType": "PlaceholderStatement",
                   "src": "430:1:11"
                 }
               ]
             },
             "documentation": "Modifiers",
-            "id": 3270,
+            "id": 3325,
             "name": "replaceable",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 3261,
+              "id": 3316,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "346:0:11"
@@ -424,7 +424,7 @@
           },
           {
             "body": {
-              "id": 3295,
+              "id": 3350,
               "nodeType": "Block",
               "src": "745:178:11",
               "statements": [
@@ -434,7 +434,7 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 3279,
+                        "id": 3334,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -445,11 +445,11 @@
                         "src": "764:9:11",
                         "subExpression": {
                           "argumentTypes": null,
-                          "id": 3278,
+                          "id": 3333,
                           "name": "replaced",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 3258,
+                          "referencedDeclaration": 3313,
                           "src": "765:8:11",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bool",
@@ -464,7 +464,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "48617320616c7265616479206265656e207265706c61636564",
-                        "id": 3280,
+                        "id": 3335,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -491,21 +491,21 @@
                           "typeString": "literal_string \"Has already been replaced\""
                         }
                       ],
-                      "id": 3277,
+                      "id": 3332,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        4534,
-                        4535
+                        4589,
+                        4590
                       ],
-                      "referencedDeclaration": 4535,
+                      "referencedDeclaration": 4590,
                       "src": "756:7:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 3281,
+                    "id": 3336,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -519,25 +519,25 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3282,
+                  "id": 3337,
                   "nodeType": "ExpressionStatement",
                   "src": "756:47:11"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 3285,
+                    "id": 3340,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 3283,
+                      "id": 3338,
                       "name": "newContractAddress",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3260,
+                      "referencedDeclaration": 3315,
                       "src": "814:18:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -548,11 +548,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 3284,
+                      "id": 3339,
                       "name": "newAddress",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3272,
+                      "referencedDeclaration": 3327,
                       "src": "835:10:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -565,25 +565,25 @@
                       "typeString": "address"
                     }
                   },
-                  "id": 3286,
+                  "id": 3341,
                   "nodeType": "ExpressionStatement",
                   "src": "814:31:11"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 3289,
+                    "id": 3344,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 3287,
+                      "id": 3342,
                       "name": "replaced",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3258,
+                      "referencedDeclaration": 3313,
                       "src": "856:8:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
@@ -595,7 +595,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "66616c7365",
-                      "id": 3288,
+                      "id": 3343,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -616,7 +616,7 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 3290,
+                  "id": 3345,
                   "nodeType": "ExpressionStatement",
                   "src": "856:16:11"
                 },
@@ -626,11 +626,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 3292,
+                        "id": 3347,
                         "name": "newAddress",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3272,
+                        "referencedDeclaration": 3327,
                         "src": "905:10:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -645,18 +645,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 3291,
+                      "id": 3346,
                       "name": "ContractReplaced",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3300,
+                      "referencedDeclaration": 3355,
                       "src": "888:16:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 3293,
+                    "id": 3348,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -670,23 +670,23 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3294,
+                  "id": 3349,
                   "nodeType": "EmitStatement",
                   "src": "883:33:11"
                 }
               ]
             },
             "documentation": null,
-            "id": 3296,
+            "id": 3351,
             "implemented": true,
             "kind": "function",
             "modifiers": [
               {
                 "arguments": null,
-                "id": 3275,
+                "id": 3330,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 3274,
+                  "id": 3329,
                   "name": "auth",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
@@ -704,15 +704,15 @@
             "name": "replace",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3273,
+              "id": 3328,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3272,
+                  "id": 3327,
                   "name": "newAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3296,
+                  "scope": 3351,
                   "src": "713:18:11",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -721,7 +721,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 3271,
+                    "id": 3326,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "713:7:11",
@@ -738,12 +738,12 @@
               "src": "712:20:11"
             },
             "returnParameters": {
-              "id": 3276,
+              "id": 3331,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "745:0:11"
             },
-            "scope": 3301,
+            "scope": 3356,
             "src": "696:227:11",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -752,20 +752,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 3300,
+            "id": 3355,
             "name": "ContractReplaced",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 3299,
+              "id": 3354,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3298,
+                  "id": 3353,
                   "indexed": false,
                   "name": "newAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3300,
+                  "scope": 3355,
                   "src": "953:18:11",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -774,7 +774,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 3297,
+                    "id": 3352,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "953:7:11",
@@ -793,7 +793,7 @@
             "src": "930:43:11"
           }
         ],
-        "scope": 3302,
+        "scope": 3357,
         "src": "189:787:11"
       }
     ],
@@ -803,14 +803,14 @@
     "absolutePath": "/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCReplaceable.sol",
     "exportedSymbols": {
       "UCReplaceable": [
-        3301
+        3356
       ]
     },
-    "id": 3302,
+    "id": 3357,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3253,
+        "id": 3308,
         "literals": [
           "solidity",
           ">=",
@@ -826,10 +826,10 @@
       {
         "absolutePath": "/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCPath.sol",
         "file": "./UCPath.sol",
-        "id": 3254,
+        "id": 3309,
         "nodeType": "ImportDirective",
-        "scope": 3302,
-        "sourceUnit": 3252,
+        "scope": 3357,
+        "sourceUnit": 3307,
         "src": "36:22:11",
         "symbolAliases": [],
         "unitAlias": ""
@@ -840,7 +840,7 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 3255,
+              "id": 3310,
               "name": "UCChangeable",
               "nodeType": "UserDefinedTypeName",
               "referencedDeclaration": 293,
@@ -850,7 +850,7 @@
                 "typeString": "contract UCChangeable"
               }
             },
-            "id": 3256,
+            "id": 3311,
             "nodeType": "InheritanceSpecifier",
             "src": "215:12:11"
           }
@@ -861,9 +861,9 @@
         "contractKind": "contract",
         "documentation": "@title UCReplaceable\r\n@dev To be used on functions that can no longer be called after a contract is replaced.\r",
         "fullyImplemented": false,
-        "id": 3301,
+        "id": 3356,
         "linearizedBaseContracts": [
-          3301,
+          3356,
           293
         ],
         "name": "UCReplaceable",
@@ -871,10 +871,10 @@
         "nodes": [
           {
             "constant": false,
-            "id": 3258,
+            "id": 3313,
             "name": "replaced",
             "nodeType": "VariableDeclaration",
-            "scope": 3301,
+            "scope": 3356,
             "src": "237:20:11",
             "stateVariable": true,
             "storageLocation": "default",
@@ -883,7 +883,7 @@
               "typeString": "bool"
             },
             "typeName": {
-              "id": 3257,
+              "id": 3312,
               "name": "bool",
               "nodeType": "ElementaryTypeName",
               "src": "237:4:11",
@@ -897,10 +897,10 @@
           },
           {
             "constant": false,
-            "id": 3260,
+            "id": 3315,
             "name": "newContractAddress",
             "nodeType": "VariableDeclaration",
-            "scope": 3301,
+            "scope": 3356,
             "src": "264:33:11",
             "stateVariable": true,
             "storageLocation": "default",
@@ -909,7 +909,7 @@
               "typeString": "address"
             },
             "typeName": {
-              "id": 3259,
+              "id": 3314,
               "name": "address",
               "nodeType": "ElementaryTypeName",
               "src": "264:7:11",
@@ -924,7 +924,7 @@
           },
           {
             "body": {
-              "id": 3269,
+              "id": 3324,
               "nodeType": "Block",
               "src": "346:93:11",
               "statements": [
@@ -934,7 +934,7 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 3264,
+                        "id": 3319,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -945,11 +945,11 @@
                         "src": "365:9:11",
                         "subExpression": {
                           "argumentTypes": null,
-                          "id": 3263,
+                          "id": 3318,
                           "name": "replaced",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 3258,
+                          "referencedDeclaration": 3313,
                           "src": "366:8:11",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bool",
@@ -964,7 +964,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "436f6e7472616374207265706c61636564206279206e6577436f6e7472616374416464726573732e",
-                        "id": 3265,
+                        "id": 3320,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -991,21 +991,21 @@
                           "typeString": "literal_string \"Contract replaced by newContractAddress.\""
                         }
                       ],
-                      "id": 3262,
+                      "id": 3317,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        4534,
-                        4535
+                        4589,
+                        4590
                       ],
-                      "referencedDeclaration": 4535,
+                      "referencedDeclaration": 4590,
                       "src": "357:7:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 3266,
+                    "id": 3321,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1019,23 +1019,23 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3267,
+                  "id": 3322,
                   "nodeType": "ExpressionStatement",
                   "src": "357:62:11"
                 },
                 {
-                  "id": 3268,
+                  "id": 3323,
                   "nodeType": "PlaceholderStatement",
                   "src": "430:1:11"
                 }
               ]
             },
             "documentation": "Modifiers",
-            "id": 3270,
+            "id": 3325,
             "name": "replaceable",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 3261,
+              "id": 3316,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "346:0:11"
@@ -1045,7 +1045,7 @@
           },
           {
             "body": {
-              "id": 3295,
+              "id": 3350,
               "nodeType": "Block",
               "src": "745:178:11",
               "statements": [
@@ -1055,7 +1055,7 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 3279,
+                        "id": 3334,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1066,11 +1066,11 @@
                         "src": "764:9:11",
                         "subExpression": {
                           "argumentTypes": null,
-                          "id": 3278,
+                          "id": 3333,
                           "name": "replaced",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 3258,
+                          "referencedDeclaration": 3313,
                           "src": "765:8:11",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bool",
@@ -1085,7 +1085,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "48617320616c7265616479206265656e207265706c61636564",
-                        "id": 3280,
+                        "id": 3335,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -1112,21 +1112,21 @@
                           "typeString": "literal_string \"Has already been replaced\""
                         }
                       ],
-                      "id": 3277,
+                      "id": 3332,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        4534,
-                        4535
+                        4589,
+                        4590
                       ],
-                      "referencedDeclaration": 4535,
+                      "referencedDeclaration": 4590,
                       "src": "756:7:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 3281,
+                    "id": 3336,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1140,25 +1140,25 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3282,
+                  "id": 3337,
                   "nodeType": "ExpressionStatement",
                   "src": "756:47:11"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 3285,
+                    "id": 3340,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 3283,
+                      "id": 3338,
                       "name": "newContractAddress",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3260,
+                      "referencedDeclaration": 3315,
                       "src": "814:18:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -1169,11 +1169,11 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 3284,
+                      "id": 3339,
                       "name": "newAddress",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3272,
+                      "referencedDeclaration": 3327,
                       "src": "835:10:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
@@ -1186,25 +1186,25 @@
                       "typeString": "address"
                     }
                   },
-                  "id": 3286,
+                  "id": 3341,
                   "nodeType": "ExpressionStatement",
                   "src": "814:31:11"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 3289,
+                    "id": 3344,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 3287,
+                      "id": 3342,
                       "name": "replaced",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3258,
+                      "referencedDeclaration": 3313,
                       "src": "856:8:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_bool",
@@ -1216,7 +1216,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "66616c7365",
-                      "id": 3288,
+                      "id": 3343,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -1237,7 +1237,7 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 3290,
+                  "id": 3345,
                   "nodeType": "ExpressionStatement",
                   "src": "856:16:11"
                 },
@@ -1247,11 +1247,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 3292,
+                        "id": 3347,
                         "name": "newAddress",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3272,
+                        "referencedDeclaration": 3327,
                         "src": "905:10:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -1266,18 +1266,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 3291,
+                      "id": 3346,
                       "name": "ContractReplaced",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3300,
+                      "referencedDeclaration": 3355,
                       "src": "888:16:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 3293,
+                    "id": 3348,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1291,23 +1291,23 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3294,
+                  "id": 3349,
                   "nodeType": "EmitStatement",
                   "src": "883:33:11"
                 }
               ]
             },
             "documentation": null,
-            "id": 3296,
+            "id": 3351,
             "implemented": true,
             "kind": "function",
             "modifiers": [
               {
                 "arguments": null,
-                "id": 3275,
+                "id": 3330,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 3274,
+                  "id": 3329,
                   "name": "auth",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
@@ -1325,15 +1325,15 @@
             "name": "replace",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3273,
+              "id": 3328,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3272,
+                  "id": 3327,
                   "name": "newAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3296,
+                  "scope": 3351,
                   "src": "713:18:11",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1342,7 +1342,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 3271,
+                    "id": 3326,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "713:7:11",
@@ -1359,12 +1359,12 @@
               "src": "712:20:11"
             },
             "returnParameters": {
-              "id": 3276,
+              "id": 3331,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "745:0:11"
             },
-            "scope": 3301,
+            "scope": 3356,
             "src": "696:227:11",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -1373,20 +1373,20 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 3300,
+            "id": 3355,
             "name": "ContractReplaced",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 3299,
+              "id": 3354,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3298,
+                  "id": 3353,
                   "indexed": false,
                   "name": "newAddress",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3300,
+                  "scope": 3355,
                   "src": "953:18:11",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -1395,7 +1395,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 3297,
+                    "id": 3352,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "953:7:11",
@@ -1414,7 +1414,7 @@
             "src": "930:43:11"
           }
         ],
-        "scope": 3302,
+        "scope": 3357,
         "src": "189:787:11"
       }
     ],
@@ -1426,7 +1426,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-04-11T17:13:25.881Z",
+  "updatedAt": "2020-04-16T01:19:43.775Z",
   "devdoc": {
     "details": "To be used on functions that can no longer be called after a contract is replaced.\r",
     "methods": {},

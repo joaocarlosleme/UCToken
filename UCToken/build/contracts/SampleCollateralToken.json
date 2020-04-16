@@ -264,7 +264,7 @@
         "id": 59,
         "nodeType": "ImportDirective",
         "scope": 77,
-        "sourceUnit": 4358,
+        "sourceUnit": 4413,
         "src": "36:55:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -278,10 +278,10 @@
               "id": 60,
               "name": "ERC20",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 4357,
+              "referencedDeclaration": 4412,
               "src": "131:5:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_ERC20_$4357",
+                "typeIdentifier": "t_contract$_ERC20_$4412",
                 "typeString": "contract ERC20"
               }
             },
@@ -291,9 +291,9 @@
           }
         ],
         "contractDependencies": [
-          3765,
-          4357,
-          4484
+          4539,
+          3820,
+          4412
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -301,9 +301,9 @@
         "id": 76,
         "linearizedBaseContracts": [
           76,
-          4357,
-          4484,
-          3765
+          4412,
+          4539,
+          3820
         ],
         "name": "SampleCollateralToken",
         "nodeType": "ContractDefinition",
@@ -326,7 +326,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 4531,
+                          "referencedDeclaration": 4586,
                           "src": "185:3:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -455,7 +455,7 @@
                       "name": "_mint",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 4241,
+                      "referencedDeclaration": 4296,
                       "src": "179:5:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_uint256_$returns$__$",
@@ -544,7 +544,7 @@
         "id": 59,
         "nodeType": "ImportDirective",
         "scope": 77,
-        "sourceUnit": 4358,
+        "sourceUnit": 4413,
         "src": "36:55:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -558,10 +558,10 @@
               "id": 60,
               "name": "ERC20",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 4357,
+              "referencedDeclaration": 4412,
               "src": "131:5:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_ERC20_$4357",
+                "typeIdentifier": "t_contract$_ERC20_$4412",
                 "typeString": "contract ERC20"
               }
             },
@@ -571,9 +571,9 @@
           }
         ],
         "contractDependencies": [
-          3765,
-          4357,
-          4484
+          4539,
+          3820,
+          4412
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -581,9 +581,9 @@
         "id": 76,
         "linearizedBaseContracts": [
           76,
-          4357,
-          4484,
-          3765
+          4412,
+          4539,
+          3820
         ],
         "name": "SampleCollateralToken",
         "nodeType": "ContractDefinition",
@@ -606,7 +606,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 4531,
+                          "referencedDeclaration": 4586,
                           "src": "185:3:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -735,7 +735,7 @@
                       "name": "_mint",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 4241,
+                      "referencedDeclaration": 4296,
                       "src": "179:5:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_uint256_$returns$__$",
@@ -847,12 +847,12 @@
         }
       },
       "links": {},
-      "address": "0x62be9a628C62756755dC0424aba2791F4fD802e9",
-      "transactionHash": "0xac10416dc1ab7ff2c9a1b32253384634882abeda64260d32aaa9c9d2c2368e09"
+      "address": "0xD736eDB13fEd911c6a46F64a88A3ff320455206E",
+      "transactionHash": "0xc5e38756e103568cbe84b3feb258c84894c4bacd62d26d8429ecb5fe90f01811"
     }
   },
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-04-11T17:13:34.461Z",
+  "updatedAt": "2020-04-16T01:19:54.528Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {

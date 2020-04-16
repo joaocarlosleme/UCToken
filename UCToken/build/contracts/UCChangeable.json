@@ -132,12 +132,12 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.7+commit.6da8b019\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"setOwner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_path\",\"type\":\"address\"}],\"name\":\"setPath\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"pathName\",\"type\":\"string\"},{\"name\":\"pathAddress\",\"type\":\"address\"}],\"name\":\"updatePath\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"ucPath\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"pathAddress\",\"type\":\"address\"},{\"name\":\"pathName\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"NewOwner\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"pathAddress\",\"type\":\"address\"}],\"name\":\"NewPath\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"pathName\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"pathAddress\",\"type\":\"address\"}],\"name\":\"PathUpdated\",\"type\":\"event\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{\"setOwner(address)\":{\"notice\":\"Public Methods\"},\"updatePath(string,address)\":{\"notice\":\"Public Auth Mehods\"}}}},\"settings\":{\"compilationTarget\":{\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCChangeable.sol\":\"UCChangeable\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCChangeable.sol\":{\"keccak256\":\"0xd5481e8fbdff8081dfa407e749f02dfd905bdd5f053e2be5603a3e252b6f7fed\",\"urls\":[\"bzzr://9c6ab7e5662bc884e62c7c282766ebd15d2c7049a74a70ed8de21821c55e5815\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCGToken.sol\":{\"keccak256\":\"0xa35f55c00ca6cf98282333efe427a1edba359b385cf243980802b8ea9f42d27c\",\"urls\":[\"bzzr://c7cccb382f0587b7261f0ac8215a212d03634a8dd4685448019e4ab821667c67\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCGovernance.sol\":{\"keccak256\":\"0x299fe206443c8b251d1b69537c2cfb049b9b1945e8b183986b6c695c1ca486b2\",\"urls\":[\"bzzr://ac44f6bfbe3f653ca466ad90eca5e44c5ec9a72e31d05859b3603cb3edf3664b\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCPath.sol\":{\"keccak256\":\"0xa1039f84905b01ac716b60009c0ceab2acd9fc45add2240235acd5e970344a8a\",\"urls\":[\"bzzr://123dace91db185fb9a75f5c557d44341e45b1912f9ce7081f116a2d7fcbf47b7\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCToken.sol\":{\"keccak256\":\"0x8e7409a390e6ecc016f516e6d18073e237a9303e930092717c7e32d5f69d3876\",\"urls\":[\"bzzr://3818008c9d68e03cc5396046eadee8671e0f1d167813a9e4bcf977cfb8dcf7f5\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/libraries/UnorderedKeySet.sol\":{\"keccak256\":\"0x9ff362a3b3b33f400f92b20e988941f76a3df03b3fb39927ceb8216eb4888b49\",\"urls\":[\"bzzr://898155ce1d97c23781cf30d4055d2c79df3cc7fa717556932a7d44cc8e892827\"]},\"@openzeppelin/contracts/GSN/Context.sol\":{\"keccak256\":\"0x90a3995645af7562d84b9d69363ffa5ae7217714ab61e951bf7bc450f40e4061\",\"urls\":[\"bzzr://51482c01bddf23793bddee43b60ab9578a62948a4f2082def24ea792a553b055\"]},\"@openzeppelin/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x640b6dee7a4b830bdfd52b5031a07fc2b12209f5b2e29e5d364a7d37f69d8076\",\"urls\":[\"bzzr://292843005e754e752644f767477ec5ad7a1ffc91ddb18c38b8079c62f3993cad\"]},\"@openzeppelin/contracts/token/ERC20/ERC20.sol\":{\"keccak256\":\"0x65a4078c03875c25413a068ce9cfdd7e68a90f8786612d1189c89341e6e3b802\",\"urls\":[\"bzzr://fefcc5ec4e313a66c9fd38375983b5973c528e7e19b6d37c2f1ac6745295e6e2\"]},\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0xe5bb0f57cff3e299f360052ba50f1ea0fff046df2be070b6943e0e3c3fdad8a9\",\"urls\":[\"bzzr://cf2d583b8dce38d0617fdcd65f2fd9f126fe17b7f683b5a515ea9d2762d8b062\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.7+commit.6da8b019\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"setOwner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_path\",\"type\":\"address\"}],\"name\":\"setPath\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"pathName\",\"type\":\"string\"},{\"name\":\"pathAddress\",\"type\":\"address\"}],\"name\":\"updatePath\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"ucPath\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"pathAddress\",\"type\":\"address\"},{\"name\":\"pathName\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"NewOwner\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"pathAddress\",\"type\":\"address\"}],\"name\":\"NewPath\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"name\":\"pathName\",\"type\":\"string\"},{\"indexed\":false,\"name\":\"pathAddress\",\"type\":\"address\"}],\"name\":\"PathUpdated\",\"type\":\"event\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{\"setOwner(address)\":{\"notice\":\"Public Methods\"},\"updatePath(string,address)\":{\"notice\":\"Public Auth Mehods\"}}}},\"settings\":{\"compilationTarget\":{\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCChangeable.sol\":\"UCChangeable\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCChangeable.sol\":{\"keccak256\":\"0x63bad7dac7b6e55d20d450779b0f1478c894fb77baa4ea13471b692d1b5a25d7\",\"urls\":[\"bzzr://875cb8635372656e54acf56b4cad5b183305ab48df218abb24e5c959f64c8737\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCGToken.sol\":{\"keccak256\":\"0xa35f55c00ca6cf98282333efe427a1edba359b385cf243980802b8ea9f42d27c\",\"urls\":[\"bzzr://c7cccb382f0587b7261f0ac8215a212d03634a8dd4685448019e4ab821667c67\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCGovernance.sol\":{\"keccak256\":\"0x299fe206443c8b251d1b69537c2cfb049b9b1945e8b183986b6c695c1ca486b2\",\"urls\":[\"bzzr://ac44f6bfbe3f653ca466ad90eca5e44c5ec9a72e31d05859b3603cb3edf3664b\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCPath.sol\":{\"keccak256\":\"0xa1039f84905b01ac716b60009c0ceab2acd9fc45add2240235acd5e970344a8a\",\"urls\":[\"bzzr://123dace91db185fb9a75f5c557d44341e45b1912f9ce7081f116a2d7fcbf47b7\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCToken.sol\":{\"keccak256\":\"0x8e7409a390e6ecc016f516e6d18073e237a9303e930092717c7e32d5f69d3876\",\"urls\":[\"bzzr://3818008c9d68e03cc5396046eadee8671e0f1d167813a9e4bcf977cfb8dcf7f5\"]},\"/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/libraries/UnorderedKeySet.sol\":{\"keccak256\":\"0x9ff362a3b3b33f400f92b20e988941f76a3df03b3fb39927ceb8216eb4888b49\",\"urls\":[\"bzzr://898155ce1d97c23781cf30d4055d2c79df3cc7fa717556932a7d44cc8e892827\"]},\"@openzeppelin/contracts/GSN/Context.sol\":{\"keccak256\":\"0x90a3995645af7562d84b9d69363ffa5ae7217714ab61e951bf7bc450f40e4061\",\"urls\":[\"bzzr://51482c01bddf23793bddee43b60ab9578a62948a4f2082def24ea792a553b055\"]},\"@openzeppelin/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x640b6dee7a4b830bdfd52b5031a07fc2b12209f5b2e29e5d364a7d37f69d8076\",\"urls\":[\"bzzr://292843005e754e752644f767477ec5ad7a1ffc91ddb18c38b8079c62f3993cad\"]},\"@openzeppelin/contracts/token/ERC20/ERC20.sol\":{\"keccak256\":\"0x65a4078c03875c25413a068ce9cfdd7e68a90f8786612d1189c89341e6e3b802\",\"urls\":[\"bzzr://fefcc5ec4e313a66c9fd38375983b5973c528e7e19b6d37c2f1ac6745295e6e2\"]},\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0xe5bb0f57cff3e299f360052ba50f1ea0fff046df2be070b6943e0e3c3fdad8a9\",\"urls\":[\"bzzr://cf2d583b8dce38d0617fdcd65f2fd9f126fe17b7f683b5a515ea9d2762d8b062\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity 0.5.7;\r\n\r\nimport \"./UCPath.sol\";\r\n\r\ncontract UCChangeable {\r\n\r\n    /// Public Properties\r\n    address public owner;\r\n\r\n    /// Contract Navigation Properties\r\n    UCPath public ucPath;\r\n\r\n    /// Modifiers\r\n    modifier auth {\r\n        //// for debugging\r\n        // require(\r\n        //     isAuthorized(msg.sender),\r\n        //     string(abi.encodePacked(\"MSG SENDER: \", toString(msg.sender), \" OWNER: \", toString(owner), \" ADDRESS THIS: \", toString(address(this))))); // \"Not authorized\"\r\n        require(isAuthorized(msg.sender),\"Not authorized\");\r\n        _;\r\n    }\r\n\r\n    constructor(address pathAddress, string memory pathName) internal {\r\n        owner = msg.sender;\r\n        emit NewOwner(msg.sender);\r\n\r\n        if(keccak256(bytes(pathName)) == keccak256(\"UCPath\")) {\r\n            ucPath = UCPath(address(this));\r\n        } else {\r\n            ucPath = UCPath(pathAddress);\r\n            // if(!ucPath.hasPath(pathName)) {\r\n            //     ucPath.initializePath(address(this), pathName); // doesn't work because doesn't pass AUTH (msg.sender is new contract not yet registered)\r\n            // }\r\n        }\r\n        // if(!ucPath.hasPath(pathName)) {\r\n        //     ucPath.initializePath(address(this), pathName); // doesn't work for UCPath contract (probably because the methods are not available yet)\r\n        // }\r\n    }\r\n\r\n    /// Public Methods\r\n    function setOwner(address _owner) public auth {\r\n        owner = _owner;\r\n        emit NewOwner(_owner);\r\n    }\r\n    function setPath(address _path) public auth {\r\n        ucPath = UCPath(_path);\r\n        emit NewPath(_path);\r\n    }\r\n\r\n    /// Public Auth Mehods\r\n\r\n    // method called by UCPath and to be overriden by implemantation contract\r\n    function updatePath(string memory pathName, address pathAddress) public auth {\r\n        emit PathUpdated(pathName, pathAddress);\r\n    }\r\n\r\n    /// Internal Functions\r\n    function isAuthorized(address src) internal view returns (bool) {\r\n        if (src == address(this)) {\r\n            return true;\r\n        } else if (src == owner) { // can't use tx.origin == ower https://solidity.readthedocs.io/en/develop/security-considerations.html#tx-origin\r\n            return true;\r\n        } else if(isContract(src)) {\r\n            // check list of ucContracts\r\n            if (ucPath == UCPath(0)) {\r\n                return false;\r\n            } else {\r\n                return ucPath.isValid(src);\r\n            }\r\n        } else {\r\n            // TODO Check list of users\r\n        }\r\n    }\r\n\r\n\r\n\r\n    /// Private Functions\r\n\r\n   /**\r\n   * Returns whether the target address is a contract\r\n   * @dev Check if this function will return false if invoked during the constructor of a contract,\r\n   * as the code is not actually created until after the constructor finishes.\r\n   * @param addr address to check\r\n   * @return whether the target address is a contract\r\n   */\r\n    function isContract(address addr) internal view returns (bool) {\r\n        // https://ethereum.stackexchange.com/a/77888/20639\r\n        bytes32 accountHash = 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;\r\n        bytes32 codehash;\r\n        assembly {\r\n            codehash := extcodehash(addr)\r\n        }\r\n        return (codehash != 0x0 && codehash != accountHash);\r\n    }\r\n    // function toString(address _addr) internal pure returns (string memory) {\r\n    //     bytes32 value = bytes32(uint256(_addr));\r\n    //     bytes memory alphabet = \"0123456789abcdef\";\r\n\r\n    //     bytes memory str = new bytes(42);\r\n    //     str[0] = '0';\r\n    //     str[1] = 'x';\r\n    //     for (uint i = 0; i < 20; i++) {\r\n    //         str[2+i*2] = alphabet[uint(uint8(value[i + 12] >> 4))];\r\n    //         str[3+i*2] = alphabet[uint(uint8(value[i + 12] & 0x0f))];\r\n    //     }\r\n    //     return string(str);\r\n    // }\r\n\r\n    /// Events\r\n    event NewOwner(address owner);\r\n    event NewPath(address pathAddress);\r\n    event PathUpdated(string pathName, address pathAddress);\r\n}\r\n",
+  "source": "pragma solidity 0.5.7;\r\n\r\nimport \"./UCPath.sol\";\r\n\r\ncontract UCChangeable {\r\n\r\n    /// Public Properties\r\n    address public owner;\r\n\r\n    /// Contract Navigation Properties\r\n    UCPath public ucPath;\r\n\r\n    /// Modifiers\r\n    modifier auth {\r\n        //// for debugging\r\n        // require(\r\n        //     isAuthorized(msg.sender),\r\n        //     string(abi.encodePacked(\"MSG SENDER: \", toString(msg.sender), \" OWNER: \", toString(owner), \" ADDRESS THIS: \", toString(address(this))))); // \"Not authorized\"\r\n        require(isAuthorized(msg.sender),\"Not authorized\");\r\n        _;\r\n    }\r\n\r\n    constructor(address pathAddress, string memory pathName) internal {\r\n        owner = msg.sender;\r\n        emit NewOwner(msg.sender);\r\n\r\n        if(keccak256(bytes(pathName)) == keccak256(\"UCPath\")) {\r\n            ucPath = UCPath(address(this));\r\n        } else {\r\n            ucPath = UCPath(pathAddress);\r\n            // if(!ucPath.hasPath(pathName)) {\r\n            //     ucPath.initializePath(address(this), pathName); // doesn't work because doesn't pass AUTH (msg.sender is new contract not yet registered)\r\n            // }\r\n        }\r\n        // if(!ucPath.hasPath(pathName)) {\r\n        //     ucPath.initializePath(address(this), pathName); // doesn't work for UCPath contract (probably because the methods are not available yet)\r\n        // }\r\n    }\r\n\r\n    /// Public Methods\r\n    function setOwner(address _owner) public auth {\r\n        owner = _owner;\r\n        emit NewOwner(_owner);\r\n    }\r\n    function setPath(address _path) public auth {\r\n        ucPath = UCPath(_path);\r\n        emit NewPath(_path);\r\n    }\r\n\r\n    /// Public Auth Mehods\r\n\r\n    // method called by UCPath and to be overriden by implemantation contract\r\n    function updatePath(string memory pathName, address pathAddress) public auth {\r\n        emit PathUpdated(pathName, pathAddress);\r\n    }\r\n\r\n    /// Internal Functions\r\n    function isAuthorized(address src) internal view returns (bool) {\r\n        if (src == address(this)) {\r\n            return true;\r\n        } else if (src == owner) { // can't use tx.origin == ower https://solidity.readthedocs.io/en/develop/security-considerations.html#tx-origin\r\n            return true;\r\n        } else if(isContract(src)) {\r\n            // check list of ucContracts\r\n            if (ucPath == UCPath(0)) {\r\n                return false;\r\n            } else {\r\n                return ucPath.isValid(src);\r\n            }\r\n        } else {\r\n            // TODO Check list of users\r\n        }\r\n    }\r\n\r\n\r\n\r\n    /// Private Functions\r\n\r\n   /**\r\n   * Returns whether the target address is a contract\r\n   * @dev Check if this function will return false if invoked during the constructor of a contract,\r\n   * as the code is not actually created until after the constructor finishes.\r\n   * @param addr address to check\r\n   * @return whether the target address is a contract\r\n   */\r\n    function isContract(address addr) internal view returns (bool) { // make public from internal fo testing\r\n        // https://ethereum.stackexchange.com/a/77888/20639\r\n        bytes32 accountHash = 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;\r\n        bytes32 codehash;\r\n        assembly {\r\n            codehash := extcodehash(addr)\r\n        }\r\n        return (codehash != 0x0 && codehash != accountHash);\r\n    }\r\n    // function toString(address _addr) internal pure returns (string memory) {\r\n    //     bytes32 value = bytes32(uint256(_addr));\r\n    //     bytes memory alphabet = \"0123456789abcdef\";\r\n\r\n    //     bytes memory str = new bytes(42);\r\n    //     str[0] = '0';\r\n    //     str[1] = 'x';\r\n    //     for (uint i = 0; i < 20; i++) {\r\n    //         str[2+i*2] = alphabet[uint(uint8(value[i + 12] >> 4))];\r\n    //         str[3+i*2] = alphabet[uint(uint8(value[i + 12] & 0x0f))];\r\n    //     }\r\n    //     return string(str);\r\n    // }\r\n\r\n    /// Events\r\n    event NewOwner(address owner);\r\n    event NewPath(address pathAddress);\r\n    event PathUpdated(string pathName, address pathAddress);\r\n}\r\n",
   "sourcePath": "E:\\JCL\\Webmaster\\GitHub\\UCToken\\UCToken\\contracts\\UCChangeable.sol",
   "ast": {
     "absolutePath": "/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCChangeable.sol",
@@ -165,7 +165,7 @@
         "id": 99,
         "nodeType": "ImportDirective",
         "scope": 294,
-        "sourceUnit": 3252,
+        "sourceUnit": 3307,
         "src": "26:22:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -220,7 +220,7 @@
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_UCPath_$3251",
+              "typeIdentifier": "t_contract$_UCPath_$3306",
               "typeString": "contract UCPath"
             },
             "typeName": {
@@ -228,10 +228,10 @@
               "id": 102,
               "name": "UCPath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 3251,
+              "referencedDeclaration": 3306,
               "src": "179:6:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_UCPath_$3251",
+                "typeIdentifier": "t_contract$_UCPath_$3306",
                 "typeString": "contract UCPath"
               }
             },
@@ -259,7 +259,7 @@
                               "name": "msg",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 4531,
+                              "referencedDeclaration": 4586,
                               "src": "538:3:3",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_magic_message",
@@ -347,10 +347,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        4534,
-                        4535
+                        4589,
+                        4590
                       ],
-                      "referencedDeclaration": 4535,
+                      "referencedDeclaration": 4590,
                       "src": "517:7:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -432,7 +432,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 4531,
+                        "referencedDeclaration": 4586,
                         "src": "680:3:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -475,7 +475,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 4531,
+                          "referencedDeclaration": 4586,
                           "src": "715:3:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -611,7 +611,7 @@
                         "name": "keccak256",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 4525,
+                        "referencedDeclaration": 4580,
                         "src": "742:9:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
@@ -667,7 +667,7 @@
                         "name": "keccak256",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 4525,
+                        "referencedDeclaration": 4580,
                         "src": "772:9:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
@@ -716,7 +716,7 @@
                             "referencedDeclaration": 103,
                             "src": "871:6:3",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_UCPath_$3251",
+                              "typeIdentifier": "t_contract$_UCPath_$3306",
                               "typeString": "contract UCPath"
                             }
                           },
@@ -750,10 +750,10 @@
                               "name": "UCPath",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 3251,
+                              "referencedDeclaration": 3306,
                               "src": "880:6:3",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_type$_t_contract$_UCPath_$3251_$",
+                                "typeIdentifier": "t_type$_t_contract$_UCPath_$3306_$",
                                 "typeString": "type(contract UCPath)"
                               }
                             },
@@ -767,13 +767,13 @@
                             "nodeType": "FunctionCall",
                             "src": "880:19:3",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_UCPath_$3251",
+                              "typeIdentifier": "t_contract$_UCPath_$3306",
                               "typeString": "contract UCPath"
                             }
                           },
                           "src": "871:28:3",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_UCPath_$3251",
+                            "typeIdentifier": "t_contract$_UCPath_$3306",
                             "typeString": "contract UCPath"
                           }
                         },
@@ -808,7 +808,7 @@
                             "referencedDeclaration": 103,
                             "src": "808:6:3",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_UCPath_$3251",
+                              "typeIdentifier": "t_contract$_UCPath_$3306",
                               "typeString": "contract UCPath"
                             }
                           },
@@ -826,7 +826,7 @@
                                     "name": "this",
                                     "nodeType": "Identifier",
                                     "overloadedDeclarations": [],
-                                    "referencedDeclaration": 4561,
+                                    "referencedDeclaration": 4616,
                                     "src": "832:4:3",
                                     "typeDescriptions": {
                                       "typeIdentifier": "t_contract$_UCChangeable_$293",
@@ -880,10 +880,10 @@
                               "name": "UCPath",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 3251,
+                              "referencedDeclaration": 3306,
                               "src": "817:6:3",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_type$_t_contract$_UCPath_$3251_$",
+                                "typeIdentifier": "t_type$_t_contract$_UCPath_$3306_$",
                                 "typeString": "type(contract UCPath)"
                               }
                             },
@@ -897,13 +897,13 @@
                             "nodeType": "FunctionCall",
                             "src": "817:21:3",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_UCPath_$3251",
+                              "typeIdentifier": "t_contract$_UCPath_$3306",
                               "typeString": "contract UCPath"
                             }
                           },
                           "src": "808:30:3",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_UCPath_$3251",
+                            "typeIdentifier": "t_contract$_UCPath_$3306",
                             "typeString": "contract UCPath"
                           }
                         },
@@ -1199,7 +1199,7 @@
                       "referencedDeclaration": 103,
                       "src": "1557:6:3",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_UCPath_$3251",
+                        "typeIdentifier": "t_contract$_UCPath_$3306",
                         "typeString": "contract UCPath"
                       }
                     },
@@ -1233,10 +1233,10 @@
                         "name": "UCPath",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3251,
+                        "referencedDeclaration": 3306,
                         "src": "1566:6:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_UCPath_$3251_$",
+                          "typeIdentifier": "t_type$_t_contract$_UCPath_$3306_$",
                           "typeString": "type(contract UCPath)"
                         }
                       },
@@ -1250,13 +1250,13 @@
                       "nodeType": "FunctionCall",
                       "src": "1566:13:3",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_UCPath_$3251",
+                        "typeIdentifier": "t_contract$_UCPath_$3306",
                         "typeString": "contract UCPath"
                       }
                     },
                     "src": "1557:22:3",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_UCPath_$3251",
+                      "typeIdentifier": "t_contract$_UCPath_$3306",
                       "typeString": "contract UCPath"
                     }
                   },
@@ -1613,7 +1613,7 @@
                           "name": "this",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 4561,
+                          "referencedDeclaration": 4616,
                           "src": "1999:4:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_contract$_UCChangeable_$293",
@@ -1775,7 +1775,7 @@
                             "condition": {
                               "argumentTypes": null,
                               "commonType": {
-                                "typeIdentifier": "t_contract$_UCPath_$3251",
+                                "typeIdentifier": "t_contract$_UCPath_$3306",
                                 "typeString": "contract UCPath"
                               },
                               "id": 236,
@@ -1792,7 +1792,7 @@
                                 "referencedDeclaration": 103,
                                 "src": "2306:6:3",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_contract$_UCPath_$3251",
+                                  "typeIdentifier": "t_contract$_UCPath_$3306",
                                   "typeString": "contract UCPath"
                                 }
                               },
@@ -1831,10 +1831,10 @@
                                   "name": "UCPath",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 3251,
+                                  "referencedDeclaration": 3306,
                                   "src": "2316:6:3",
                                   "typeDescriptions": {
-                                    "typeIdentifier": "t_type$_t_contract$_UCPath_$3251_$",
+                                    "typeIdentifier": "t_type$_t_contract$_UCPath_$3306_$",
                                     "typeString": "type(contract UCPath)"
                                   }
                                 },
@@ -1848,7 +1848,7 @@
                                 "nodeType": "FunctionCall",
                                 "src": "2316:9:3",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_contract$_UCPath_$3251",
+                                  "typeIdentifier": "t_contract$_UCPath_$3306",
                                   "typeString": "contract UCPath"
                                 }
                               },
@@ -1897,7 +1897,7 @@
                                         "referencedDeclaration": 103,
                                         "src": "2406:6:3",
                                         "typeDescriptions": {
-                                          "typeIdentifier": "t_contract$_UCPath_$3251",
+                                          "typeIdentifier": "t_contract$_UCPath_$3306",
                                           "typeString": "contract UCPath"
                                         }
                                       },
@@ -1908,7 +1908,7 @@
                                       "lValueRequested": false,
                                       "memberName": "isValid",
                                       "nodeType": "MemberAccess",
-                                      "referencedDeclaration": 3219,
+                                      "referencedDeclaration": 3274,
                                       "src": "2406:14:3",
                                       "typeDescriptions": {
                                         "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_bool_$",
@@ -2130,7 +2130,7 @@
             "body": {
               "id": 277,
               "nodeType": "Block",
-              "src": "2963:331:3",
+              "src": "2963:371:3",
               "statements": [
                 {
                   "assignments": [
@@ -2143,7 +2143,7 @@
                       "name": "accountHash",
                       "nodeType": "VariableDeclaration",
                       "scope": 277,
-                      "src": "3035:19:3",
+                      "src": "3075:19:3",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -2154,7 +2154,7 @@
                         "id": 260,
                         "name": "bytes32",
                         "nodeType": "ElementaryTypeName",
-                        "src": "3035:7:3",
+                        "src": "3075:7:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
                           "typeString": "bytes32"
@@ -2175,7 +2175,7 @@
                     "kind": "number",
                     "lValueRequested": false,
                     "nodeType": "Literal",
-                    "src": "3057:66:3",
+                    "src": "3097:66:3",
                     "subdenomination": null,
                     "typeDescriptions": {
                       "typeIdentifier": "t_rational_89477152217924674838424037953991966239322087453347756267410168184682657981552_by_1",
@@ -2184,7 +2184,7 @@
                     "value": "0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470"
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "3035:88:3"
+                  "src": "3075:88:3"
                 },
                 {
                   "assignments": [
@@ -2197,7 +2197,7 @@
                       "name": "codehash",
                       "nodeType": "VariableDeclaration",
                       "scope": 277,
-                      "src": "3134:16:3",
+                      "src": "3174:16:3",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -2208,7 +2208,7 @@
                         "id": 264,
                         "name": "bytes32",
                         "nodeType": "ElementaryTypeName",
-                        "src": "3134:7:3",
+                        "src": "3174:7:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
                           "typeString": "bytes32"
@@ -2221,25 +2221,25 @@
                   "id": 266,
                   "initialValue": null,
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "3134:16:3"
+                  "src": "3174:16:3"
                 },
                 {
                   "externalReferences": [
-                    {
-                      "codehash": {
-                        "declaration": 265,
-                        "isOffset": false,
-                        "isSlot": false,
-                        "src": "3185:8:3",
-                        "valueSize": 1
-                      }
-                    },
                     {
                       "addr": {
                         "declaration": 255,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "3209:4:3",
+                        "src": "3249:4:3",
+                        "valueSize": 1
+                      }
+                    },
+                    {
+                      "codehash": {
+                        "declaration": 265,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "3225:8:3",
                         "valueSize": 1
                       }
                     }
@@ -2247,7 +2247,7 @@
                   "id": 267,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    codehash := extcodehash(addr)\n}",
-                  "src": "3161:80:3"
+                  "src": "3201:80:3"
                 },
                 {
                   "expression": {
@@ -2282,7 +2282,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 265,
-                            "src": "3243:8:3",
+                            "src": "3283:8:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_bytes32",
                               "typeString": "bytes32"
@@ -2300,7 +2300,7 @@
                             "kind": "number",
                             "lValueRequested": false,
                             "nodeType": "Literal",
-                            "src": "3255:3:3",
+                            "src": "3295:3:3",
                             "subdenomination": null,
                             "typeDescriptions": {
                               "typeIdentifier": "t_rational_0_by_1",
@@ -2308,7 +2308,7 @@
                             },
                             "value": "0x0"
                           },
-                          "src": "3243:15:3",
+                          "src": "3283:15:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bool",
                             "typeString": "bool"
@@ -2334,7 +2334,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 265,
-                            "src": "3262:8:3",
+                            "src": "3302:8:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_bytes32",
                               "typeString": "bytes32"
@@ -2349,19 +2349,19 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 261,
-                            "src": "3274:11:3",
+                            "src": "3314:11:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_bytes32",
                               "typeString": "bytes32"
                             }
                           },
-                          "src": "3262:23:3",
+                          "src": "3302:23:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bool",
                             "typeString": "bool"
                           }
                         },
-                        "src": "3243:42:3",
+                        "src": "3283:42:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -2375,7 +2375,7 @@
                     "isPure": false,
                     "lValueRequested": false,
                     "nodeType": "TupleExpression",
-                    "src": "3242:44:3",
+                    "src": "3282:44:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -2384,7 +2384,7 @@
                   "functionReturnParameters": 259,
                   "id": 276,
                   "nodeType": "Return",
-                  "src": "3235:51:3"
+                  "src": "3275:51:3"
                 }
               ]
             },
@@ -2463,7 +2463,7 @@
               "src": "2956:6:3"
             },
             "scope": 293,
-            "src": "2900:394:3",
+            "src": "2900:434:3",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "internal"
@@ -2485,7 +2485,7 @@
                   "name": "owner",
                   "nodeType": "VariableDeclaration",
                   "scope": 282,
-                  "src": "3869:13:3",
+                  "src": "3909:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2496,7 +2496,7 @@
                     "id": 279,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3869:7:3",
+                    "src": "3909:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2507,9 +2507,9 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3868:15:3"
+              "src": "3908:15:3"
             },
-            "src": "3854:30:3"
+            "src": "3894:30:3"
           },
           {
             "anonymous": false,
@@ -2528,7 +2528,7 @@
                   "name": "pathAddress",
                   "nodeType": "VariableDeclaration",
                   "scope": 286,
-                  "src": "3904:19:3",
+                  "src": "3944:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2539,7 +2539,7 @@
                     "id": 283,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3904:7:3",
+                    "src": "3944:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2550,9 +2550,9 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3903:21:3"
+              "src": "3943:21:3"
             },
-            "src": "3890:35:3"
+            "src": "3930:35:3"
           },
           {
             "anonymous": false,
@@ -2571,7 +2571,7 @@
                   "name": "pathName",
                   "nodeType": "VariableDeclaration",
                   "scope": 292,
-                  "src": "3949:15:3",
+                  "src": "3989:15:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2582,7 +2582,7 @@
                     "id": 287,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3949:6:3",
+                    "src": "3989:6:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -2598,7 +2598,7 @@
                   "name": "pathAddress",
                   "nodeType": "VariableDeclaration",
                   "scope": 292,
-                  "src": "3966:19:3",
+                  "src": "4006:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2609,7 +2609,7 @@
                     "id": 289,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3966:7:3",
+                    "src": "4006:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -2620,16 +2620,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3948:38:3"
+              "src": "3988:38:3"
             },
-            "src": "3931:56:3"
+            "src": "3971:56:3"
           }
         ],
         "scope": 294,
-        "src": "52:3938:3"
+        "src": "52:3978:3"
       }
     ],
-    "src": "0:3992:3"
+    "src": "0:4032:3"
   },
   "legacyAST": {
     "absolutePath": "/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCChangeable.sol",
@@ -2657,7 +2657,7 @@
         "id": 99,
         "nodeType": "ImportDirective",
         "scope": 294,
-        "sourceUnit": 3252,
+        "sourceUnit": 3307,
         "src": "26:22:3",
         "symbolAliases": [],
         "unitAlias": ""
@@ -2712,7 +2712,7 @@
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_UCPath_$3251",
+              "typeIdentifier": "t_contract$_UCPath_$3306",
               "typeString": "contract UCPath"
             },
             "typeName": {
@@ -2720,10 +2720,10 @@
               "id": 102,
               "name": "UCPath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 3251,
+              "referencedDeclaration": 3306,
               "src": "179:6:3",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_UCPath_$3251",
+                "typeIdentifier": "t_contract$_UCPath_$3306",
                 "typeString": "contract UCPath"
               }
             },
@@ -2751,7 +2751,7 @@
                               "name": "msg",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 4531,
+                              "referencedDeclaration": 4586,
                               "src": "538:3:3",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_magic_message",
@@ -2839,10 +2839,10 @@
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        4534,
-                        4535
+                        4589,
+                        4590
                       ],
-                      "referencedDeclaration": 4535,
+                      "referencedDeclaration": 4590,
                       "src": "517:7:3",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
@@ -2924,7 +2924,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 4531,
+                        "referencedDeclaration": 4586,
                         "src": "680:3:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -2967,7 +2967,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 4531,
+                          "referencedDeclaration": 4586,
                           "src": "715:3:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -3103,7 +3103,7 @@
                         "name": "keccak256",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 4525,
+                        "referencedDeclaration": 4580,
                         "src": "742:9:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
@@ -3159,7 +3159,7 @@
                         "name": "keccak256",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 4525,
+                        "referencedDeclaration": 4580,
                         "src": "772:9:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
@@ -3208,7 +3208,7 @@
                             "referencedDeclaration": 103,
                             "src": "871:6:3",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_UCPath_$3251",
+                              "typeIdentifier": "t_contract$_UCPath_$3306",
                               "typeString": "contract UCPath"
                             }
                           },
@@ -3242,10 +3242,10 @@
                               "name": "UCPath",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 3251,
+                              "referencedDeclaration": 3306,
                               "src": "880:6:3",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_type$_t_contract$_UCPath_$3251_$",
+                                "typeIdentifier": "t_type$_t_contract$_UCPath_$3306_$",
                                 "typeString": "type(contract UCPath)"
                               }
                             },
@@ -3259,13 +3259,13 @@
                             "nodeType": "FunctionCall",
                             "src": "880:19:3",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_UCPath_$3251",
+                              "typeIdentifier": "t_contract$_UCPath_$3306",
                               "typeString": "contract UCPath"
                             }
                           },
                           "src": "871:28:3",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_UCPath_$3251",
+                            "typeIdentifier": "t_contract$_UCPath_$3306",
                             "typeString": "contract UCPath"
                           }
                         },
@@ -3300,7 +3300,7 @@
                             "referencedDeclaration": 103,
                             "src": "808:6:3",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_UCPath_$3251",
+                              "typeIdentifier": "t_contract$_UCPath_$3306",
                               "typeString": "contract UCPath"
                             }
                           },
@@ -3318,7 +3318,7 @@
                                     "name": "this",
                                     "nodeType": "Identifier",
                                     "overloadedDeclarations": [],
-                                    "referencedDeclaration": 4561,
+                                    "referencedDeclaration": 4616,
                                     "src": "832:4:3",
                                     "typeDescriptions": {
                                       "typeIdentifier": "t_contract$_UCChangeable_$293",
@@ -3372,10 +3372,10 @@
                               "name": "UCPath",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 3251,
+                              "referencedDeclaration": 3306,
                               "src": "817:6:3",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_type$_t_contract$_UCPath_$3251_$",
+                                "typeIdentifier": "t_type$_t_contract$_UCPath_$3306_$",
                                 "typeString": "type(contract UCPath)"
                               }
                             },
@@ -3389,13 +3389,13 @@
                             "nodeType": "FunctionCall",
                             "src": "817:21:3",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_UCPath_$3251",
+                              "typeIdentifier": "t_contract$_UCPath_$3306",
                               "typeString": "contract UCPath"
                             }
                           },
                           "src": "808:30:3",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_contract$_UCPath_$3251",
+                            "typeIdentifier": "t_contract$_UCPath_$3306",
                             "typeString": "contract UCPath"
                           }
                         },
@@ -3691,7 +3691,7 @@
                       "referencedDeclaration": 103,
                       "src": "1557:6:3",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_UCPath_$3251",
+                        "typeIdentifier": "t_contract$_UCPath_$3306",
                         "typeString": "contract UCPath"
                       }
                     },
@@ -3725,10 +3725,10 @@
                         "name": "UCPath",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3251,
+                        "referencedDeclaration": 3306,
                         "src": "1566:6:3",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_UCPath_$3251_$",
+                          "typeIdentifier": "t_type$_t_contract$_UCPath_$3306_$",
                           "typeString": "type(contract UCPath)"
                         }
                       },
@@ -3742,13 +3742,13 @@
                       "nodeType": "FunctionCall",
                       "src": "1566:13:3",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_UCPath_$3251",
+                        "typeIdentifier": "t_contract$_UCPath_$3306",
                         "typeString": "contract UCPath"
                       }
                     },
                     "src": "1557:22:3",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_UCPath_$3251",
+                      "typeIdentifier": "t_contract$_UCPath_$3306",
                       "typeString": "contract UCPath"
                     }
                   },
@@ -4105,7 +4105,7 @@
                           "name": "this",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 4561,
+                          "referencedDeclaration": 4616,
                           "src": "1999:4:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_contract$_UCChangeable_$293",
@@ -4267,7 +4267,7 @@
                             "condition": {
                               "argumentTypes": null,
                               "commonType": {
-                                "typeIdentifier": "t_contract$_UCPath_$3251",
+                                "typeIdentifier": "t_contract$_UCPath_$3306",
                                 "typeString": "contract UCPath"
                               },
                               "id": 236,
@@ -4284,7 +4284,7 @@
                                 "referencedDeclaration": 103,
                                 "src": "2306:6:3",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_contract$_UCPath_$3251",
+                                  "typeIdentifier": "t_contract$_UCPath_$3306",
                                   "typeString": "contract UCPath"
                                 }
                               },
@@ -4323,10 +4323,10 @@
                                   "name": "UCPath",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 3251,
+                                  "referencedDeclaration": 3306,
                                   "src": "2316:6:3",
                                   "typeDescriptions": {
-                                    "typeIdentifier": "t_type$_t_contract$_UCPath_$3251_$",
+                                    "typeIdentifier": "t_type$_t_contract$_UCPath_$3306_$",
                                     "typeString": "type(contract UCPath)"
                                   }
                                 },
@@ -4340,7 +4340,7 @@
                                 "nodeType": "FunctionCall",
                                 "src": "2316:9:3",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_contract$_UCPath_$3251",
+                                  "typeIdentifier": "t_contract$_UCPath_$3306",
                                   "typeString": "contract UCPath"
                                 }
                               },
@@ -4389,7 +4389,7 @@
                                         "referencedDeclaration": 103,
                                         "src": "2406:6:3",
                                         "typeDescriptions": {
-                                          "typeIdentifier": "t_contract$_UCPath_$3251",
+                                          "typeIdentifier": "t_contract$_UCPath_$3306",
                                           "typeString": "contract UCPath"
                                         }
                                       },
@@ -4400,7 +4400,7 @@
                                       "lValueRequested": false,
                                       "memberName": "isValid",
                                       "nodeType": "MemberAccess",
-                                      "referencedDeclaration": 3219,
+                                      "referencedDeclaration": 3274,
                                       "src": "2406:14:3",
                                       "typeDescriptions": {
                                         "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_bool_$",
@@ -4622,7 +4622,7 @@
             "body": {
               "id": 277,
               "nodeType": "Block",
-              "src": "2963:331:3",
+              "src": "2963:371:3",
               "statements": [
                 {
                   "assignments": [
@@ -4635,7 +4635,7 @@
                       "name": "accountHash",
                       "nodeType": "VariableDeclaration",
                       "scope": 277,
-                      "src": "3035:19:3",
+                      "src": "3075:19:3",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -4646,7 +4646,7 @@
                         "id": 260,
                         "name": "bytes32",
                         "nodeType": "ElementaryTypeName",
-                        "src": "3035:7:3",
+                        "src": "3075:7:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
                           "typeString": "bytes32"
@@ -4667,7 +4667,7 @@
                     "kind": "number",
                     "lValueRequested": false,
                     "nodeType": "Literal",
-                    "src": "3057:66:3",
+                    "src": "3097:66:3",
                     "subdenomination": null,
                     "typeDescriptions": {
                       "typeIdentifier": "t_rational_89477152217924674838424037953991966239322087453347756267410168184682657981552_by_1",
@@ -4676,7 +4676,7 @@
                     "value": "0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470"
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "3035:88:3"
+                  "src": "3075:88:3"
                 },
                 {
                   "assignments": [
@@ -4689,7 +4689,7 @@
                       "name": "codehash",
                       "nodeType": "VariableDeclaration",
                       "scope": 277,
-                      "src": "3134:16:3",
+                      "src": "3174:16:3",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -4700,7 +4700,7 @@
                         "id": 264,
                         "name": "bytes32",
                         "nodeType": "ElementaryTypeName",
-                        "src": "3134:7:3",
+                        "src": "3174:7:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
                           "typeString": "bytes32"
@@ -4713,25 +4713,25 @@
                   "id": 266,
                   "initialValue": null,
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "3134:16:3"
+                  "src": "3174:16:3"
                 },
                 {
                   "externalReferences": [
-                    {
-                      "codehash": {
-                        "declaration": 265,
-                        "isOffset": false,
-                        "isSlot": false,
-                        "src": "3185:8:3",
-                        "valueSize": 1
-                      }
-                    },
                     {
                       "addr": {
                         "declaration": 255,
                         "isOffset": false,
                         "isSlot": false,
-                        "src": "3209:4:3",
+                        "src": "3249:4:3",
+                        "valueSize": 1
+                      }
+                    },
+                    {
+                      "codehash": {
+                        "declaration": 265,
+                        "isOffset": false,
+                        "isSlot": false,
+                        "src": "3225:8:3",
                         "valueSize": 1
                       }
                     }
@@ -4739,7 +4739,7 @@
                   "id": 267,
                   "nodeType": "InlineAssembly",
                   "operations": "{\n    codehash := extcodehash(addr)\n}",
-                  "src": "3161:80:3"
+                  "src": "3201:80:3"
                 },
                 {
                   "expression": {
@@ -4774,7 +4774,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 265,
-                            "src": "3243:8:3",
+                            "src": "3283:8:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_bytes32",
                               "typeString": "bytes32"
@@ -4792,7 +4792,7 @@
                             "kind": "number",
                             "lValueRequested": false,
                             "nodeType": "Literal",
-                            "src": "3255:3:3",
+                            "src": "3295:3:3",
                             "subdenomination": null,
                             "typeDescriptions": {
                               "typeIdentifier": "t_rational_0_by_1",
@@ -4800,7 +4800,7 @@
                             },
                             "value": "0x0"
                           },
-                          "src": "3243:15:3",
+                          "src": "3283:15:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bool",
                             "typeString": "bool"
@@ -4826,7 +4826,7 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 265,
-                            "src": "3262:8:3",
+                            "src": "3302:8:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_bytes32",
                               "typeString": "bytes32"
@@ -4841,19 +4841,19 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 261,
-                            "src": "3274:11:3",
+                            "src": "3314:11:3",
                             "typeDescriptions": {
                               "typeIdentifier": "t_bytes32",
                               "typeString": "bytes32"
                             }
                           },
-                          "src": "3262:23:3",
+                          "src": "3302:23:3",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bool",
                             "typeString": "bool"
                           }
                         },
-                        "src": "3243:42:3",
+                        "src": "3283:42:3",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -4867,7 +4867,7 @@
                     "isPure": false,
                     "lValueRequested": false,
                     "nodeType": "TupleExpression",
-                    "src": "3242:44:3",
+                    "src": "3282:44:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -4876,7 +4876,7 @@
                   "functionReturnParameters": 259,
                   "id": 276,
                   "nodeType": "Return",
-                  "src": "3235:51:3"
+                  "src": "3275:51:3"
                 }
               ]
             },
@@ -4955,7 +4955,7 @@
               "src": "2956:6:3"
             },
             "scope": 293,
-            "src": "2900:394:3",
+            "src": "2900:434:3",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "internal"
@@ -4977,7 +4977,7 @@
                   "name": "owner",
                   "nodeType": "VariableDeclaration",
                   "scope": 282,
-                  "src": "3869:13:3",
+                  "src": "3909:13:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -4988,7 +4988,7 @@
                     "id": 279,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3869:7:3",
+                    "src": "3909:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -4999,9 +4999,9 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3868:15:3"
+              "src": "3908:15:3"
             },
-            "src": "3854:30:3"
+            "src": "3894:30:3"
           },
           {
             "anonymous": false,
@@ -5020,7 +5020,7 @@
                   "name": "pathAddress",
                   "nodeType": "VariableDeclaration",
                   "scope": 286,
-                  "src": "3904:19:3",
+                  "src": "3944:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -5031,7 +5031,7 @@
                     "id": 283,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3904:7:3",
+                    "src": "3944:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -5042,9 +5042,9 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3903:21:3"
+              "src": "3943:21:3"
             },
-            "src": "3890:35:3"
+            "src": "3930:35:3"
           },
           {
             "anonymous": false,
@@ -5063,7 +5063,7 @@
                   "name": "pathName",
                   "nodeType": "VariableDeclaration",
                   "scope": 292,
-                  "src": "3949:15:3",
+                  "src": "3989:15:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -5074,7 +5074,7 @@
                     "id": 287,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3949:6:3",
+                    "src": "3989:6:3",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -5090,7 +5090,7 @@
                   "name": "pathAddress",
                   "nodeType": "VariableDeclaration",
                   "scope": 292,
-                  "src": "3966:19:3",
+                  "src": "4006:19:3",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -5101,7 +5101,7 @@
                     "id": 289,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "3966:7:3",
+                    "src": "4006:7:3",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -5112,16 +5112,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "3948:38:3"
+              "src": "3988:38:3"
             },
-            "src": "3931:56:3"
+            "src": "3971:56:3"
           }
         ],
         "scope": 294,
-        "src": "52:3938:3"
+        "src": "52:3978:3"
       }
     ],
-    "src": "0:3992:3"
+    "src": "0:4032:3"
   },
   "compiler": {
     "name": "solc",
@@ -5129,7 +5129,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-04-11T17:13:25.753Z",
+  "updatedAt": "2020-04-16T01:19:43.621Z",
   "devdoc": {
     "methods": {}
   },
