@@ -69,14 +69,14 @@
     "absolutePath": "/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCStorage.sol",
     "exportedSymbols": {
       "UCStorage": [
-        3371
+        3383
       ]
     },
-    "id": 3372,
+    "id": 3384,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3358,
+        "id": 3370,
         "literals": [
           "solidity",
           ">=",
@@ -95,19 +95,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3371,
+        "id": 3383,
         "linearizedBaseContracts": [
-          3371
+          3383
         ],
         "name": "UCStorage",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 3360,
+            "id": 3372,
             "name": "totalSupply",
             "nodeType": "VariableDeclaration",
-            "scope": 3371,
+            "scope": 3383,
             "src": "66:26:12",
             "stateVariable": true,
             "storageLocation": "default",
@@ -116,7 +116,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 3359,
+              "id": 3371,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "66:7:12",
@@ -130,10 +130,10 @@
           },
           {
             "constant": false,
-            "id": 3364,
+            "id": 3376,
             "name": "balanceOf",
             "nodeType": "VariableDeclaration",
-            "scope": 3371,
+            "scope": 3383,
             "src": "100:44:12",
             "stateVariable": true,
             "storageLocation": "default",
@@ -142,9 +142,9 @@
               "typeString": "mapping(address => uint256)"
             },
             "typeName": {
-              "id": 3363,
+              "id": 3375,
               "keyType": {
-                "id": 3361,
+                "id": 3373,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "108:7:12",
@@ -160,7 +160,7 @@
                 "typeString": "mapping(address => uint256)"
               },
               "valueType": {
-                "id": 3362,
+                "id": 3374,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "119:7:12",
@@ -175,10 +175,10 @@
           },
           {
             "constant": false,
-            "id": 3370,
+            "id": 3382,
             "name": "allowance",
             "nodeType": "VariableDeclaration",
-            "scope": 3371,
+            "scope": 3383,
             "src": "150:64:12",
             "stateVariable": true,
             "storageLocation": "default",
@@ -187,9 +187,9 @@
               "typeString": "mapping(address => mapping(address => uint256))"
             },
             "typeName": {
-              "id": 3369,
+              "id": 3381,
               "keyType": {
-                "id": 3365,
+                "id": 3377,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "158:7:12",
@@ -205,9 +205,9 @@
                 "typeString": "mapping(address => mapping(address => uint256))"
               },
               "valueType": {
-                "id": 3368,
+                "id": 3380,
                 "keyType": {
-                  "id": 3366,
+                  "id": 3378,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "177:7:12",
@@ -223,7 +223,7 @@
                   "typeString": "mapping(address => uint256)"
                 },
                 "valueType": {
-                  "id": 3367,
+                  "id": 3379,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "188:7:12",
@@ -238,7 +238,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 3372,
+        "scope": 3384,
         "src": "36:192:12"
       }
     ],
@@ -248,14 +248,14 @@
     "absolutePath": "/E/JCL/Webmaster/GitHub/UCToken/UCToken/contracts/UCStorage.sol",
     "exportedSymbols": {
       "UCStorage": [
-        3371
+        3383
       ]
     },
-    "id": 3372,
+    "id": 3384,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3358,
+        "id": 3370,
         "literals": [
           "solidity",
           ">=",
@@ -274,19 +274,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3371,
+        "id": 3383,
         "linearizedBaseContracts": [
-          3371
+          3383
         ],
         "name": "UCStorage",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 3360,
+            "id": 3372,
             "name": "totalSupply",
             "nodeType": "VariableDeclaration",
-            "scope": 3371,
+            "scope": 3383,
             "src": "66:26:12",
             "stateVariable": true,
             "storageLocation": "default",
@@ -295,7 +295,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 3359,
+              "id": 3371,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "66:7:12",
@@ -309,10 +309,10 @@
           },
           {
             "constant": false,
-            "id": 3364,
+            "id": 3376,
             "name": "balanceOf",
             "nodeType": "VariableDeclaration",
-            "scope": 3371,
+            "scope": 3383,
             "src": "100:44:12",
             "stateVariable": true,
             "storageLocation": "default",
@@ -321,9 +321,9 @@
               "typeString": "mapping(address => uint256)"
             },
             "typeName": {
-              "id": 3363,
+              "id": 3375,
               "keyType": {
-                "id": 3361,
+                "id": 3373,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "108:7:12",
@@ -339,7 +339,7 @@
                 "typeString": "mapping(address => uint256)"
               },
               "valueType": {
-                "id": 3362,
+                "id": 3374,
                 "name": "uint256",
                 "nodeType": "ElementaryTypeName",
                 "src": "119:7:12",
@@ -354,10 +354,10 @@
           },
           {
             "constant": false,
-            "id": 3370,
+            "id": 3382,
             "name": "allowance",
             "nodeType": "VariableDeclaration",
-            "scope": 3371,
+            "scope": 3383,
             "src": "150:64:12",
             "stateVariable": true,
             "storageLocation": "default",
@@ -366,9 +366,9 @@
               "typeString": "mapping(address => mapping(address => uint256))"
             },
             "typeName": {
-              "id": 3369,
+              "id": 3381,
               "keyType": {
-                "id": 3365,
+                "id": 3377,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "158:7:12",
@@ -384,9 +384,9 @@
                 "typeString": "mapping(address => mapping(address => uint256))"
               },
               "valueType": {
-                "id": 3368,
+                "id": 3380,
                 "keyType": {
-                  "id": 3366,
+                  "id": 3378,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
                   "src": "177:7:12",
@@ -402,7 +402,7 @@
                   "typeString": "mapping(address => uint256)"
                 },
                 "valueType": {
-                  "id": 3367,
+                  "id": 3379,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "188:7:12",
@@ -417,7 +417,7 @@
             "visibility": "public"
           }
         ],
-        "scope": 3372,
+        "scope": 3384,
         "src": "36:192:12"
       }
     ],
@@ -429,7 +429,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-04-16T01:19:43.787Z",
+  "updatedAt": "2020-04-18T23:02:07.859Z",
   "devdoc": {
     "methods": {}
   },

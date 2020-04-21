@@ -61,7 +61,9 @@ contract UCCrawlingBand is UCChangeable {
             return latestCeilingPrice;
         }
         // Check if proposed price is within price band
-        uint256 priceBandLimit = (estimatedFloorPrice.mul(band)).div(100);
+        //uint256 priceBandLimit = estimatedFloorPrice.add((estimatedFloorPrice.mul(band)).div(100)); // that is wrong because its 10% from CeilingPrice and not 10% over floorprice
+        // same as "ceilingPrice - ((ceilingPrice*BAND)/100) = floorPriceLimit"
+        uint256 priceBandLimit = (estimatedFloorPrice.mul(100)).div(uint256(100).sub(band)); // see excel confirming samples
         if(proposedPrice >= priceBandLimit)
         {
             proposedPrice = priceBandLimit;
@@ -73,17 +75,22 @@ contract UCCrawlingBand is UCChangeable {
         return proposedPrice;
     }
     function getEstimatedFloorPrice() public view returns (uint256) {
-        if(latestFloorTime == 0) {
+        if(latestCeilingTime == 0) {
             return 900000;
+        }
+        uint256 latestTime = latestFloorTime;
+        if(latestTime == 0) {
+            latestTime = latestCeilingTime;
         }
 
         // adjust crawling rate to include increase in spread (when ceiling price grows faster than floor price, detaching from reserves)
         uint256 floorPriceCrawlingRate = (crawlingRate.mul(detachRate)).div(100);
         require(floorPriceCrawlingRate <= crawlingRate, "Error calculating floorPriceCrawlingRate: cant be greater than CrawlingRate.");
 
-        uint256 elapsedHours = (now.sub(latestFloorTime)).div(3600);
+        //uint256 elapsedHours = (now.sub(latestFloorTime)).div(3600); // FOR TESTING EVERY SEC IS AN HOUR
+        uint256 elapsedHours = now.sub(latestTime); // FAST TEST ONLY (ADJUST TO GO LIVE)
         uint256 proposedPrice = latestFloorPrice.add(floorPriceCrawlingRate.mul(elapsedHours));
-        require(proposedPrice > latestFloorPrice, "Calculated proposed price must be higher than latestFloorPrice.");
+        require(proposedPrice >= latestFloorPrice, "Calculated proposed price must be higher than latestFloorPrice.");
 
         // check if there can be an increase on floorPrice based on reserves
         uint256 totalReserves = ucMarketplace.getReservesBalance();
@@ -91,8 +98,6 @@ contract UCCrawlingBand is UCChangeable {
         if(totalReserves < proposedPrice.mul(totalSupply)) {
             proposedPrice = totalReserves.div(totalSupply);
         }
-        // Check if proposed price is within price band ???
-
         return proposedPrice;
     }
 

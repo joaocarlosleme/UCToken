@@ -10,7 +10,7 @@ contract('UCMarketplace', function(accounts) {
     var sampleTokenInstance;
     var ucTokenInstance;
     var crawlingBandInstance;
-    var admin = accounts[0];
+    var seller = accounts[0];
     var buyer = accounts[1];
 
     var ucPathAddress;
@@ -64,9 +64,11 @@ contract('UCMarketplace', function(accounts) {
             return marketplaceInstance.getCollateralBalance(sampleTokenInstance.address, true);
         }).then(function(balance0) {
             assert.equal(balance0, 0, 'initial Collateral balance 0');
+            console.log("Marketplace Collateral balance (0): " + balance0.toNumber());
             return marketplaceInstance.getCollateralPrice(sampleTokenInstance.address);
         }).then(function(price) {
             assert.equal(price, 500000, 'price set correctly (call method)');
+            console.log("Collateral price 0,5UC (0,5 cents 6 decimals): " + price.toNumber());
             return marketplaceInstance.collaterals(sampleTokenInstance.address);
         }).then(function(collateral) {
             assert.equal(collateral[1], 500000, 'price set correctly (call struct)');
@@ -74,7 +76,7 @@ contract('UCMarketplace', function(accounts) {
         }).then(function(rate) {
             assert.equal(rate[0], 2, 'rate value correctly');
             assert(!rate[1], 'rate type set correctly');
-            //return marketplaceInstance.getCollateralRate(sampleTokenInstance.address);
+            console.log("Rate Collateral per UC (2): " + rate[0].toNumber());
         });
     });
 
@@ -91,28 +93,33 @@ contract('UCMarketplace', function(accounts) {
         });
       });
 
-    it('mint', function() {
-        return marketplaceInstance.mint(sampleTokenInstance.address, "20000000000000000000", "9000000000000000000").then(function(result) {
-            assert(result, 'mint successfull');
-            return marketplaceInstance.mint(sampleTokenInstance.address, "20000000000000000000", "11000000000000000000");
-        }).then(assert.fail).catch(function(error) {
-            assert(error.message.indexOf('revert') >= 0, 'Calculated UC amount below minimum');
-        });
-    });
-
-    it('check Balances', function() {
+    it('check Balances before mint', function() {
         return UCToken.deployed().then(function(instance) {
             ucTokenInstance = instance;
             return ucTokenInstance.totalSupply();
         }).then(function(_totalSupply) {
-            assert.equal(_totalSupply, "10000000000000000000", 'UC Total Supply correct');
+            assert.equal(_totalSupply, "0", 'UC Total Supply correct');
+            console.log("UCToken total supply (0): " + _totalSupply.toNumber());
             return ucTokenInstance.balanceOf(accounts[0]);
         }).then(function(adminBalance) {
-          assert.equal(adminBalance, "10000000000000000000", 'Correct balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          assert.equal(adminBalance, "0", 'Correct balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Admin UC balace (0): " + adminBalance.toNumber());
+          return sampleTokenInstance.totalSupply();
+        }).then(function(_totalSupply) {
+            assert.equal(_totalSupply, "100000000000000000000", 'Collateral Total Supply correct');
+            console.log("Collateral total supply (100*10*18): " + _totalSupply);
+            return sampleTokenInstance.balanceOf(accounts[0]);
+        }).then(function(adminBalance) {
+          assert.equal(adminBalance, "100000000000000000000", 'Correct Admin balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Admin Collateral balance (100*10**18): " + adminBalance);
+          return sampleTokenInstance.balanceOf(marketplaceInstance.address);
+        }).then(function(marketplaceBalance) {
+          assert.equal(marketplaceBalance, "0", 'Correct Marketplace balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Marketplace Collateral balance (0): " + marketplaceBalance.toNumber());
         });
     });
 
-    it('check CrawlingBand', function() {
+    it('check CrawlingBand before mint', function() {
         return UCCrawlingBand.deployed().then(function(instance) {
             crawlingBandInstance = instance;
             return crawlingBandInstance.latestCeilingPrice();
@@ -127,8 +134,65 @@ contract('UCMarketplace', function(accounts) {
             return crawlingBandInstance.getEstimatedCeilingPrice();
         }).then(function(estimatedCeilingPrice) {
             console.log("estimatedCeilingPrice: " + estimatedCeilingPrice.toNumber());
-        //     return crawlingBandInstance.init();
-        //}).then(function() {
+            return crawlingBandInstance.getUCMarketplaceAddress();
+        }).then(function(marketPlacceAddress2) {
+            assert.equal(marketPlacceAddress2, marketplaceInstance.address, "Init has been called and marketplace address set")
+
+        });
+    });
+
+    it('mint 10 UCs in Exchange for 20 Collaterals', function() {
+        return marketplaceInstance.mint(sampleTokenInstance.address, "20000000000000000000", "9000000000000000000").then(function(result) {
+            assert(result, 'mint successfull');
+            return marketplaceInstance.mint(sampleTokenInstance.address, "20000000000000000000", "11000000000000000000");
+        }).then(assert.fail).catch(function(error) {
+            assert(error.message.indexOf('revert') >= 0, 'Calculated UC amount below minimum');
+        });
+    });
+
+    it('check Balances after mint', function() {
+        return ucTokenInstance.totalSupply().then(function(_totalSupply) {
+            assert.equal(_totalSupply, "10000000000000000000", 'UC Total Supply correct');
+            console.log("UCToken total supply (10*10**18): " + _totalSupply);
+            return ucTokenInstance.balanceOf(accounts[0]);
+        }).then(function(adminBalance) {
+          assert.equal(adminBalance, "10000000000000000000", 'Correct Admin UC balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Admin UC balance (10*10**18): " + adminBalance);
+          return sampleTokenInstance.totalSupply();
+        }).then(function(_totalSupply) {
+            assert.equal(_totalSupply, "100000000000000000000", 'Collateral Total Supply correct');
+            console.log("Collateral total supply (100*10*18): " + _totalSupply);
+            return sampleTokenInstance.balanceOf(accounts[0]);
+        }).then(function(adminBalance) {
+          assert.equal(adminBalance, "80000000000000000000", 'Correct Admin collateral balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Admin Collateral balance (80*10**18): " + adminBalance);
+          return sampleTokenInstance.balanceOf(marketplaceInstance.address);
+        }).then(function(marketplaceBalance) {
+          assert.equal(marketplaceBalance, "20000000000000000000", 'Correct Marketplace balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Marketplace Collateral balance (20*10**18): " + marketplaceBalance);
+          return marketplaceInstance.getCollateralBalance(sampleTokenInstance.address, true);
+        }).then(function(marketplaceBalance) {
+          assert.equal(marketplaceBalance, "20000000000000000000", 'Correct Marketplace balance from getCollateralBalance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Marketplace Collateral balance from getCollateralBalance (20*10**18): " + marketplaceBalance);
+          return marketplaceInstance.getReservesBalance();
+        }).then(function(totalBalance) {
+          assert.equal(totalBalance, "10000000", 'Correct Marketplace total balance in USD'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Marketplace total balance in USD (10*10**6): " + totalBalance);
+        });
+    });
+
+    it('check CrawlingBand after mint', function() {
+        return crawlingBandInstance.latestCeilingPrice().then(function(latestCeliningPrice) {
+            console.log("latestCeliningPrice: " + latestCeliningPrice.toNumber());
+            return crawlingBandInstance.latestCeilingTime();
+        }).then(function(latestCeilinigTIme) {
+            console.log("latestCeilinigTime: " + latestCeilinigTIme.toNumber());
+            return crawlingBandInstance.getTimeStamp();
+        }).then(function(timeStamp) {
+            console.log("Current TimeStamp: " + timeStamp.toNumber());
+            return crawlingBandInstance.getEstimatedCeilingPrice();
+        }).then(function(estimatedCeilingPrice) {
+            console.log("estimatedCeilingPrice: " + estimatedCeilingPrice.toNumber());
             return crawlingBandInstance.getUCMarketplaceAddress();
         }).then(function(marketPlacceAddress2) {
             assert.equal(marketPlacceAddress2, marketplaceInstance.address, "Init has been called and marketplace address set")
@@ -153,23 +217,40 @@ contract('UCMarketplace', function(accounts) {
         return marketplaceInstance.addSaleOrder("5000000000000000000", 900000, sampleTokenInstance.address, 3600).then(function(receipt) {
             assert.equal(receipt.logs.length, 1, 'triggers one event');
             assert.equal(receipt.logs[0].event, 'OrderBookChange', 'should be the "OrderBookChange" event');
-            //assert.equal(receipt.logs[0].args.owner, accounts[0], 'logs the account the tokens are authorized by');
-            //assert.equal(receipt.logs[0].args.spender, marketplaceInstance.address, 'logs the account the tokens are authorized to');
-            //assert.equal(receipt.logs[0].args.value, "100000000000000000000", 'logs the transfer amount');
         });
     });
 
     it('add balance for account 2 (2nd buyer) and allowance for marketplace', function() {
-        return sampleTokenInstance.transfer(buyer, "50000000000000000000", { from: admin }).then(function(receipt) {
+        return sampleTokenInstance.transfer(buyer, "50000000000000000000", { from: seller }).then(function(receipt) {
             assert.equal(receipt.logs.length, 1, 'triggers one event');
             assert.equal(receipt.logs[0].event, 'Transfer', 'should be the "Transfer" event');
-            //assert.equal(receipt.logs[0].args.owner, accounts[0], 'logs the account the tokens are authorized by');
-            //assert.equal(receipt.logs[0].args.spender, marketplaceInstance.address, 'logs the account the tokens are authorized to');
-            //assert.equal(receipt.logs[0].args.value, "100000000000000000000", 'logs the transfer amount');
             return sampleTokenInstance.approve(marketplaceInstance.address, "50000000000000000000", { from: buyer });
         }).then(function(receipt) {
             assert.equal(receipt.logs.length, 1, 'triggers one event');
             assert.equal(receipt.logs[0].event, 'Approval', 'should be the "Approval" event');
+        });
+    });
+
+    it('check Balances before Sale Order Match', function() {
+        return sampleTokenInstance.balanceOf(accounts[0]).then(function(adminBalance) {
+          assert.equal(adminBalance, "30000000000000000000", 'Correct Admin collateral balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Seller (account[0]) Collateral balance (30*10**18): " + adminBalance);
+          return sampleTokenInstance.balanceOf(accounts[1]);
+        }).then(function(buyerBalance) {
+          assert.equal(buyerBalance, "50000000000000000000", 'Correct Buyer collateral balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Buyer (accounts[1]) Collateral balance (50*10**18): " + buyerBalance);
+          return ucTokenInstance.balanceOf(accounts[0]);
+        }).then(function(adminBalance) {
+          assert.equal(adminBalance, "5000000000000000000", 'Correct Admin UC balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Admin UC balance (5*10**18): " + adminBalance);
+          return ucTokenInstance.balanceOf(accounts[1]);
+        }).then(function(buyerBalance) {
+          assert.equal(buyerBalance, "0", 'Correct Admin UC balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Byuer UC balance (0): " + buyerBalance);
+          return ucTokenInstance.balanceOf(marketplaceInstance.address);
+        }).then(function(marketplaceBalance) {
+          assert.equal(marketplaceBalance, "5000000000000000000", 'Correct Marketplace UC balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Marketplace UC balance (5*10**18): " + marketplaceBalance);
         });
     });
 
@@ -186,6 +267,29 @@ contract('UCMarketplace', function(accounts) {
         }).then(function(receipt) {
             assert.equal(receipt.logs.length, 2, 'triggers two events');
             assert.equal(receipt.logs[1].event, 'OrderBookChange', 'should be the "OrderBookChange" event');
+        });
+    });
+
+    it('check Balances after Sale Order Match', function() {
+        return sampleTokenInstance.balanceOf(accounts[0]).then(function(adminBalance) {
+          assert.equal(adminBalance, "39000000000000000000", 'Correct Admin collateral balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Seller (account[0]) Collateral balance (39*10**18): " + adminBalance);
+          return sampleTokenInstance.balanceOf(accounts[1]);
+        }).then(function(buyerBalance) {
+          assert.equal(buyerBalance, "41000000000000000000", 'Correct Buyer collateral balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Buyer (accounts[1]) Collateral balance (41*10**18): " + buyerBalance);
+          return ucTokenInstance.balanceOf(accounts[0]);
+        }).then(function(adminBalance) {
+          assert.equal(adminBalance, "5000000000000000000", 'Correct Admin UC balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Admin UC balance (5*10**18): " + adminBalance);
+          return ucTokenInstance.balanceOf(accounts[1]);
+        }).then(function(buyerBalance) {
+          assert.equal(buyerBalance, "5000000000000000000", 'Correct Admin UC balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Byuer UC balance (5*10**18): " + buyerBalance);
+          return ucTokenInstance.balanceOf(marketplaceInstance.address);
+        }).then(function(marketplaceBalance) {
+          assert.equal(marketplaceBalance, "0", 'Correct Marketplace UC balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Marketplace UC balance (0): " + marketplaceBalance);
         });
     });
 

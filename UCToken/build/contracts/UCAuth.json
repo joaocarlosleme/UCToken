@@ -165,7 +165,7 @@
         "id": 79,
         "nodeType": "ImportDirective",
         "scope": 97,
-        "sourceUnit": 3793,
+        "sourceUnit": 3805,
         "src": "36:41:2",
         "symbolAliases": [],
         "unitAlias": ""
@@ -176,7 +176,7 @@
         "id": 80,
         "nodeType": "ImportDirective",
         "scope": 97,
-        "sourceUnit": 3307,
+        "sourceUnit": 3319,
         "src": "79:22:2",
         "symbolAliases": [],
         "unitAlias": ""
@@ -237,7 +237,7 @@
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_struct$_Set_$3632_storage",
+              "typeIdentifier": "t_struct$_Set_$3644_storage",
               "typeString": "struct UnorderedAddressSetLib.Set"
             },
             "typeName": {
@@ -245,10 +245,10 @@
               "id": 84,
               "name": "UnorderedAddressSetLib.Set",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 3632,
+              "referencedDeclaration": 3644,
               "src": "271:26:2",
               "typeDescriptions": {
-                "typeIdentifier": "t_struct$_Set_$3632_storage_ptr",
+                "typeIdentifier": "t_struct$_Set_$3644_storage_ptr",
                 "typeString": "struct UnorderedAddressSetLib.Set"
               }
             },
@@ -404,7 +404,7 @@
         "id": 79,
         "nodeType": "ImportDirective",
         "scope": 97,
-        "sourceUnit": 3793,
+        "sourceUnit": 3805,
         "src": "36:41:2",
         "symbolAliases": [],
         "unitAlias": ""
@@ -415,7 +415,7 @@
         "id": 80,
         "nodeType": "ImportDirective",
         "scope": 97,
-        "sourceUnit": 3307,
+        "sourceUnit": 3319,
         "src": "79:22:2",
         "symbolAliases": [],
         "unitAlias": ""
@@ -476,7 +476,7 @@
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_struct$_Set_$3632_storage",
+              "typeIdentifier": "t_struct$_Set_$3644_storage",
               "typeString": "struct UnorderedAddressSetLib.Set"
             },
             "typeName": {
@@ -484,10 +484,10 @@
               "id": 84,
               "name": "UnorderedAddressSetLib.Set",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 3632,
+              "referencedDeclaration": 3644,
               "src": "271:26:2",
               "typeDescriptions": {
-                "typeIdentifier": "t_struct$_Set_$3632_storage_ptr",
+                "typeIdentifier": "t_struct$_Set_$3644_storage_ptr",
                 "typeString": "struct UnorderedAddressSetLib.Set"
               }
             },
@@ -619,7 +619,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-04-16T01:19:43.600Z",
+  "updatedAt": "2020-04-18T23:02:07.686Z",
   "devdoc": {
     "methods": {}
   },

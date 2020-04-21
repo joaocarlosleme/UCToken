@@ -106,6 +106,7 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
     function getCollateralAddressAtIndex(uint _index) public view returns(address _address) {
         return collateralsSet.keyAtIndex(_index);
     }
+    // returns the amount of collateral (qty)
     function getCollateralBalance(address _tokenAddr, bool includeOrderbook) public view returns (uint256) {
         require(collateralsSet.exists(_tokenAddr), "Collateral doesn't exist");
         uint256 totalAmount = collaterals[_tokenAddr].token.balanceOf(address(this));
@@ -177,6 +178,7 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
         return saleOrdersSet.keyAtIndex(_index);
     }
 
+    // CHECK: should we inform amount of collateral? Or should it be maximum collateral, and use asking price other than amount offered?
     function matchSaleOrder(bytes32 _key, address _collateral, uint256 _amount)
         public collateralActive(_collateral) returns (bool) {
         require(saleOrdersSet.exists(_key), "SaleOrder doesn't exist");
@@ -285,7 +287,7 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
         // mint UC
         require(ucToken.mint(msg.sender, ucAmount), "Couldn't mint UC token.");
 
-        emit Mint(_amount, msg.sender, _amount, _collateral);
+        emit Mint(ucAmount, msg.sender, _amount, _collateral);
 
         return true;
     }
@@ -375,8 +377,8 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
         for (uint256 i = 0; i < collateralCount; i++) {
             address collateralAddress = getCollateralAddressAtIndex(i);
             Collateral memory collateral = collaterals[collateralAddress];
-            uint256 collateralBalance = getCollateralBalance(collateralAddress, false);
-            totalBalance = totalBalance.add(collateralBalance.mul(collateral.price));
+            uint256 collateralBalance = (getCollateralBalance(collateralAddress, false).mul(collateral.price)).div(10**18);
+            totalBalance = totalBalance.add(collateralBalance);
         }
         return totalBalance;
     }
