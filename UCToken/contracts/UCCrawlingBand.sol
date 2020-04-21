@@ -51,15 +51,20 @@ contract UCCrawlingBand is UCChangeable {
         if(latestCeilingTime == 0) {
             return 1000000;
         }
-        //uint256 elapsedHours = (now.sub(latestCeilingTime)).div(3600); // FOR TESTING EVERY SEC IS AN HOUR
-        uint256 elapsedHours = now.sub(latestCeilingTime); // FAST TEST ONLY (ADJUST TO GO LIVE)
+        //uint256 elapsedHours = (now.sub(latestCeilingTime)).div(3600);
+        uint256 elapsedHours = now.sub(latestCeilingTime); // FOR TESTING ONLY EVERY SEC IS AN HOUR
+        //uint256 elapsedHours = 5; // test ONLY
         uint256 proposedPrice = latestCeilingPrice.add(crawlingRate.mul(elapsedHours));
         require(proposedPrice >= latestCeilingPrice, "Error calculating proposed price: must be higher than latestCeilingPrice.");
         uint256 estimatedFloorPrice = getEstimatedFloorPrice();
-        // check if there can be an increase on floorPrice, otherwise do not increase CeilingPrice
-        if(latestFloorPrice >= estimatedFloorPrice) {
-            return latestCeilingPrice;
-        }
+
+        // removed code below because if there is a recent burn before and no recent mint, latestFloorPrice within the same hour is the same and would not allow adjust in ceiling price
+        // a similar check is done below on the band and will limit the raise
+        // // check if there can be an increase on floorPrice, otherwise do not increase CeilingPrice
+        // if(latestFloorPrice >= estimatedFloorPrice) {
+        //     return latestCeilingPrice;
+        // }
+
         // Check if proposed price is within price band
         //uint256 priceBandLimit = estimatedFloorPrice.add((estimatedFloorPrice.mul(band)).div(100)); // that is wrong because its 10% from CeilingPrice and not 10% over floorprice
         // same as "ceilingPrice - ((ceilingPrice*BAND)/100) = floorPriceLimit"
@@ -79,24 +84,27 @@ contract UCCrawlingBand is UCChangeable {
             return 900000;
         }
         uint256 latestTime = latestFloorTime;
+        uint256 latestPrice = latestFloorPrice;
         if(latestTime == 0) {
             latestTime = latestCeilingTime;
+            latestPrice = 900000;
         }
 
         // adjust crawling rate to include increase in spread (when ceiling price grows faster than floor price, detaching from reserves)
         uint256 floorPriceCrawlingRate = (crawlingRate.mul(detachRate)).div(100);
         require(floorPriceCrawlingRate <= crawlingRate, "Error calculating floorPriceCrawlingRate: cant be greater than CrawlingRate.");
 
-        //uint256 elapsedHours = (now.sub(latestFloorTime)).div(3600); // FOR TESTING EVERY SEC IS AN HOUR
-        uint256 elapsedHours = now.sub(latestTime); // FAST TEST ONLY (ADJUST TO GO LIVE)
-        uint256 proposedPrice = latestFloorPrice.add(floorPriceCrawlingRate.mul(elapsedHours));
-        require(proposedPrice >= latestFloorPrice, "Calculated proposed price must be higher than latestFloorPrice.");
+        //uint256 elapsedHours = (now.sub(latestFloorTime)).div(3600);
+        uint256 elapsedHours = now.sub(latestTime); // FOR TESTING ONLY EVERY SEC IS AN HOUR
+        //uint256 elapsedHours = 5; // test ONLY
+        uint256 proposedPrice = latestPrice.add(floorPriceCrawlingRate.mul(elapsedHours));
+        require(proposedPrice >= latestPrice, "Calculated proposed price must be higher than latestFloorPrice.");
 
         // check if there can be an increase on floorPrice based on reserves
-        uint256 totalReserves = ucMarketplace.getReservesBalance();
-        uint256 totalSupply = ucToken.totalSupply();
-        if(totalReserves < proposedPrice.mul(totalSupply)) {
-            proposedPrice = totalReserves.div(totalSupply);
+        uint256 totalReserves = ucMarketplace.getReservesBalance(); // USD 6 digits
+        uint256 totalSupply = ucToken.totalSupply(); // QTY 18 digits
+        if(totalReserves < (proposedPrice.mul(totalSupply)).div(10**18)) {
+            proposedPrice = (totalReserves.mul(10*18)).div(totalSupply);
         }
         return proposedPrice;
     }

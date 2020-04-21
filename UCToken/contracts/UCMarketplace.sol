@@ -29,7 +29,7 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
     struct Collateral {
         address tokenAddr; // acceptable ERC20 token address
         uint256 price; // price in US Dollar / 1000000 (6 decimals)
-        uint256 orderbookBalance; // total amount of tokens on orderBooks (contract balance)
+        uint256 orderbookBalance; // total amount of tokens on orderBooks (allocated to users)
         bool paused;
         ERC20Detailed token;
         mapping (address => uint256) balances; // maker balance for order books (user balances)
@@ -318,9 +318,7 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
         //require(cAmount >= _minColAmount, "Collateral amount to receive is below minimum.");
 
         // transfer from reserves
-        //if (!cToken.token.transfer(msg.sender, cAmount)) revert("Couldn't transfer collateral tokens");
         require(cToken.token.transfer(msg.sender, cAmount), "Couldn't transfer collateral tokens");
-        cToken.orderbookBalance = cToken.orderbookBalance.sub(cAmount);
 
         // burn UC
         require(ucToken.burn(msg.sender, _amount), "Couldn't burn UC token.");
@@ -355,7 +353,6 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
         require(ucAmount >= _minUCAmount, "Calculated UC amount below minimum.");
 
         // transfer to reserves
-        cToken.orderbookBalance = cToken.orderbookBalance.add(_amount);
         require(cToken.token.transferFrom(msg.sender, address(this), _amount), "Transfer of collateral failed.");
         //if (!cToken.token.transferFrom(msg.sender, address(this), _amount)) revert("Transfer of collateral failed.");
 

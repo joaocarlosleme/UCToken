@@ -125,6 +125,9 @@ contract('UCMarketplace', function(accounts) {
             return crawlingBandInstance.latestCeilingPrice();
         }).then(function(latestCeliningPrice) {
             console.log("latestCeliningPrice: " + latestCeliningPrice.toNumber());
+            return crawlingBandInstance.latestFloorPrice();
+        }).then(function(latestFloorPrice) {
+            console.log("latestFloorPrice: " + latestFloorPrice.toNumber());
             return crawlingBandInstance.latestCeilingTime();
         }).then(function(latestCeilinigTIme) {
             console.log("latestCeilinigTime: " + latestCeilinigTIme.toNumber());
@@ -134,6 +137,9 @@ contract('UCMarketplace', function(accounts) {
             return crawlingBandInstance.getEstimatedCeilingPrice();
         }).then(function(estimatedCeilingPrice) {
             console.log("estimatedCeilingPrice: " + estimatedCeilingPrice.toNumber());
+            return crawlingBandInstance.getEstimatedFloorPrice();
+        }).then(function(estimatedFloorPrice) {
+            console.log("estimatedFloorPrice: " + estimatedFloorPrice.toNumber());
             return crawlingBandInstance.getUCMarketplaceAddress();
         }).then(function(marketPlacceAddress2) {
             assert.equal(marketPlacceAddress2, marketplaceInstance.address, "Init has been called and marketplace address set")
@@ -184,6 +190,9 @@ contract('UCMarketplace', function(accounts) {
     it('check CrawlingBand after mint', function() {
         return crawlingBandInstance.latestCeilingPrice().then(function(latestCeliningPrice) {
             console.log("latestCeliningPrice: " + latestCeliningPrice.toNumber());
+            return crawlingBandInstance.latestFloorPrice();
+        }).then(function(latestFloorPrice) {
+            console.log("latestFloorPrice: " + latestFloorPrice.toNumber());
             return crawlingBandInstance.latestCeilingTime();
         }).then(function(latestCeilinigTIme) {
             console.log("latestCeilinigTime: " + latestCeilinigTIme.toNumber());
@@ -193,10 +202,12 @@ contract('UCMarketplace', function(accounts) {
             return crawlingBandInstance.getEstimatedCeilingPrice();
         }).then(function(estimatedCeilingPrice) {
             console.log("estimatedCeilingPrice: " + estimatedCeilingPrice.toNumber());
+            return crawlingBandInstance.getEstimatedFloorPrice();
+        }).then(function(estimatedFloorPrice) {
+            console.log("estimatedFloorPrice: " + estimatedFloorPrice.toNumber());
             return crawlingBandInstance.getUCMarketplaceAddress();
         }).then(function(marketPlacceAddress2) {
             assert.equal(marketPlacceAddress2, marketplaceInstance.address, "Init has been called and marketplace address set")
-
         });
     });
 
@@ -278,6 +289,10 @@ contract('UCMarketplace', function(accounts) {
         }).then(function(buyerBalance) {
           assert.equal(buyerBalance, "41000000000000000000", 'Correct Buyer collateral balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
           console.log("Buyer (accounts[1]) Collateral balance (41*10**18): " + buyerBalance);
+          return sampleTokenInstance.balanceOf(marketplaceInstance.address);
+        }).then(function(marketplaceBalance) {
+          assert.equal(marketplaceBalance, "20000000000000000000", 'Correct Marketplace balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Marketplace Collateral balance (20*10**18): " + marketplaceBalance);
           return ucTokenInstance.balanceOf(accounts[0]);
         }).then(function(adminBalance) {
           assert.equal(adminBalance, "5000000000000000000", 'Correct Admin UC balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
@@ -290,6 +305,95 @@ contract('UCMarketplace', function(accounts) {
         }).then(function(marketplaceBalance) {
           assert.equal(marketplaceBalance, "0", 'Correct Marketplace UC balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
           console.log("Marketplace UC balance (0): " + marketplaceBalance);
+          return ucTokenInstance.totalSupply();
+        }).then(function(_totalSupply) {
+            assert.equal(_totalSupply, "10000000000000000000", 'UC Total Supply correct');
+            console.log("UCToken total supply (10*10**18): " + _totalSupply);
+        });
+    });
+
+    it('check CrawlingBand before burn', function() {
+        return crawlingBandInstance.latestCeilingPrice().then(function(latestCeliningPrice) {
+            console.log("latestCeliningPrice: " + latestCeliningPrice.toNumber());
+            return crawlingBandInstance.latestFloorPrice();
+        }).then(function(latestFloorPrice) {
+            console.log("latestFloorPrice: " + latestFloorPrice.toNumber());
+            return crawlingBandInstance.latestCeilingTime();
+        }).then(function(latestCeilinigTIme) {
+            console.log("latestCeilinigTime: " + latestCeilinigTIme.toNumber());
+            return crawlingBandInstance.getTimeStamp();
+        }).then(function(timeStamp) {
+            console.log("Current TimeStamp: " + timeStamp.toNumber());
+            return crawlingBandInstance.getEstimatedCeilingPrice();
+        }).then(function(estimatedCeilingPrice) {
+            console.log("estimatedCeilingPrice: " + estimatedCeilingPrice.toNumber());
+            return crawlingBandInstance.getEstimatedFloorPrice();
+        }).then(function(estimatedFloorPrice) {
+            console.log("estimatedFloorPrice: " + estimatedFloorPrice.toNumber());
+            return crawlingBandInstance.getUCMarketplaceAddress();
+        }).then(function(marketPlacceAddress2) {
+            assert.equal(marketPlacceAddress2, marketplaceInstance.address, "Init has been called and marketplace address set")
+        });
+    });
+
+    it('burn 2 UCs in Exchange for at least 3,6 Collaterals', function() {
+        return marketplaceInstance.burn("2000000000000000000", sampleTokenInstance.address).then(function(result) {
+            assert(result, 'burn successfull');
+        });
+    });
+
+    it('check Balances after Burn', function() {
+        return sampleTokenInstance.balanceOf(accounts[0]).then(function(adminBalance) {
+          assert(adminBalance >= "42600000000000000000", 'Correct Admin collateral balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Seller (account[0]) Collateral balance >= (42,6*10**18): " + adminBalance);
+          return sampleTokenInstance.balanceOf(accounts[1]);
+        }).then(function(buyerBalance) {
+          assert.equal(buyerBalance, "41000000000000000000", 'Correct Buyer collateral balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Buyer (accounts[1]) Collateral balance (41*10**18): " + buyerBalance);
+          return sampleTokenInstance.balanceOf(marketplaceInstance.address);
+        }).then(function(marketplaceBalance) {
+          assert(marketplaceBalance <= "16400000000000000000", 'Correct Marketplace balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Marketplace Collateral balance <= (16,4*10**18): " + marketplaceBalance);
+          return ucTokenInstance.balanceOf(accounts[0]);
+        }).then(function(adminBalance) {
+          assert.equal(adminBalance, "3000000000000000000", 'Correct Admin UC balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Admin UC balance (3*10**18): " + adminBalance);
+          return ucTokenInstance.balanceOf(accounts[1]);
+        }).then(function(buyerBalance) {
+          assert.equal(buyerBalance, "5000000000000000000", 'Correct Admin UC balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Byuer UC balance (5*10**18): " + buyerBalance);
+          return ucTokenInstance.balanceOf(marketplaceInstance.address);
+        }).then(function(marketplaceBalance) {
+          assert.equal(marketplaceBalance, "0", 'Correct Marketplace UC balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Marketplace UC balance (0): " + marketplaceBalance);
+          return ucTokenInstance.totalSupply();
+        }).then(function(_totalSupply) {
+          assert.equal(_totalSupply, "8000000000000000000", 'UC Total Supply correct');
+          console.log("UCToken total supply (8*10**18): " + _totalSupply);
+        });
+    });
+
+    it('check CrawlingBand after burn', function() {
+        return crawlingBandInstance.latestCeilingPrice().then(function(latestCeliningPrice) {
+            console.log("latestCeliningPrice: " + latestCeliningPrice.toNumber());
+            return crawlingBandInstance.latestFloorPrice();
+        }).then(function(latestFloorPrice) {
+            console.log("latestFloorPrice: " + latestFloorPrice.toNumber());
+            return crawlingBandInstance.latestCeilingTime();
+        }).then(function(latestCeilinigTIme) {
+            console.log("latestCeilinigTime: " + latestCeilinigTIme.toNumber());
+            return crawlingBandInstance.getTimeStamp();
+        }).then(function(timeStamp) {
+            console.log("Current TimeStamp: " + timeStamp.toNumber());
+            return crawlingBandInstance.getEstimatedCeilingPrice();
+        }).then(function(estimatedCeilingPrice) {
+            console.log("estimatedCeilingPrice: " + estimatedCeilingPrice.toNumber());
+            return crawlingBandInstance.getEstimatedFloorPrice();
+        }).then(function(estimatedFloorPrice) {
+            console.log("estimatedFloorPrice: " + estimatedFloorPrice.toNumber());
+            return crawlingBandInstance.getUCMarketplaceAddress();
+        }).then(function(marketPlacceAddress2) {
+            assert.equal(marketPlacceAddress2, marketplaceInstance.address, "Init has been called and marketplace address set")
         });
     });
 
