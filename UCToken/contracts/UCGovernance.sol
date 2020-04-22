@@ -33,7 +33,7 @@ contract UCGovernance is UCChangeable {
         // string functionName;
         // string parameters;
         // string notes;
-        bytes32 target; // hash of the proposal (contractAddress, method name)
+        bytes32 target; // hash of the contractAddress and method name
         bytes32 proposal; // hash of the proposal (parameter values)
         uint256 safeDelay; // time the request need to wait after its approved before its applied
         CRStatus status;
@@ -68,6 +68,14 @@ contract UCGovernance is UCChangeable {
     constructor(address pathAddress) UCChangeable(pathAddress, "UCGovernance") public {
         ucgToken = UCGToken(ucPath.getPath("UCGToken"));
         maxParticipation = 7; // initial value
+    }
+
+    /// Public TEST ONLY Functions
+    function createTarget(address targetContract, string memory methodName) public pure returns(bytes32) {
+        return keccak256(abi.encodePacked(targetContract, methodName));
+    }
+    function createProposalSetPath(string memory pathName, address newAddress) public pure returns(bytes32) {
+        return keccak256(abi.encodePacked(pathName, newAddress));
     }
 
     /// Public Functions
