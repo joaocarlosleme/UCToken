@@ -55,7 +55,7 @@ contract UCGovernance is UCChangeable {
     // }
 
     /// Public Mappings
-    mapping(bytes32 => ChangeRequest) public changeRequests; // where bytes32 is a unique ID for the changeRequest (hash of the proposal + now)
+    mapping(bytes32 => ChangeRequest) public changeRequests; // where bytes32 is a unique ID for the changeRequest (hash of target+proposal+now)
     mapping(address=>uint256) public lockedUCGBalance;
     mapping(bytes32 => bytes32) public winnerRequestIdPerTarget; // maps target to winner ChangeRequest key
 
@@ -78,8 +78,19 @@ contract UCGovernance is UCChangeable {
         return keccak256(abi.encodePacked(pathName, newAddress));
     }
 
-    /// Public Functions
+    /// Public View Functions
 
+    function getChangeRequestsCount() public view returns(uint) {
+        return changeRequestsSet.count();
+    }
+    function getChangeRequestKeyAtIndex(uint _index) public view returns(bytes32) {
+        return changeRequestsSet.keyAtIndex(_index);
+    }
+    function changeRequestExits(bytes32 _key) public view returns(bool) {
+        return changeRequestsSet.exists(_key);
+    }
+
+    /// Public Functions
     function lock(uint256 _amount) public {
         // transfer to collateral reserves
         require(ucgToken.transferFrom(msg.sender, address(this), _amount), "Transfer of UCGTokens failed.");
@@ -189,9 +200,6 @@ contract UCGovernance is UCChangeable {
         reduceVoteOnChangeRequest(_key, lockedUCGBalance[msg.sender]);
         emit VoteCancelled(_key, msg.sender);
     }
-    function changeRequestExits(bytes32 _key) public view returns(bool) {
-        return changeRequestsSet.exists(_key);
-    }
 
     /**
      * @dev Verifies if a ChangeRequest is the Winner Request for its target
@@ -262,6 +270,7 @@ contract UCGovernance is UCChangeable {
     // }
 
     /// Private Methods
+
     function reduceVoteOnChangeRequest(bytes32 _key, uint256 _amount) private {
         // check if change request exist
         require(changeRequestsSet.exists(_key), "ChangeRequest doesn't exist");
