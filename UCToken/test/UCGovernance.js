@@ -58,8 +58,46 @@ contract('UCGovernance', function(accounts) {
             assert.equal(CR[0], targetHash, "Target set correctly");
             assert.equal(CR[1], proposalHash, "Proposal set correctly");
             assert.equal(CR[2], 360, "safeDelay set correctly");
-            //assert.equal(CR[3], 0, "Status set correctly");
-            console.log("CR Status 0?: " + CR[3]);
+            assert.equal(CR[3], 0, "Status set correctly");
+            assert.equal(CR[4], accounts[0], "createBy set correctly");
+            assert.equal(CR[6], 1, "UIP set correctly");
+            assert.equal(CR[7], "TEST setPath UCToken to UCGToken Address", "createBy set correctly");
+            assert.equal(CR[8], 0, "votes set correctly");
+            assert.equal(CR[9], 0, "votesAgainstWinner set correctly");
+            //console.log("CR Status 0?: " + CR[3]);
+        });
+    });
+
+    it('approves UCG tokens for delegated transfer', function() {
+        return ucgTokenInstance.approve.call(ucGovInstance.address, "500000000000000000000", { from: accounts[0] }).then(function(success) {
+          assert.equal(success, true, 'it returns true');
+          return ucgTokenInstance.approve(ucGovInstance.address, "500000000000000000000", { from: accounts[0] });
+        }).then(function(receipt) {
+          assert.equal(receipt.logs.length, 1, 'triggers one event');
+          assert.equal(receipt.logs[0].event, 'Approval', 'should be the "Approval" event');
+          assert.equal(receipt.logs[0].args.owner, accounts[0], 'logs the account the tokens are authorized by');
+          assert.equal(receipt.logs[0].args.spender, ucGovInstance.address, 'logs the account the tokens are authorized to');
+          assert.equal(receipt.logs[0].args.value, "500000000000000000000", 'logs the transfer amount');
+          return ucgTokenInstance.allowance(accounts[0], ucGovInstance.address);
+        }).then(function(allowance) {
+          assert.equal(allowance, "500000000000000000000", 'stores the allowance for delegated transfer');
+        });
+    });
+
+    it('lock 500 tokens', function() {
+        return ucGovInstance.lock("500000000000000000000").then(function(receipt) {
+            assert.equal(receipt.logs.length, 1, 'triggers one event');
+            assert.equal(receipt.logs[0].event, 'Locked', 'should be the "Locked" event');
+            return ucGovInstance.lockedUCGBalance(accounts[0]);
+        }).then(function(balance) {
+            assert.equal(balance, "500000000000000000000", 'Locked amount set correctly');
+        });
+    });
+
+    it('vote on CR', function() {
+        return ucGovInstance.voteOnChangeRequest(changeRequestId).then(function(receipt) {
+            assert.equal(receipt.logs.length, 1, 'triggers one event');
+            assert.equal(receipt.logs[0].event, 'NewVote', 'should be the "NewVote" event');
         });
     });
 
