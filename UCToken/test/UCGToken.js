@@ -56,13 +56,13 @@ contract('UCGToken', function(accounts) {
       //     assert(isContract, 'isContract method working');
           return pathInstance.hasPath("UCToken");
       }).then(function(hasPath) {
-          assert(hasPath, 'UCToken path initialized');
+          assert.equal(hasPath, true, 'UCToken path initialized');
           return pathInstance.getPath("UCGToken");
       }).then(function(pathAddress) {
           assert.equal(pathAddress, tokenInstance.address, 'UCToken path address properly set');
           return pathInstance.isValid(tokenInstance.address);
       }).then(function(isValid) {
-          assert(isValid, 'Contract address is valid');
+          assert.equal(isValid, true, 'Contract address is valid');
       });
     });
 

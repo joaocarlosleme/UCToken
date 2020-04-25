@@ -52,7 +52,7 @@ contract('UCGovernance', function(accounts) {
             changeRequestId = key;
             return ucGovInstance.changeRequestExits(changeRequestId);
         }).then(function(result) {
-            assert(result, 'CR Existis');
+            assert.equal(result, true, 'CR Existis');
             return ucGovInstance.changeRequests(changeRequestId);
         }).then(function(CR) {
             assert.equal(CR[0], targetHash, "Target set correctly");
@@ -91,6 +91,9 @@ contract('UCGovernance', function(accounts) {
             return ucGovInstance.lockedUCGBalance(accounts[0]);
         }).then(function(balance) {
             assert.equal(balance, "500000000000000000000", 'Locked amount set correctly');
+            return ucgTokenInstance.balanceOf(ucGovInstance.address);
+        }).then(function(balance) {
+            assert.equal(balance, "500000000000000000000", 'UGovernance contract balance set correctly');
         });
     });
 
@@ -98,6 +101,30 @@ contract('UCGovernance', function(accounts) {
         return ucGovInstance.voteOnChangeRequest(changeRequestId).then(function(receipt) {
             assert.equal(receipt.logs.length, 1, 'triggers one event');
             assert.equal(receipt.logs[0].event, 'NewVote', 'should be the "NewVote" event');
+            return ucGovInstance.changeRequests(changeRequestId);
+        }).then(function(CR) {
+            assert.equal(CR[8], "500000000000000000000", "votes set correctly");
+            assert.equal(CR[9], "500000000000000000000", "votesAgainstWinner set correctly");
+        });
+    });
+
+    it('is Winner?', function() {
+        return ucGovInstance.isWinner.call(changeRequestId).then(function(result) {
+            assert.equal(result, false, 'Not winner - not enought votes');
+        });
+    });
+
+    it('cancel vote on CR', function() {
+        return ucGovInstance.cancelVoteOnChangeRequest(changeRequestId).then(function(receipt) {
+            assert.equal(receipt.logs.length, 1, 'triggers one event');
+            assert.equal(receipt.logs[0].event, 'VoteCancelled', 'should be the "VoteCancelled" event');
+            return ucGovInstance.changeRequests(changeRequestId);
+        }).then(function(CR) {
+            assert.equal(CR[8], "0", "votes set correctly");
+            assert.equal(CR[9], "0", "votesAgainstWinner set correctly");
+            return ucGovInstance.winnerRequestIdPerTarget(targetHash);
+        }).then(function(key) {
+            assert.equal(key, "0x0000000000000000000000000000000000000000000000000000000000000000", "No winner set for target yet")
         });
     });
 

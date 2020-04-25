@@ -26,13 +26,13 @@ contract('UCPath', function(accounts) {
         //     assert(isContract, 'isContract method working');
             return ucPathInstance.hasPath("UCPath");
         }).then(function(hasPath) {
-            assert(hasPath, 'UCPath path initialized');
+            assert.equal(hasPath, true, 'UCPath path initialized');
             return ucPathInstance.getPath("UCPath");
         }).then(function(pathAddress) {
             assert.equal(pathAddress, ucPathInstance.address, 'UCPath path address properly set');
             return ucPathInstance.isValid(ucPathInstance.address);
         }).then(function(isValid) {
-            assert(isValid, 'Contract address is valid');
+            assert.equal(isValid, true, 'Contract address is valid');
         });
       });
 

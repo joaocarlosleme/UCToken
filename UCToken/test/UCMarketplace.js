@@ -35,13 +35,13 @@ contract('UCMarketplace', function(accounts) {
         //     assert(isContract, 'isContract method working');
             return pathInstance.hasPath("UCMarketplace");
         }).then(function(hasPath) {
-            assert(hasPath, 'UCMarketplace path initialized');
+            assert.equal(hasPath, true, 'UCMarketplace path initialized');
             return pathInstance.getPath("UCMarketplace");
         }).then(function(pathAddress) {
             assert.equal(pathAddress, marketplaceInstance.address, 'UCMarketplace path address properly set');
             return pathInstance.isValid(marketplaceInstance.address);
         }).then(function(isValid) {
-            assert(isValid, 'Contract address is valid');
+            assert.equal(isValid, true, 'Contract address is valid');
         });
     });
 
@@ -75,7 +75,7 @@ contract('UCMarketplace', function(accounts) {
             return marketplaceInstance.getCollateralRate(sampleTokenInstance.address);
         }).then(function(rate) {
             assert.equal(rate[0], 2, 'rate value correctly');
-            assert(!rate[1], 'rate type set correctly');
+            assert.equal(rate[1], false, 'rate type set correctly');
             console.log("Rate Collateral per UC (2): " + rate[0].toNumber());
         });
     });
@@ -148,8 +148,12 @@ contract('UCMarketplace', function(accounts) {
     });
 
     it('mint 10 UCs in Exchange for 20 Collaterals', function() {
-        return marketplaceInstance.mint(sampleTokenInstance.address, "20000000000000000000", "9000000000000000000").then(function(result) {
-            assert(result, 'mint successfull');
+        return marketplaceInstance.mint.call(sampleTokenInstance.address, "20000000000000000000", "9000000000000000000").then(function(result) {
+            assert.equal(result, true, 'mint called successfull');
+            return marketplaceInstance.mint(sampleTokenInstance.address, "20000000000000000000", "9000000000000000000");
+        }).then(function(receipt) {
+            assert.equal(receipt.logs.length, 1, 'triggers one event');
+            assert.equal(receipt.logs[0].event, 'Mint', 'should be the "Mint" event');
             return marketplaceInstance.mint(sampleTokenInstance.address, "20000000000000000000", "11000000000000000000");
         }).then(assert.fail).catch(function(error) {
             assert(error.message.indexOf('revert') >= 0, 'Calculated UC amount below minimum');
@@ -349,8 +353,12 @@ contract('UCMarketplace', function(accounts) {
     });
 
     it('burn 2 UCs in Exchange for at least 3,6 Collaterals', function() {
-        return marketplaceInstance.burn("2000000000000000000", sampleTokenInstance.address).then(function(result) {
-            assert(result, 'burn successfull');
+        return marketplaceInstance.burn.call("2000000000000000000", sampleTokenInstance.address).then(function(result) {
+            assert.equal(result, true, 'burn call successfull');
+            return marketplaceInstance.burn("2000000000000000000", sampleTokenInstance.address);
+        }).then(function(receipt) {
+            assert.equal(receipt.logs.length, 1, 'triggers one event');
+            assert.equal(receipt.logs[0].event, 'Burn', 'should be the "Burn" event');
         });
     });
 

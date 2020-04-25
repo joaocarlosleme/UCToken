@@ -77,6 +77,13 @@ contract UCGovernance is UCChangeable {
     function createProposalSetPath(string memory pathName, address newAddress) public pure returns(bytes32) {
         return keccak256(abi.encodePacked(pathName, newAddress));
     }
+    function testMapping(bytes32 key) public view returns(bool) {
+        bytes32 wrKey = winnerRequestIdPerTarget[key];
+        if(wrKey == 0) {
+            return true;
+        }
+        return false;
+    }
 
     /// Public View Functions
 
@@ -212,30 +219,41 @@ contract UCGovernance is UCChangeable {
         require(changeRequestsSet.exists(_key), "ChangeRequest doesn't exist");
 
         ChangeRequest storage cr = changeRequests[_key];
-        bytes32 wrKey = winnerRequestIdPerTarget[cr.target];
-        if(_key == wrKey) {
-            return true;
-        }
         // if differente, check if it cr can replace winner request
         if(cr.status != CRStatus.PendingApproval) { // check if it's pending aproval
             return false; // only PendingApproval CRs can become winners
         }
-        ChangeRequest storage wr = changeRequests[wrKey]; // locate winner
-        if(wr.createdOn > cr.createdOn) { // check if changeRequest came after winnerRequest, otherwise it is expired
-            cr.status = CRStatus.Expired;
-            return false;
+
+        bool winner;
+        bytes32 wrKey = winnerRequestIdPerTarget[cr.target];
+        if(wrKey != 0) {
+            if(_key == wrKey) {
+                return true;
+            }
+
+            ChangeRequest storage wr = changeRequests[wrKey]; // locate winner
+            if(wr.createdOn > cr.createdOn) { // check if changeRequest came after winnerRequest, otherwise it is expired
+                cr.status = CRStatus.Expired;
+                return false;
+            }
+            if(cr.votesAgainstWinner > wr.votes)
+            {
+                // replace winner
+                wr.status = CRStatus.Replaced;
+                winner = true;
+            }
+        } else if(cr.votes >= 300000000*10**18) {
+            // if there is no winner, must have at least 300K votes
+            winner = true;
         }
-        if(cr.votesAgainstWinner > wr.votes)
-        {
+        if(winner) {
             // replace winner
-            wr.status = CRStatus.Replaced;
             cr.status = CRStatus.Approved;
             cr.safeDelay = cr.safeDelay.add(now); // update safeDelay to reflet a time from approval
             winnerRequestIdPerTarget[cr.target] = _key;
             emit NewWinner(_key, cr.safeDelay);
-            return true;
         }
-        return false;
+        return winner;
     }
 
     /// Public Auth Methods
