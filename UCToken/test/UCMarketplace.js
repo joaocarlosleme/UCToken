@@ -293,7 +293,7 @@ contract('UCMarketplace', function(accounts) {
             return marketplaceInstance.getCollateralBalance(sampleTokenInstance.address, true);
         }).then(function(marketplaceBalance) {
             assert.equal(marketplaceBalance, "20000000000000000000", 'Correct Marketplace balance from getCollateralBalance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
-            console.log("Marketplace Collateral balance from getCollateralBalance (+Orderbook) (20*10**18): " + marketplaceBalance);
+            console.log("Marketplace Collateral balance from getCollateralBalance (+Orderbook) after match (20*10**18): " + marketplaceBalance);
         });
     });
 

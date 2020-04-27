@@ -210,19 +210,38 @@ contract UCGovernance is UCChangeable {
 
     /**
      * @dev Verifies if a ChangeRequest is the Winner Request for its target
-     * and if not it will verify if it beats current winner and replace it
+     * it DOES verify if it beats current winner and DOES not replace it
      * @param _key bytes32 key of the ChangeRequest
      * @return true if it's winner and false if not
      */
-    function isWinner(bytes32 _key) public returns (bool) {
+    function isWinner(bytes32 _key) public view returns (bool) {
         // check if change request exist
         require(changeRequestsSet.exists(_key), "ChangeRequest doesn't exist");
 
         ChangeRequest storage cr = changeRequests[_key];
-        // if differente, check if it cr can replace winner request
-        if(cr.status != CRStatus.PendingApproval) { // check if it's pending aproval
-            return false; // only PendingApproval CRs can become winners
+
+        bytes32 wrKey = winnerRequestIdPerTarget[cr.target];
+
+        if(wrKey == 0) {
+            return false;
         }
+        if(_key == wrKey) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @dev Verifies if a ChangeRequest is the Winner Request for its target
+     * and if not it will verify if it beats current winner and replace it
+     * @param _key bytes32 key of the ChangeRequest
+     * @return true if it's winner and false if not
+     */
+    function makeWinner(bytes32 _key) public returns (bool) {
+        // check if change request exist
+        require(changeRequestsSet.exists(_key), "ChangeRequest doesn't exist");
+
+        ChangeRequest storage cr = changeRequests[_key];
 
         bool winner;
         bytes32 wrKey = winnerRequestIdPerTarget[cr.target];
@@ -230,7 +249,10 @@ contract UCGovernance is UCChangeable {
             if(_key == wrKey) {
                 return true;
             }
-
+            // if differente, check if it cr can replace winner request (must check here too to prevent change of state if doesn't change)
+            if(cr.status != CRStatus.PendingApproval) { // check if it's pending aproval
+                return false; // only PendingApproval CRs can become winners
+            }
             ChangeRequest storage wr = changeRequests[wrKey]; // locate winner
             if(wr.createdOn > cr.createdOn) { // check if changeRequest came after winnerRequest, otherwise it is expired
                 cr.status = CRStatus.Expired;
@@ -245,6 +267,10 @@ contract UCGovernance is UCChangeable {
         } else if(cr.votes >= 300000000*10**18) {
             // if there is no winner, must have at least 300K votes
             winner = true;
+            // if differente, check if it can replace winner request
+            if(cr.status != CRStatus.PendingApproval) { // check if it's pending aproval
+                return false; // only PendingApproval CRs can become winners
+            }
         }
         if(winner) {
             // replace winner

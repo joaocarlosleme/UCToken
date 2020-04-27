@@ -8,7 +8,7 @@ contract UCPath is UCChangeable {
    using UnorderedAddressSetLib for UnorderedAddressSetLib.Set;
 
    /// Public Properties
-   address public ucCrawlingBandAddress;
+   //address public ucCrawlingBandAddress;
    //uint256[2] public changeUCCrawlingBandAddressReq; // requirement
 
    /// Contract Navigation Properties
@@ -38,6 +38,10 @@ contract UCPath is UCChangeable {
    }
 
    /// Public Methods
+   function init() public {
+        require(address(ucGovernance) == address(0), "Already initialized");
+        ucGovernance = UCGovernance(ucPath.getPath("UCGovernance"));
+    }
    function getPath(string memory _contractName) public view returns (address) {
       address path = currentPath[_contractName];
       require(path != address(0), string(abi.encodePacked("Path not initialized: ", _contractName)));
@@ -56,13 +60,13 @@ contract UCPath is UCChangeable {
       // get request target, proposal, safe Delay and status
       (bytes32 target, bytes32 proposal, uint safeDelay, UCGovernance.CRStatus status,,,,,,) = ucGovernance.changeRequests(changeRequestID);
       // check if it hasn't been applyed yet
-      require(uint(status) != 1, "ChangeRequest is not on Approved status");
+      require(uint(status) == 1, "ChangeRequest is not on Approved status");
       // check if request match target
       require(target == keccak256(abi.encodePacked(address(this), "setPath")), "ChangeRequest does not match Target");
       // check if request match proposal
       require(proposal == keccak256(abi.encodePacked(pathName, newAddress)), "ChangeRequest does not match proposal");
       // check if safeDelay has passed
-      require(now > safeDelay, "Can't apply request within safe delay");
+      require(now >= safeDelay, "Can't apply request within safe delay");
       // check if path exist and is different that proposed path
       address currPath = currentPath[pathName];
       if(currPath != address(0)) {
@@ -78,7 +82,6 @@ contract UCPath is UCChangeable {
       } else {
          emit PathInicialized(pathName, newAddress);
       }
-
    }
 
    /// Public Auth Methods
@@ -105,8 +108,6 @@ contract UCPath is UCChangeable {
    function isValid(address _address) external view returns (bool) {
       return ucContracts.exists(_address);
    }
-
-
 
    /// Private Functions
    function insertContractToList(address _contract) private {

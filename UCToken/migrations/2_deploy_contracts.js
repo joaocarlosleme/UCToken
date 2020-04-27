@@ -49,5 +49,7 @@ module.exports = function(deployer) {
     UCPath.deployed().then(function(instance) { instance.initializePath(UCGovernance.address, "UCGovernance") });
     UCCrawlingBand.deployed().then(function(instance) { instance.init() });
     return deployer.deploy(SampleCollateralToken);
+  }).then(function() {
+    UCPath.deployed().then(function(instance) { instance.init() });
   });
 };
