@@ -3,12 +3,14 @@ var UCPath = artifacts.require("./UCPath.sol");
 var SampleCollateralToken = artifacts.require("./SampleCollateralToken.sol");
 var UCToken = artifacts.require("./UCToken.sol");
 var UCCrawlingBand = artifacts.require("./UCCrawlingBand.sol");
+var UCGToken = artifacts.require("./UCGToken.sol");
 
 contract('UCMarketplace', function(accounts) {
     var marketplaceInstance;
     var pathInstance;
     var sampleTokenInstance;
     var ucTokenInstance;
+    var ucgTokenInstance;
     var crawlingBandInstance;
     var seller = accounts[0];
     var buyer = accounts[1];
@@ -116,6 +118,17 @@ contract('UCMarketplace', function(accounts) {
         }).then(function(marketplaceBalance) {
           assert.equal(marketplaceBalance, "0", 'Correct Marketplace balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
           console.log("Marketplace Collateral balance (0): " + marketplaceBalance.toNumber());
+          return UCGToken.deployed();
+        }).then(function(instance) {
+            ucgTokenInstance = instance;
+            return ucgTokenInstance.totalSupply();
+        }).then(function(_totalSupply) {
+            assert.equal(_totalSupply, 500000000*10**18, 'UCG Total Supply correct');
+            console.log("UCGToken total supply (500000000*10**18): " + _totalSupply);
+            return ucgTokenInstance.balanceOf(accounts[0]);
+        }).then(function(adminBalance) {
+          assert.equal(adminBalance, 500000000*10**18, 'Correct UCG balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+          console.log("Admin UCG balance (500000000*10**18): " + adminBalance);
         });
     });
 
@@ -162,8 +175,8 @@ contract('UCMarketplace', function(accounts) {
 
     it('check Balances after mint', function() {
         return ucTokenInstance.totalSupply().then(function(_totalSupply) {
-            assert.equal(_totalSupply, "10000000000000000000", 'UC Total Supply correct');
             console.log("UCToken total supply (10*10**18): " + _totalSupply);
+            assert.equal(_totalSupply, "10000000000000000000", 'UC Total Supply correct');
             return ucTokenInstance.balanceOf(accounts[0]);
         }).then(function(adminBalance) {
           assert.equal(adminBalance, "10000000000000000000", 'Correct Admin UC balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
@@ -188,6 +201,10 @@ contract('UCMarketplace', function(accounts) {
         }).then(function(totalBalance) {
           assert.equal(totalBalance, "10000000", 'Correct Marketplace total balance in USD'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
           console.log("Marketplace total balance in USD (10*10**6): " + totalBalance);
+          return ucgTokenInstance.balanceOf(accounts[0]);
+        }).then(function(adminBalance) {
+            console.log("Admin UCG balance (500000010*10**18): " + adminBalance);
+            assert.equal(adminBalance, 500000010*10**18, 'Correct UCG balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
         });
     });
 
@@ -419,5 +436,30 @@ contract('UCMarketplace', function(accounts) {
             assert.equal(marketPlacceAddress2, marketplaceInstance.address, "Init has been called and marketplace address set")
         });
     });
+
+    it('burn 10 UCGS in Exchange for X Collaterals', function() {
+        return marketplaceInstance.getReservesBalance().then(function(totalBalance) {
+            console.log("Marketplace total balance in USD (> 8,19*10**6): " + totalBalance);
+            return marketplaceInstance.ucgBurnValue("10000000000000000000", 500000);
+        }).then(function(ucgValue) {
+            console.log("Value of 10UCGs in Collateral Qty (32799383344): " + ucgValue);
+            //assert.equal(ucgValue, 32799383344, "Correct UCG Burn Value in Collateral Qty")
+            return sampleTokenInstance.balanceOf(marketplaceInstance.address);
+        }).then(function(marketplaceBalance) {
+            //assert(marketplaceBalance <= "16400000000000000000", 'Correct Marketplace balance'); // jon note - fixed here because it must alocate to contract address. On migration we changed and alocated 750000 to contract adress leaving only 250k to admin
+            console.log("Marketplace Collateral balance before burn <= (16,4*10**18): " + marketplaceBalance);
+            return marketplaceInstance.burnUCGTEST("10000000000000000000");
+        }).then(function(adminBalance) {
+            console.log("Admin UCG balance (500000010*10**18): " + adminBalance);
+        //     return marketplaceInstance.burn.call("10000000000000000000", sampleTokenInstance.address);
+        // }).then(function(result) {
+        //     assert.equal(result, true, 'burn call successfull');
+        //     return marketplaceInstance.burn("10000000000000000000", sampleTokenInstance.address);
+        // }).then(function(receipt) {
+        //     assert.equal(receipt.logs.length, 1, 'triggers one event');
+        //     assert.equal(receipt.logs[0].event, 'BurnUCG', 'should be the "BurnUCG" event');
+        });
+    });
+
 
 });
