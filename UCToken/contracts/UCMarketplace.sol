@@ -4,6 +4,7 @@ import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20Detailed.sol";
 import "./UCToken.sol";
+import "./UCGToken.sol";
 //import "./UCStorage.sol";
 import "./UCCrawlingBand.sol";
 //import "./UCCollateralTokenInterface.sol"; // replaced by ERC20Detailed
@@ -19,9 +20,14 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
     using UnorderedAddressSetLib for UnorderedAddressSetLib.Set;
 
     /// Public Properties
+    uint256 public ucgReserveStake; // % of reserves balance allocated to UCG burn/redeem. Number from 0 to 100
+
+    /// Private Properties
+    uint256 private ucMintCount;
 
     /// Contract Navigation Properties
     UCToken public ucToken; // maybe should always call UCPath?
+    UCGToken public ucgToken; // maybe should always call UCPath?
     UCCrawlingBand public ucCrawlingBand; // The reference to UCCrawlingBand implementation.
     //UCStorage public ucStorage;
 
@@ -70,7 +76,9 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
 
     constructor(address pathAddress) UCChangeable(pathAddress, "UCMarketplace") public {
         ucToken = UCToken(ucPath.getPath("UCToken")); // maybe should always call UCPath?
+        ucgToken = UCGToken(ucPath.getPath("UCGToken"));
         ucCrawlingBand = UCCrawlingBand(ucPath.getPath("UCCrawlingBand"));
+        ucgReserveStake = 10; // initial default value (10%)
     }
 
     /// Public Methods - Authorized only
@@ -287,7 +295,15 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
         // mint UC
         require(ucToken.mint(msg.sender, ucAmount), "Couldn't mint UC token.");
 
-        emit Mint(ucAmount, msg.sender, _amount, _collateral);
+        // if UC qty < 500M, mint UCG
+        bool ucgMinted;
+        ucMintCount = ucMintCount.add(ucAmount);
+        if(ucMintCount < 500*10**18) {
+            require(ucgToken.mint(msg.sender, ucAmount), "Couldn't mint UCG token.");
+            ucgMinted = true;
+        }
+
+        emit Mint(ucAmount, msg.sender, _amount, _collateral, ucgMinted);
 
         return true;
     }
@@ -305,7 +321,7 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
 
         require(_amount > 0, "UC amount required");
         uint256 balance = ucToken.balanceOf(msg.sender);
-        require(balance >= _amount, "");
+        require(balance >= _amount, "Not enought balance");
 
         // return default
         Collateral storage cToken = collaterals[_collateral];
@@ -329,40 +345,79 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
         return true;
 
     }
+    /**
+     * @dev Returns UCG burn value for a certain amount of UCG token
+     * @param ucgQty amount of UCG Tokens to burn (18 digit)
+     * @param colPrice price of the collateral its being valued for (6 digit)
+     * @return UCG burn value in Collateral amount (Qty 18 digts)
+     */
+    function ucgBurnValue(uint256 ucgQty, uint256 colPrice) public view returns (uint256) {
+        //return (getReservesBalance().mul(ucgReserveStake).mul(10**18)).div(ucgToken.totalSupply().mul(100)); // unit price but too low returns 0
+        //return (getReservesBalance().mul(ucgReserveStake).mul(qty)).div(ucgToken.totalSupply().mul(100)); // returns price 6 digit for ucgBurned amount (too low too)
+        //return (getReservesBalance().mul(ucgReserveStake).mul(qty).mul(10**18)).div(ucgToken.totalSupply().mul(100).mul(colPrice)); // below is the same as this, but shorter
+        return (getReservesBalance().mul(ucgReserveStake).mul(ucgQty).mul(10**16)).div(ucgToken.totalSupply().mul(colPrice));
+    }
 
     /**
-     * @dev Get UC tokens in exchangefor collateral and assign to sender
-     * Order is fulfilled either from OrderBook or Minted, whaever is cheaper
+     * @dev Exchange UCGs for collateral, burMake new tokens in exchangefor collateral and assign to sender
      * This function has a non-reentrancy guard, so it shouldn't be called by
      * another `nonReentrant` function.
+     * @param _amount amount of UCG Tokens to burn
      * @param _collateral collateral Token Address
-     * @param _amount amount of collateral Token to exchange
-     * @param _minUCAmount minimum amount of UCs desired in exchange for the collateral
-     * @return The amount of UCs buyer received
+     * @return The amount of Collateral seller received
      */
-    function buy(address _collateral, uint256 _amount, uint256 _minUCAmount) public nonReentrant returns (bool) {
-        require(_amount > 0, "collateral required");
+    function burnUCG(uint256 _amount, address _collateral) public nonReentrant collateralActive(_collateral) returns (bool) {
+        // TODO: implement check minimum balances for each collateral (maybe also do this check when placing an order)
 
+        require(_amount > 0, "UCG amount required");
+        uint256 balance = ucgToken.balanceOf(msg.sender);
+        require(balance >= _amount, "Not enought balance");
+
+        // return default
         Collateral storage cToken = collaterals[_collateral];
         // make sure token is an approved token
-        require (cToken.tokenAddr != address(0), "Collateral token not found.");
+        require(cToken.tokenAddr != address(0), "collateral token not found.");
 
-        // check rate
-        uint256 ucCeilingPrice = ucCrawlingBand.getCurrentCeilingPrice();
-        uint256 ucAmount = (_amount.mul(cToken.price)).div(ucCeilingPrice);
-        require(ucAmount >= _minUCAmount, "Calculated UC amount below minimum.");
+        // check UCG Price
+        //uint256 cAmount = (_amount.mul(ucgBurnPrice())).div(cToken.price); // when was checking for unit price
+        //uint256 cAmount = (ucgBurnValue(_amount).mul(10**18)).div(cToken.price); // when ucgBurnValue used to return price in USD 6 digit
+        // check UCG value in collateral
+        uint256 cAmount = ucgBurnValue(_amount, cToken.price);
 
-        // transfer to reserves
-        require(cToken.token.transferFrom(msg.sender, address(this), _amount), "Transfer of collateral failed.");
-        //if (!cToken.token.transferFrom(msg.sender, address(this), _amount)) revert("Transfer of collateral failed.");
+        if(cAmount > 0) {
+            // transfer from reserves
+            require(cToken.token.transfer(msg.sender, cAmount), "Couldn't transfer collateral tokens");
+        }
 
-        // mint UC
-        require(ucToken.mint(msg.sender, ucAmount), "Couldn't mint UC token.");
+        // burn UCG
+        require(ucgToken.burn(msg.sender, _amount), "Couldn't burn UC token.");
 
-        emit Mint(_amount, msg.sender, _amount, _collateral);
+        emit BurnUCG(_amount, msg.sender, cAmount, _collateral);
 
+        //return cAmount;
         return true;
+
     }
+
+    function burnUCGTEST(uint256 _amount) public view returns (uint256) {
+        require(_amount > 0, "UCG amount required");
+        uint256 balance = ucgToken.balanceOf(msg.sender);
+        return balance;
+    }
+
+    // /**
+    //  * @dev Get UC tokens in exchangefor collateral and assign to sender
+    //  * Order is fulfilled either from OrderBook or Minted, whaever is cheaper
+    //  * This function has a non-reentrancy guard, so it shouldn't be called by
+    //  * another `nonReentrant` function.
+    //  * @param _collateral collateral Token Address
+    //  * @param _amount amount of collateral Token to exchange
+    //  * @param _minUCAmount minimum amount of UCs desired in exchange for the collateral
+    //  * @return The amount of UCs buyer received
+    //  */
+    // function buy(address _collateral, uint256 _amount, uint256 _minUCAmount) public nonReentrant returns (bool) {
+    //     // to be done outside contract (external site) matching orderbook
+    // }
 
     /**
      * @dev Get Total reserves balance (amount * price) for every collateral
@@ -388,13 +443,19 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
      *
      * Note that `value` may be zero.
      */
-    event Mint(uint256 amount, address indexed to, uint256 cost, address indexed collateral);
+    event Mint(uint256 amount, address indexed to, uint256 cost, address indexed collateral, bool ucgMinted);
 
     /**
      * @dev Emitted UC tokens are destroied
      *
      */
     event Burn(uint256 amount, address indexed from, uint256 returned, address indexed collateral);
+
+    /**
+     * @dev Emitted UCG tokens are destroied
+     *
+     */
+    event BurnUCG(uint256 amount, address indexed from, uint256 returned, address indexed collateral);
 
     /**
      * @dev Emitted when collateral tokens are deposited
