@@ -15,6 +15,9 @@ install project npm dependencies:
 ```npm install```
 
 ## Testing
+Initiate Ganache
+```ganache-cli --allowUnlimitedContractSize```
+
 All tests are run with:
 ```truffle-test```
 

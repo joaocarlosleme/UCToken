@@ -41,7 +41,8 @@ module.exports = function(deployer) {
   	return deployer.deploy(UCCrawlingBand, 10, 11, UCPath.address);
   }).then(function() {
     UCPath.deployed().then(function(instance) { instance.initializePath(UCCrawlingBand.address, "UCCrawlingBand") });
-  	return deployer.deploy(UCMarketplace, UCPath.address, { gas: 20000000 });
+    //return deployer.deploy(UCMarketplace, UCPath.address, { gas: 0x1fffffffffffff });
+    return deployer.deploy(UCMarketplace, UCPath.address);
   }).then(function() {
     UCPath.deployed().then(function(instance) { instance.initializePath(UCMarketplace.address, "UCMarketplace") });
   	return deployer.deploy(UCGovernance, UCPath.address);

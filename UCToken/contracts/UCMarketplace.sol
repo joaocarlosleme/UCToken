@@ -371,6 +371,7 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
 
         require(_amount > 0, "UCG amount required");
         uint256 balance = ucgToken.balanceOf(msg.sender);
+
         require(balance >= _amount, "Not enought balance");
 
         // return default
@@ -397,12 +398,6 @@ contract UCMarketplace is UCChangeable, ReentrancyGuard {
         //return cAmount;
         return true;
 
-    }
-
-    function burnUCGTEST(uint256 _amount) public view returns (uint256) {
-        require(_amount > 0, "UCG amount required");
-        uint256 balance = ucgToken.balanceOf(msg.sender);
-        return balance;
     }
 
     // /**
