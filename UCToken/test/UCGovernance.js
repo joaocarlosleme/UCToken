@@ -31,7 +31,7 @@ contract('UCGovernance', function(accounts) {
     var targetHash;
     var proposalHash;
     it('add change request (setPath UCToken to UCGToken Address)', function() {
-        return ucGovInstance.createTarget(ucPathInstance.address, "setPath").then(function(target) {
+        return ucGovInstance.createTarget(ucPathInstance.address, "setPath", "UCToken").then(function(target) {
             targetHash = target;
             return ucGovInstance.createProposalSetPath("UCToken", ucgTokenInstance.address);
         }).then(function(proposal) {

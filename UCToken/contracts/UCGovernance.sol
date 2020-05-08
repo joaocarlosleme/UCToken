@@ -33,7 +33,7 @@ contract UCGovernance is UCChangeable {
         // string functionName;
         // string parameters;
         // string notes;
-        bytes32 target; // hash of the contractAddress and method name
+        bytes32 target; // usually its the hash of the contractAddress and method name. Somethimes may add a property as weel
         bytes32 proposal; // hash of the proposal (parameter values)
         uint256 safeDelay; // time the request need to wait after its approved before its applied
         CRStatus status;
@@ -71,8 +71,8 @@ contract UCGovernance is UCChangeable {
     }
 
     /// Public TEST ONLY Functions
-    function createTarget(address targetContract, string memory methodName) public pure returns(bytes32) {
-        return keccak256(abi.encodePacked(targetContract, methodName));
+    function createTarget(address targetContract, string memory methodName, string memory pathName) public pure returns(bytes32) {
+        return keccak256(abi.encodePacked(targetContract, methodName, pathName));
     }
     function createProposalSetPath(string memory pathName, address newAddress) public pure returns(bytes32) {
         return keccak256(abi.encodePacked(pathName, newAddress));
@@ -265,7 +265,7 @@ contract UCGovernance is UCChangeable {
                 winner = true;
             }
         } else if(cr.votes >= 300000000*10**18) {
-            // if there is no winner, must have at least 300K votes
+            // if there is no winner, must have at least 300M votes (30% of UCG max) // TODO ADD VARIABLE AND ALLOW TO SET
             winner = true;
             // if differente, check if it can replace winner request
             if(cr.status != CRStatus.PendingApproval) { // check if it's pending aproval

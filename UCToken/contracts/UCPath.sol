@@ -55,6 +55,8 @@ contract UCPath is UCChangeable {
          return false;
       }
    }
+
+   // in this case, target includes pathName property, so it can allow different voting weights on different paths
    function setPath(bytes32 changeRequestID, string memory pathName, address newAddress) public {
       require(ucGovernance.isWinner(changeRequestID), "ChangeRequest not winner");
       // get request target, proposal, safe Delay and status
@@ -62,7 +64,7 @@ contract UCPath is UCChangeable {
       // check if it hasn't been applyed yet
       require(uint(status) == 1, "ChangeRequest is not on Approved status");
       // check if request match target
-      require(target == keccak256(abi.encodePacked(address(this), "setPath")), "ChangeRequest does not match Target");
+      require(target == keccak256(abi.encodePacked(address(this), "setPath", pathName)), "ChangeRequest does not match Target");
       // check if request match proposal
       require(proposal == keccak256(abi.encodePacked(pathName, newAddress)), "ChangeRequest does not match proposal");
       // check if safeDelay has passed
