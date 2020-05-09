@@ -16,7 +16,11 @@ contract UCChangeable {
         // require(
         //     isAuthorized(msg.sender),
         //     string(abi.encodePacked("MSG SENDER: ", toString(msg.sender), " OWNER: ", toString(owner), " ADDRESS THIS: ", toString(address(this))))); // "Not authorized"
-        require(isAuthorized(msg.sender),"Not authorized");
+        require(isAuthorized(msg.sender, ""),"Not authorized");
+        _;
+    }
+    modifier authPath(string memory contractName) {
+        require(isAuthorized(msg.sender, contractName),"Not authorized");
         _;
     }
 
@@ -42,7 +46,7 @@ contract UCChangeable {
         owner = _owner;
         emit NewOwner(_owner);
     }
-    function setPath(address _path) public auth {
+    function setUCPath(address _path) public auth {
         ucPath = UCPath(_path);
         emit NewPath(_path);
     }
@@ -55,11 +59,34 @@ contract UCChangeable {
     }
 
     /// Internal Functions
-    function isAuthorized(address src) internal view returns (bool) {
+
+    // function isAuthorized(address src) internal view returns (bool) {
+    //     if (src == address(this)) {
+    //         return true;
+    //     } else if (src == owner) { // can't use tx.origin == ower https://solidity.readthedocs.io/en/develop/security-considerations.html#tx-origin
+    //         return true;
+    //     } else if(isContract(src)) {
+    //         // check list of ucContracts
+    //         if (ucPath == UCPath(0)) {
+    //             return false;
+    //         } else {
+    //             return ucPath.isValid(src);
+    //         }
+    //     } else {
+    //         // TODO Check list of users
+    //     }
+    // }
+    function isAuthorized(address src, string memory contractName) internal view returns (bool) {
         if (src == address(this)) {
             return true;
         } else if (src == owner) { // can't use tx.origin == ower https://solidity.readthedocs.io/en/develop/security-considerations.html#tx-origin
             return true;
+        } else if (bytes(contractName).length != 0) {
+            if (ucPath == UCPath(0)) {
+                return false;
+            } else {
+                return ucPath.getPath(contractName) == src;
+            }
         } else if(isContract(src)) {
             // check list of ucContracts
             if (ucPath == UCPath(0)) {

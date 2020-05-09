@@ -4,7 +4,7 @@ import "./UCChangeable.sol";
 
 /** @title  Contract address holder of all UC funds with minimum business logic
   *
-  * @notice xxx
+  * @notice NOT YET IN USE
   *
   * @dev make changes on marketplace to have this contract as balance holder of collaterals. This way
   * we can have other contracts and exchange one collateral for another (according to UCGov approval)
